@@ -9,17 +9,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.prod.txt .
 RUN pip install --no-cache-dir -r requirements.prod.txt
 
-# Kronos local package
-COPY third_party/Kronos ./third_party/Kronos
-RUN pip install --no-cache-dir ./third_party/Kronos
-
 COPY src ./src
 COPY templates ./templates
+COPY third_party/Kronos ./third_party/Kronos
 
 RUN mkdir -p /app/data/models /app/logs
 
 ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH=/app/src
+# Kronos has no setup.py — add its directory to PYTHONPATH directly
+ENV PYTHONPATH=/app/src:/app/third_party/Kronos
 
 EXPOSE 8000
 

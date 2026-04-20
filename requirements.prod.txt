@@ -20,6 +20,10 @@ numpy>=1.26
 pandas>=2.2
 joblib>=1.3
 torch>=2.4
+einops>=0.8
+huggingface_hub>=0.33
+safetensors>=0.4
+tqdm>=4.67
 
 # AWS SES
 boto3>=1.34

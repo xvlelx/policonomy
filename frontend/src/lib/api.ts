@@ -372,11 +372,11 @@ export type HedgeFundsResponse = {
   funds: HedgeFund[]
 }
 
-async function get<T>(path: string): Promise<T> {
+async function get<T>(path: string, timeoutMs = 15000): Promise<T> {
   const res = await fetch(`${BASE}${path}`, {
     cache: 'no-store',
     headers: { 'ngrok-skip-browser-warning': 'true' },
-    signal: AbortSignal.timeout(10000),
+    signal: AbortSignal.timeout(timeoutMs),
   })
   if (!res.ok) throw new Error(`API error: ${res.status}`)
   return res.json()
@@ -450,11 +450,11 @@ export const api = {
     post<{ started: boolean; pid: number }>('/api/pipeline/run', {}, { 'X-Admin-Key': adminKey }),
   fearGreed: (refresh?: boolean) =>
     get<FearGreed>(`/api/fear-greed${refresh ? '?refresh=true' : ''}`),
-  reportsList: () => get<{ dates: string[]; sessions: ReportSession[] }>('/api/reports'),
+  reportsList: () => get<{ dates: string[]; sessions: ReportSession[] }>('/api/reports', 30000),
   latestReport: (generate?: boolean) =>
-    get<Report>(`/api/reports/latest${generate ? '?generate=true' : ''}`),
+    get<Report>(`/api/reports/latest${generate ? '?generate=true' : ''}`, 30000),
   reportByDate: (date: string, runType: 'morning' | 'afternoon' = 'morning') =>
-    get<Report>(`/api/reports/${date}?run_type=${runType}`),
+    get<Report>(`/api/reports/${date}?run_type=${runType}`, 30000),
   hedgeFunds: (force?: boolean) =>
     get<HedgeFundsResponse>(`/api/hedge-funds${force ? '?force=true' : ''}`),
 }

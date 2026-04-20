@@ -344,7 +344,7 @@ export default function ReportsClient() {
         setSelectedDate(r.date);
         setSelectedRunType(r.run_type ?? 'morning');
       })
-      .catch(() => setError("리포트를 불러오지 못했습니다."))
+      .catch((e: unknown) => setError(`오류: ${e instanceof Error ? e.message : String(e)}`))
       .finally(() => setLoading(false));
   };
 

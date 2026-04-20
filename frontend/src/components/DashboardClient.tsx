@@ -47,7 +47,7 @@ export default function DashboardClient() {
         api.articleStats(),
       ]);
       setSummary(s);
-      setPredictions(preds);
+      setPredictions(preds?.kronos_predictions ? preds : null);
       setArticleStats(stats);
       prevStatusRef.current = s.pipeline.status;
       setError(null);

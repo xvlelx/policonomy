@@ -206,9 +206,7 @@ def get_article_stats():
 @app.get('/api/predictions')
 def get_predictions():
     data = _load_json('predictions.json')
-    if data is None:
-        raise HTTPException(status_code=404, detail='예측 데이터 없음')
-    return data
+    return data if data is not None else {}
 
 
 @app.get('/api/pipeline/status')

@@ -1,0 +1,29 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Runtime data (Railway volume에서 관리)
+data/*
+!data/.gitkeep
+logs/
+*.db
+
+# AI assistant memory
+.claude/
+
+# Frontend build
+frontend/.next/
+frontend/node_modules/
+
+# Misc
+패키지.txt
+기획서_코드리뷰_v1.0.md
+기안보고_Phase1_완료_20260415.md

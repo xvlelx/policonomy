@@ -1,0 +1,30 @@
+# 1. 기본 도구
+pip install python-dotenv jupyter ipykernel
+
+# 2. 수집
+pip install feedparser yt-dlp crawl4ai
+
+# 3. AI 분석
+pip install anthropic openai
+
+# 4. 시장 데이터
+pip install yfinance openbb
+
+# 5. Whisper
+pip install openai-whisper
+
+# 6. Kronos 의존성
+cd ~/policonomy/third_party/Kronos
+pip install -r requirements.txt
+
+# 7. 영상/이미지
+pip install moviepy pillow matplotlib
+
+# 8. TTS
+pip install elevenlabs
+
+# 9. 백엔드
+pip install fastapi uvicorn sqlalchemy psycopg2-binary celery redis
+
+# 10. 기타
+pip install boto3 jinja2 stripe packagingslowapi

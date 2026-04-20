@@ -14,6 +14,7 @@ __pycache__/
 data/*
 !data/.gitkeep
 !data/*.json
+!data/*.db
 !data/models/
 !data/reports/
 logs/

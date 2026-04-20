@@ -1,0 +1,612 @@
+{
+  "date": "2026-04-19",
+  "generated_at": "2026-04-19T06:33:17.153767",
+  "articles_count": 64,
+  "sections": {
+    "headlines": [
+      {
+        "outlet": "한겨레",
+        "region": "KR",
+        "title": "한은 “해외 주식 투자 드라마틱하게 늘어…‘수출 호조→원화 강세’ 옛말”",
+        "link": "https://www.hani.co.kr/arti/economy/finance/1254651.html",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "한은 \"해외 주식 투자 드라마틱하게 늘어…‘수출 호조→원화 강세’ 옛말\""
+      },
+      {
+        "outlet": "연합뉴스",
+        "region": "KR",
+        "title": "'5선 도전' 오세훈 \"서울 내주면 정권 폭주 제동장치 사라진다\"(종합2보)",
+        "link": "https://www.yna.co.kr/view/AKR20260418021952001",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "오세훈 서울시장의 5선 도전과 정권 폭주에 대한 발언"
+      },
+      {
+        "outlet": "조선일보",
+        "region": "KR",
+        "title": "선거 해보나마나 與 압승?... 여론조사업체, 불황에 운다",
+        "link": "https://www.chosun.com/weekly/politics/2026/04/19/UAJIZTDNQRCFJDEBWAWVIFWYEQ/",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "선거와 경제 불황에 대한 여론조사업체의 반응에 대한 뉴스 기사"
+      },
+      {
+        "outlet": "SBS",
+        "region": "KR",
+        "title": "20일 2차 협상 가능성…\"협상 안 되면 다시 폭격\"  압박",
+        "link": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008523284",
+        "sentiment": "neutral",
+        "importance": 8,
+        "category": "real_estate",
+        "one_line": "미국과 이란의 2차 협상 가능성"
+      },
+      {
+        "outlet": "전자신문",
+        "region": "KR",
+        "title": "“이란 혁명수비대, 호르무즈 유조선에 발포”…모즈타바 “적에 쓰라린 패배 안길 준비”",
+        "link": "https://www.etnews.com/20260418000065",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "tech_industry",
+        "one_line": "이란 혁명수비대, 호르무즈 유조선에 발포"
+      },
+      {
+        "outlet": "매일경제",
+        "region": "KR",
+        "title": "삼성 노조 “내달 총파업땐 30조 손실” 압박…블랙리스트 연관성은 인정",
+        "link": "https://www.mk.co.kr/news/business/12020857",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "real_estate",
+        "one_line": "삼성 노조가 총파업을 예고하고 막대한 손실을 예상하는 소식이 나면서 우리 경제에 노조 리스크가 증가하는 상황"
+      },
+      {
+        "outlet": "한국경제",
+        "region": "KR",
+        "title": "\"비거주 1주택 규제, 보유세 강화가 진짜 변수\"…대응책은 [이송렬의 우주인]",
+        "link": "https://www.hankyung.com/article/2026041774796",
+        "sentiment": "neutral",
+        "importance": 6,
+        "category": "real_estate",
+        "one_line": "비거주 1주택 규제, 보유세 강화가 진짜 변수"
+      },
+      {
+        "outlet": "Bloomberg",
+        "region": "US",
+        "title": "Trump Sees Iran Deal as Imminent, Nuclear Issue Remains in Limbo",
+        "link": "https://www.bloomberg.com/news/articles/2026-04-18/trump-sees-iran-deal-as-imminent-nuclear-issue-remains-in-limbo",
+        "sentiment": "neutral",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "트럼프, 이란과 임박한 합의 가능성"
+      },
+      {
+        "outlet": "CNBC",
+        "region": "US",
+        "title": "We spoke to over 30 central bankers, policymakers and politicians. Here are their top concerns",
+        "link": "https://www.cnbc.com/2026/04/18/iran-war-inflation-prices-energy-trump-economy-end.html",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "미-이란 전쟁으로 인한 경기 침체와 에너지 안보에 대한 우려"
+      },
+      {
+        "outlet": "NYT",
+        "region": "US",
+        "title": "Ships Attacked in Strait of Hormuz as Iran Declares Strict Control of Vital Shipping Route",
+        "link": "https://www.nytimes.com/2026/04/18/world/middleeast/iran-tanker-strait-of-hormuz.html",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "이란이 호르무즈 해협에서 운항을 위협하는 새로운 위협을 제시함"
+      },
+      {
+        "outlet": "Google News",
+        "region": "XX",
+        "title": "Charting the Global Economy: IMF Trims World Growth Projections - Bloomberg.com",
+        "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQeXgycTZpZmllbzBfRlFhelMzNGVIa2ZLZWtwUVN0MGVOWkhkMF9MRVpOSldXX29RS0V0WFJUbnBBRWpXNHhWaVdZWGVNSnZYdkNNaGd5LWhNVDdDYWQzR2VCYm1XWUJsWkJUdmxpS1cwa2VFSmpYaFRpQ1lsNlJhWDI5TGtRTWRCTjZaNl90aGl3RnNYQ25Jb0RpVWpMTmFBSUdkUUhYUmNqZzh2UG5LeDFGUHZOV2ctVkdLdw?oc=5",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "IMF는 세계 경제 성장 예측을 낮췄다."
+      },
+      {
+        "outlet": "finance.yahoo.com",
+        "region": "XX",
+        "title": "ADB chief warns of yen pressure from Japan's too-slow rate hikes",
+        "link": "https://finance.yahoo.com/markets/currencies/articles/adb-chief-warns-yen-pressure-163900561.html",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "일본의 금리 인상 속도가 느려서 엔화에 대한 압력이 증가하는 경고"
+      },
+      {
+        "outlet": "seekingalpha.com",
+        "region": "XX",
+        "title": "Whale's Insight: The Rebound Is Spreading Across Bitcoin, Altcoins, And Stocks",
+        "link": "https://seekingalpha.com/article/4891817-whales-insight-rebound-spreading-across-bitcoin-altcoins-stocks?source=feed_all_articles",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "비트코인과 알트코인, 주식의 회복이 확산되고 있다."
+      },
+      {
+        "outlet": "techcrunch.com",
+        "region": "XX",
+        "title": "The App Store is booming again, and AI may be why",
+        "link": "https://techcrunch.com/2026/04/18/the-app-store-is-booming-again-and-ai-may-be-why/",
+        "sentiment": "positive",
+        "importance": 7,
+        "category": "tech_industry",
+        "one_line": "애플 스토어가 다시 부흥하고 있으며 AI가 이유일 수 있다."
+      },
+      {
+        "outlet": "thehackernews.com",
+        "region": "XX",
+        "title": "$13.74M Hack Shuts Down Sanctioned Grinex Exchange After Intelligence Claims",
+        "link": "https://thehackernews.com/2026/04/1374m-hack-shuts-down-sanctioned-grinex.html",
+        "sentiment": "negative",
+        "importance": 7,
+        "category": "tech_industry",
+        "one_line": "미국과 영국이 금지한 크립토 커뮤니티에 해킹이 발생했다."
+      },
+      {
+        "outlet": "khan.co.kr",
+        "region": "XX",
+        "title": "[속보] 국회, 광주 4개 선거구 중대선거구 도입 등 ‘정치개혁’ 법안 처리…범여권 4당 반발",
+        "link": "https://www.khan.co.kr/article/202604180110001/?utm_source=khan_rss&utm_medium=rss&utm_campaign=politic_news",
+        "sentiment": "neutral",
+        "importance": 6,
+        "category": "politics_economy",
+        "one_line": "국회가 정치개혁 법안을 처리, 광주 4개 선거구 중대선거구 도입"
+      }
+    ],
+    "top_issues": [
+      {
+        "rank": 1,
+        "title": "글로벌 경제 성장 둔화",
+        "summary": "IMF는 세계 경제 성장 예측을 낮췄으며, 전쟁과 인플레이션으로 인한 경기 침체 우려가 증가하고 있습니다.",
+        "political_intent": "글로벌 경제 정책 협력 필요성에 대한 강조",
+        "economic_interest": "경제 성장 둔화에 따른 투자 전략 재조정 필요",
+        "framing": "경제 지표 악화에 따른 부정적 프레임",
+        "security_angle": "글로벌 경제 불안정성 증가로 인한 안보 위협",
+        "market_impact": "글로벌 주식 시장 하락 가능성",
+        "sentiment": "negative"
+      },
+      {
+        "rank": 2,
+        "title": "이란과 미국의 긴장 고조",
+        "summary": "이란과 미국의 긴장 고조로 인한 국제유가 상승과 글로벌 경기 침체 우려가 증가하고 있습니다.",
+        "political_intent": "미국과 이란의 외교적 해결 노력 강조",
+        "economic_interest": "국제유가 상승에 따른 에너지 시장 불안정성 증가",
+        "framing": "긴장 고조에 따른 불안정성 강조 프레임",
+        "security_angle": "중동 지역 안보 위협 증가",
+        "market_impact": "글로벌 에너지 시장 가격 변동성 증가",
+        "sentiment": "negative"
+      },
+      {
+        "rank": 3,
+        "title": "국내 조선업 성장 가능성",
+        "summary": "K-조선이 미국 해군 함정 유지·보수·정비(MRO) 수주에 성공하여 성장 가능성을 보여주고 있습니다.",
+        "political_intent": "국내 산업계 성장 지원 정책 강조",
+        "economic_interest": "국내 조선업 경쟁력 강화로 인한 수출 증가 가능성",
+        "framing": "성장 가능성 강조에 따른 긍정적 프레임",
+        "security_angle": "국내 산업 안보에 대한 긍정적 영향",
+        "market_impact": "국내 조선업종 주가 상승 가능성",
+        "sentiment": "positive"
+      },
+      {
+        "rank": 4,
+        "title": "부동산 시장 불안",
+        "summary": "세종 아파트 매물량 급증으로 인한 부동산 시장 불안이 증가하고 있습니다.",
+        "political_intent": "부동산 시장 안정화 정책 필요성 강조",
+        "economic_interest": "부동산 시장 불안정에 따른 경제 불확실성 증가",
+        "framing": "부동산 시장 불안정성 강조 프레임",
+        "security_angle": "부동산 시장 불안정에 따른 금융 안정성 위협",
+        "market_impact": "부동산 시장 가격 변동성 증가",
+        "sentiment": "negative"
+      },
+      {
+        "rank": 5,
+        "title": "오세훈 서울시장의 5선 도전",
+        "summary": "오세훈 서울시장이 5선에 도전하며 정권 폭주에 대한 발언을 하고 있습니다.",
+        "political_intent": "오세훈 시장의 정치적 의도 분석 필요",
+        "economic_interest": "서울시 경제 정책 변화 가능성",
+        "framing": "정치적 프레임 강조",
+        "security_angle": "정치적 불안정성 증가 가능성",
+        "market_impact": "서울시 경제 정책 변화에 따른 시장 영향 분석 필요",
+        "sentiment": "cautious"
+      }
+    ],
+    "country_stances": [
+      {
+        "issue_title": "글로벌 경제 성장 둔화",
+        "countries": [
+          {
+            "country": "미국",
+            "flag": "🇺🇸",
+            "official_position": "미국은 글로벌 경제 성장 둔화에 대해 우려를 표명하며, 국제 협력과 무역 협력을 통해 경제 성장을 촉진하겠다고 밝혔습니다.",
+            "real_intent": "미국은 자국 경제 이익을 보호하기 위해 보호무역 정책을 강화할 가능성이 있습니다.",
+            "stance_type": "관망"
+          },
+          {
+            "country": "중국",
+            "flag": "🇨🇳",
+            "official_position": "중국은 글로벌 경제 성장 둔화에 대해 국제 협력을 강조하며, 자국 경제의 대외 개방을 확대하겠다고 밝혔습니다.",
+            "real_intent": "중국은 자국 경제 영향력을 확대하기 위해 일대일로 프로젝트를 강화할 가능성이 있습니다.",
+            "stance_type": "지지"
+          },
+          {
+            "country": "유럽연합",
+            "flag": "🇪🇺",
+            "official_position": "유럽연합은 글로벌 경제 성장 둔화에 대해 우려를 표명하며, 재정 정책을 통해 경제 성장을 촉진하겠다고 밝혔습니다.",
+            "real_intent": "유럽연합은 유로존 경제 안정화를 위해 통화 정책을 조정할 가능성이 있습니다.",
+            "stance_type": "지지"
+          },
+          {
+            "country": "한국",
+            "flag": "🇰🇷",
+            "official_position": "한국은 글로벌 경제 성장 둔화에 대해 우려를 표명하며, 수출 확대와 내수 진작을 통해 경제 성장을 촉진하겠다고 밝혔습니다.",
+            "real_intent": "한국은 자국 경제 영향력을 확대하기 위해 FTA를 강화할 가능성이 있습니다.",
+            "stance_type": "지지"
+          }
+        ]
+      },
+      {
+        "issue_title": "이란과 미국의 긴장 고조",
+        "countries": [
+          {
+            "country": "미국",
+            "flag": "🇺🇸",
+            "official_position": "미국은 이란과의 긴장 고조에 대해 군사적 대응을 경고하며, 이란의 핵 프로그램 저지를 위해 국제 협력을 강화하겠다고 밝혔습니다.",
+            "real_intent": "미국은 자국 안보 이익을 보호하기 위해 군사적 옵션을 고려할 가능성이 있습니다.",
+            "stance_type": "반대"
+          },
+          {
+            "country": "이란",
+            "flag": "🇮🇷",
+            "official_position": "이란은 미국의 압박에 대해 저항권을 행사하며, 자국 핵 프로그램을 지속하겠다고 밝혔습니다.",
+            "real_intent": "이란은 자국 영향력을 확대하기 위해 지역 협력 강화에 나설 가능성이 있습니다.",
+            "stance_type": "반대"
+          },
+          {
+            "country": "이스라엘",
+            "flag": "🇮🇱",
+            "official_position": "이스라엘은 이란의 핵 프로그램에 대해 심각한 우려를 표명하며, 군사적 대응을 준비하겠다고 밝혔습니다.",
+            "real_intent": "이스라엘은 자국 안보 이익을 보호하기 위해 선제 공격을 고려할 가능성이 있습니다.",
+            "stance_type": "반대"
+          },
+          {
+            "country": "한국",
+            "flag": "🇰🇷",
+            "official_position": "한국은 이란과 미국의 긴장 고조에 대해 우려를 표명하며, 국제 협력을 통해 긴장 완화를 촉구했습니다.",
+            "real_intent": "한국은 자국 경제 이익을 보호하기 위해 중립 입장을 유지할 가능성이 있습니다.",
+            "stance_type": "중립"
+          }
+        ]
+      },
+      {
+        "issue_title": "국내 조선업 성장 가능성",
+        "countries": [
+          {
+            "country": "한국",
+            "flag": "🇰🇷",
+            "official_position": "한국은 자국 조선업 성장 가능성에 대해 환영하며, 조선업 경쟁력 강화를 위해 지원을 확대하겠다고 밝혔습니다.",
+            "real_intent": "한국은 자국 조선업 영향력을 확대하기 위해 해외 시장 진출을 강화할 가능성이 있습니다.",
+            "stance_type": "지지"
+          },
+          {
+            "country": "미국",
+            "flag": "🇺🇸",
+            "official_position": "미국은 한국 조선업 성장 가능성에 대해 긍정적으로 평가하며, 미국 조선업 경쟁력 강화를 위해 지원을 확대하겠다고 밝혔습니다.",
+            "real_intent": "미국은 자국 조선업 이익을 보호하기 위해 무역 정책을 조정할 가능성이 있습니다.",
+            "stance_type": "관망"
+          },
+          {
+            "country": "중국",
+            "flag": "🇨🇳",
+            "official_position": "중국은 한국 조선업 성장 가능성에 대해 주목하며, 자국 조선업 경쟁력 강화를 위해 지원을 확대하겠다고 밝혔습니다.",
+            "real_intent": "중국은 자국 조선업 영향력을 확대하기 위해 해외 시장 진출을 강화할 가능성이 있습니다.",
+            "stance_type": "관망"
+          },
+          {
+            "country": "일본",
+            "flag": "🇯🇵",
+            "official_position": "일본은 한국 조선업 성장 가능성에 대해 우려를 표명하며, 자국 조선업 경쟁력 강화를 위해 지원을 확대하겠다고 밝혔습니다.",
+            "real_intent": "일본은 자국 조선업 이익을 보호하기 위해 무역 정책을 조정할 가능성이 있습니다.",
+            "stance_type": "반대"
+          }
+        ]
+      }
+    ],
+    "market_data": {
+      "market_items": [
+        {
+          "market": "KOSPI",
+          "last_close": 5858.87,
+          "pred_close": 5673.64,
+          "change_pct": -3.16,
+          "pred_range": {
+            "high": 5898.4,
+            "low": 5499.19
+          },
+          "xgb_direction": "하락",
+          "xgb_confidence": 17.8,
+          "ai_confidence": 72,
+          "ai_reason": "해외 주식 투자 증가로 인한 원화 강세 현상과 정부의 석유 최고가격제 도입에 따른 소비 감소 기대감 부족으로 투자 심리가 위축되며 하락할 것으로 예상"
+        },
+        {
+          "market": "USD/KRW",
+          "last_close": 1473.28,
+          "pred_close": 1497.88,
+          "change_pct": 1.67,
+          "pred_range": {
+            "high": 1507.23,
+            "low": 1473.99
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": 65,
+          "ai_reason": "해외 주식 투자 증가로 인한 원화 강세 현상으로 인해 USD/KRW 환율이 하락할 것으로 예상"
+        },
+        {
+          "market": "삼성전자",
+          "last_close": 206000.0,
+          "pred_close": 206637.61,
+          "change_pct": 0.31,
+          "pred_range": {
+            "high": 218444.97,
+            "low": 201945.25
+          },
+          "xgb_direction": "상승",
+          "xgb_confidence": 74.0,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "skhynix",
+          "last_close": 1027000.0,
+          "pred_close": 1024055.12,
+          "change_pct": -0.29,
+          "pred_range": {
+            "high": 1062782.38,
+            "low": 980386.31
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "NASDAQ",
+          "last_close": 22902.89,
+          "pred_close": 23341.89,
+          "change_pct": 1.92,
+          "pred_range": {
+            "high": 23425.61,
+            "low": 22683.93
+          },
+          "xgb_direction": "하락",
+          "xgb_confidence": 28.0,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "sp500",
+          "last_close": 6816.89,
+          "pred_close": 6822.36,
+          "change_pct": 0.08,
+          "pred_range": {
+            "high": 6869.89,
+            "low": 6719.06
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "dow",
+          "last_close": 47916.57,
+          "pred_close": 48053.19,
+          "change_pct": 0.29,
+          "pred_range": {
+            "high": 48431.47,
+            "low": 47696.86
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "nvidia",
+          "last_close": 188.63,
+          "pred_close": 191.78,
+          "change_pct": 1.67,
+          "pred_range": {
+            "high": 197.59,
+            "low": 187.04
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        }
+      ],
+      "news_impact": [
+        {
+          "category": "real_estate",
+          "label": "부동산",
+          "positive": 1,
+          "negative": 11,
+          "neutral": 3,
+          "total": 15,
+          "net_score": -0.67,
+          "markets": [
+            "kospi"
+          ]
+        },
+        {
+          "category": "global_macro",
+          "label": "글로벌 매크로",
+          "positive": 5,
+          "negative": 13,
+          "neutral": 1,
+          "total": 19,
+          "net_score": -0.42,
+          "markets": [
+            "nasdaq",
+            "sp500",
+            "kospi",
+            "usd_krw"
+          ]
+        },
+        {
+          "category": "politics_economy",
+          "label": "정치·경제",
+          "positive": 5,
+          "negative": 8,
+          "neutral": 2,
+          "total": 15,
+          "net_score": -0.2,
+          "markets": [
+            "kospi",
+            "usd_krw"
+          ]
+        },
+        {
+          "category": "tech_industry",
+          "label": "기술·산업",
+          "positive": 5,
+          "negative": 8,
+          "neutral": 2,
+          "total": 15,
+          "net_score": -0.2,
+          "markets": [
+            "nasdaq",
+            "sp500",
+            "dow",
+            "nvidia",
+            "samsung",
+            "hynix"
+          ]
+        }
+      ],
+      "key_sector": {
+        "name": "반도체",
+        "direction": "강세",
+        "reason": "AI 칩 스타트업 Cerebras가 IPO를 신청하고, TSMC의 4분기 실적이 AI 가속기 시장의 잠재력을 과소평가하고 있다는 점에서 반도체 업종이 강세를 보일 것으로 예상"
+      },
+      "overall_sentiment": "neutral"
+    },
+    "risk_watchlist": [
+      {
+        "event": "이란과 미국의 갈등 심화",
+        "scenario": "이란이 호르무즈 해협을 재통제하고, 미국이 이란에 대한 해상 봉쇄를 유지하면서 긴장이 고조되고 있다. 이러한 상황은 글로벌 경제에 stagflation 위험을 증가시킬 수 있다. 특히, 원유 공급 차질이 우려되면서 국제 유가가 상승할 가능성이 있다.",
+        "expected_trend": "변동성확대",
+        "risk_level": "HIGH",
+        "affected_markets": [
+          "KOSPI",
+          "USD/KRW",
+          "WTI"
+        ]
+      },
+      {
+        "event": "IMF의 세계 성장률 전망치 하향 조정",
+        "scenario": "IMF가 세계 성장률 전망치를 하향 조정하면서 글로벌 경제의 불확실성이 증가하고 있다. 이는 투자 심리를 위축시키고, 위험 자산에 대한 선호도를 감소시킬 수 있다.",
+        "expected_trend": "하락",
+        "risk_level": "MEDIUM",
+        "affected_markets": [
+          "KOSPI",
+          "USD/KRW"
+        ]
+      },
+      {
+        "event": "연준 이사의 금리 인하 지연 가능성 언급",
+        "scenario": "연준 이사가 2026년 금리 인하가 없을 수도 있다고 언급하면서, 금리 인하에 대한 시장의 기대가 지연되고 있다. 이는 달러 강세를 유도하고, 신흥국 통화에 대한 압박을 가중시킬 수 있다.",
+        "expected_trend": "상승",
+        "risk_level": "MEDIUM",
+        "affected_markets": [
+          "USD/KRW"
+        ]
+      },
+      {
+        "event": "일본의 금리 인상 지연에 따른 엔화 약세",
+        "scenario": "일본이 금리 인상을 지연하면서 엔화가 약세를 보이고 있다. 이는 일본의 경제 펀더멘털에 대한 우려를 증가시키고, 글로벌 금융 시장에 영향을 미칠 수 있다.",
+        "expected_trend": "변동성확대",
+        "risk_level": "MEDIUM",
+        "affected_markets": [
+          "USD/JPY",
+          "KOSPI"
+        ]
+      },
+      {
+        "event": "오세훈의 서울시장 5선 도전 관련 정치적 불확실성",
+        "scenario": "오세훈의 서울시장 5선 도전이 국내 정치의 불확실성을 증가시키고 있다. 이는 국내 투자 심리에 영향을 미치고, KOSPI의 변동성을 확대시킬 수 있다.",
+        "expected_trend": "하락",
+        "risk_level": "LOW",
+        "affected_markets": [
+          "KOSPI"
+        ]
+      }
+    ],
+    "summary_matrix": {
+      "matrix": [
+        {
+          "category": "기술",
+          "category_en": "Technology",
+          "status": "중립",
+          "key_trend": "K-조선의 미국 해군 함정 MRO 수주 성공으로 국내 조선업종의 성장 가능성이 높아졌다. AI와 같은 첨단 기술의 적용으로 산업 효율성이 증가하고 있다.",
+          "risk": "기술적 문제나 국제 관계의 악화로 인한 프로젝트 취소 가능성",
+          "opportunity": "첨단 기술 도입으로 인한 산업 경쟁력 강화"
+        },
+        {
+          "category": "경제",
+          "category_en": "Economy",
+          "status": "부정",
+          "key_trend": "원화 강세 현상과 정부의 석유 최고가격제 도입에 따른 소비 감소 기대감 부족으로 투자 심리가 위축되고 있다. 글로벌 경기 침체 우려가 상존하고 있다.",
+          "risk": "경기 침체로 인한 소비 감소와 투자 위축",
+          "opportunity": "원화 강세로 인한 수입 물가 하락"
+        },
+        {
+          "category": "정치",
+          "category_en": "Politics",
+          "status": "부정",
+          "key_trend": "이란과 미국의 긴장 고조로 인한 국제유가 상승 우려가 있다. 정부의 정책 대응이 시장의 불확실성을 가중시키고 있다.",
+          "risk": "국제 갈등으로 인한 경제 제재와 무역 전쟁",
+          "opportunity": "정부의 적극적인 정책 대응으로 인한 시장 안정화"
+        },
+        {
+          "category": "안보",
+          "category_en": "Security",
+          "status": "부정",
+          "key_trend": "이란과 미국의 긴장 고조로 인한 국제 안보 우려가 증가하고 있다. 글로벌 공급망에 대한 불안감이 높아지고 있다.",
+          "risk": "국제 갈등으로 인한 안보 위협과 경제 불안",
+          "opportunity": "국제 협력을 통한 안보 강화"
+        },
+        {
+          "category": "금융",
+          "category_en": "Finance",
+          "status": "중립",
+          "key_trend": "해외 주식 투자 증가로 인한 원화 강세 현상이 나타나고 있다. 시장의 불확실성으로 인한 투자 심리가 위축되고 있다.",
+          "risk": "시장 변동성으로 인한 금융 불안",
+          "opportunity": "원화 강세로 인한 금융 자산 가치 상승"
+        },
+        {
+          "category": "시장",
+          "category_en": "Market",
+          "status": "혼조",
+          "key_trend": "K-조선의 미국 해군 함정 MRO 수주 성공으로 국내 조선업종의 성장 기대감이 높아졌다. 그러나 글로벌 경기 침체 우려와 국제유가 상승으로 시장의 불확실성이 증가하고 있다.",
+          "risk": "시장 변동성으로 인한 투자 손실",
+          "opportunity": "성장 산업에 대한 투자 기회 확대"
+        }
+      ],
+      "structural_analysis": "현재 글로벌 시장은 기술, 경제, 정치, 안보, 금융, 시장 등 다양한 측면에서 불확실성이 증가하고 있다. 특히 이란과 미국의 긴장 고조로 인한 국제유가 상승과 글로벌 경기 침체 우려가 상존하고 있다. 그러나 K-조선의 미국 해군 함정 MRO 수주 성공으로 국내 조선업종의 성장 가능성이 높아지는 등 일부 산업에서는 성장 기대감이 높아지고 있다. 이러한 상황에서 기업과 투자자는 불확실성에 대비하여 신중한 전략을 수립해야 한다. 장기적으로는 첨단 기술 도입과 산업 경쟁력 강화에 집중하고, 단기적으로는 시장 변동성에 대비하여 위험 관리에 힘써야 한다. 또한, 국제 협력을 통한 안보 강화와 정부의 적극적인 정책 대응이 필요하다. 이러한 전략을 통해 글로벌 시장의 불확실성에 대비하고, 새로운 기회를 포착할 수 있을 것이다."
+    }
+  }
+}

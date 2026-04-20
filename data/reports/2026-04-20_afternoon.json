@@ -1,0 +1,625 @@
+{
+  "date": "2026-04-20",
+  "run_type": "afternoon",
+  "generated_at": "2026-04-20T20:16:10.556771",
+  "articles_count": 74,
+  "sections": {
+    "headlines": [
+      {
+        "outlet": "연합뉴스",
+        "region": "KR",
+        "title": "[속보] \"일본 혼슈 동쪽 해역서 규모 7.4 지진…쓰나미 경보\"",
+        "link": "https://www.yna.co.kr/view/AKR20260420137700073",
+        "sentiment": "negative",
+        "importance": 9,
+        "category": "global_macro",
+        "one_line": "일본 혼슈 동쪽 해역서 규모 7.4 지진 발생, 쓰나미 경보 발령"
+      },
+      {
+        "outlet": "매일경제",
+        "region": "KR",
+        "title": "WGBI 편입 효과 ‘쑥’… 日 큰손들, 韓 국채 21~27조  쓸어담는다",
+        "link": "https://www.mk.co.kr/news/economy/12021651",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "WGBI 편입 효과 '쑥'… 日 큰손들, 韓 국채 21~27조 쓸어담는다"
+      },
+      {
+        "outlet": "한국경제",
+        "region": "KR",
+        "title": "이란 대통령, 중재국 파키스탄에 \"美 또 배신하려해…진정성 의심\"",
+        "link": "https://www.hankyung.com/article/2026042015127",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "이란 대통령이 미국과의 관계에 대한 불신을 표현한 파키스탄 방문"
+      },
+      {
+        "outlet": "전자신문",
+        "region": "KR",
+        "title": "3억 달러 가상자산 해킹, 디파이 연쇄 충격 확산",
+        "link": "https://www.etnews.com/20260420000001",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "tech_industry",
+        "one_line": "가상자산 시장에 연쇄 충격이 확산되고 있다."
+      },
+      {
+        "outlet": "아시아경제",
+        "region": "KR",
+        "title": "3월 서울 아파트 매매 거래량 18% 급감…15억 이하 실수요 집중",
+        "link": "https://www.asiae.co.kr/article/2026041815525192077",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "real_estate",
+        "one_line": "서울 아파트 매매 거래량 18% 급감"
+      },
+      {
+        "outlet": "SBS",
+        "region": "KR",
+        "title": "\"2차 회담, 현재로선 계획 없다…미국이 협정 위반\"",
+        "link": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008525407",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "real_estate",
+        "one_line": "미국과 이란의 2차 종전 협상 개최 불확실"
+      },
+      {
+        "outlet": "동아일보",
+        "region": "KR",
+        "title": "‘질문 리스트’ 남기고 숨진 소녀팬…일일이 답변 보낸 머스크",
+        "link": "https://www.donga.com/news/Inter/article/all/20260420/133772710/2",
+        "sentiment": "positive",
+        "importance": 7,
+        "category": "politics_economy",
+        "one_line": "테슬라 CEO 일론 머스크가 암 투병 끝에 세상을 떠난 소녀의 마지막 질문들에 직접 답변"
+      },
+      {
+        "outlet": "한겨레",
+        "region": "KR",
+        "title": "새 이미지 AI ‘덕트 테이프’ 호평…오픈AI, ‘나노 바나나’에 도전장?",
+        "link": "https://www.hani.co.kr/arti/economy/it/1254884.html",
+        "sentiment": "positive",
+        "importance": 6,
+        "category": "politics_economy",
+        "one_line": "새 이미지 AI '덕트 테이프' 호평…오픈AI, '나노 바나나'에 도전장?"
+      },
+      {
+        "outlet": "CNBC",
+        "region": "US",
+        "title": "Oil prices jump after Iran and U.S. attack commercial ships as tensions escalate over Strait of Hormuz",
+        "link": "https://www.cnbc.com/2026/04/19/oil-price-iran-war-strait-hormuz-tanker.html",
+        "sentiment": "negative",
+        "importance": 9,
+        "category": "global_macro",
+        "one_line": "이란과 미국의 상선 공격으로 인한 석유 가격 급등"
+      },
+      {
+        "outlet": "NYT",
+        "region": "US",
+        "title": "U.S. Attacks Iranian Cargo Ship as Both Countries Claim Cease-Fire Violations",
+        "link": "https://www.nytimes.com/2026/04/19/world/middleeast/us-iran-cease-fire-violations-strait-of-hormuz.html",
+        "sentiment": "negative",
+        "importance": 9,
+        "category": "global_macro",
+        "one_line": "미국과 이란의 군사 충돌로 인한 경제적 중요도"
+      },
+      {
+        "outlet": "MarketWatch",
+        "region": "US",
+        "title": "Oil futures climb after Strait of Hormuz closed again as peace talks thrown into uncertainty",
+        "link": "https://www.marketwatch.com/story/oil-futures-climb-after-strait-of-hormuz-closed-again-as-peace-talks-thrown-into-uncertainty-11988c5b?mod=mw_rss_topstories",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "Strait of Hormuz가 다시 폐쇄로 인해 오일 가격이 상승"
+      },
+      {
+        "outlet": "Bloomberg",
+        "region": "US",
+        "title": "Stocks, Bonds Fall as Oil Jumps After Hormuz Chaos: Markets Wrap",
+        "link": "https://www.bloomberg.com/news/articles/2026-04-19/us-futures-fall-oil-jumps-as-iran-tensions-worsen-markets-wrap",
+        "sentiment": "negative",
+        "importance": 7,
+        "category": "global_macro",
+        "one_line": "오일 가격 상승으로 미국 주식과 채권이 하락"
+      },
+      {
+        "outlet": "khan.co.kr",
+        "region": "XX",
+        "title": "국힘 서울시장 후보 확정 오세훈 “서울 내주면 정권폭주 막을 제동장치 사라진다”",
+        "link": "https://www.khan.co.kr/article/202604181220001/?utm_source=khan_rss&utm_medium=rss&utm_campaign=politic_news",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "국힘 서울시장 후보 확정 오세훈 \"서울 내주면 정권폭주 막을 제동장치 사라진다\""
+      },
+      {
+        "outlet": "Google News",
+        "region": "XX",
+        "title": "코스피 6200선대 ‘출렁’… 호르무즈 변수에 변동성 확대 - hidomin.com",
+        "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5rQ3FneGU5SzExUEljSUdhSjJEM2NSOG5DM1FFVk9rYVFNMUh4eDhDWFpFTVg3T0VqaDY3bmVtZWtYQU9tNUhEOF9ucVN3Nm5EMlFRSlVfMUZ6Ui11dGlvZWlpRDNiMWp1LVE?oc=5",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "코스피 6200선대 '출렁'… 호르무즈 변수에 변동성 확대"
+      },
+      {
+        "outlet": "finance.yahoo.com",
+        "region": "XX",
+        "title": "Analyst Upgrades Ford Motor (F) to ‘Buy’, Cites Strong Earnings Potential",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/analyst-upgrades-ford-motor-f-063130078.html",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "Analyst가 Ford Motor의 주가를 'Buy'로 업그레이드 함에 따라 Ford Motor의 주가가 상승할 가능성이 높아짐."
+      },
+      {
+        "outlet": "seekingalpha.com",
+        "region": "XX",
+        "title": "Turkcell: Cheap Valuation, But Rising CapEx And Forex Risks (Rating Downgrade)",
+        "link": "https://seekingalpha.com/article/4891899-turkcell-stock-may-look-cheap-but-rising-capex-and-forex-exposures-point-to-mounting-risks?source=feed_all_articles",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "투자자에게 중요한 정보를 제공하는 투자 분석 기사"
+      },
+      {
+        "outlet": "techcrunch.com",
+        "region": "XX",
+        "title": "OpenAI’s existential questions",
+        "link": "https://techcrunch.com/2026/04/19/openais-existential-questions/",
+        "sentiment": "neutral",
+        "importance": 6,
+        "category": "tech_industry",
+        "one_line": "OpenAI의 최근 인수와 그에 대한 존재적 문제에 대한 논의"
+      }
+    ],
+    "top_issues": [
+      {
+        "rank": 1,
+        "title": "이란과 미국의 군사 충돌",
+        "summary": "이란과 미국의 군사 충돌로 인해 석유 가격이 급등하고, 글로벌 경제에 불안이 확산되고 있다. 이 충돌은 중동 지역의 안정성을 위협하며, 세계 경제에 미칠 영향이 크다. 특히, 호르무즈 해협을 통한 유조선 운항이 어려워질 경우 글로벌 에너지 시장에 큰 영향을 미칠 수 있다.",
+        "political_intent": "이란과 미국의 군사 충돌은 정치적 의도와 경제적 이익을 동시에 고려한 결과로 보인다. 미국은 이란의 핵 개발을 막고, 이란은 미국의 간섭을 거부하는 모습을 보이고 있다.",
+        "economic_interest": "이란과 미국의 군사 충돌은 글로벌 에너지 시장에 큰 영향을 미칠 수 있다. 특히, 호르무즈 해협을 통한 유조선 운항이 어려워질 경우 에너지 가격이 급등할 수 있다.",
+        "framing": "언론은 이란과 미국의 군사 충돌을 중동 지역의 안정성 위협과 글로벌 경제에 미칠 영향으로 프레이밍하고 있다.",
+        "security_angle": "이란과 미국의 군사 충돌은 중동 지역의 안정성을 위협하며, 테러와의 전쟁을 재개할 가능성이 있다.",
+        "market_impact": "이란과 미국의 군사 충돌은 글로벌 에너지 시장에 큰 영향을 미칠 수 있으며, 특히 에너지 가격이 급등할 수 있다.",
+        "sentiment": "negative"
+      },
+      {
+        "rank": 2,
+        "title": "일본 혼슈 동쪽 해역서 규모 7.4 지진",
+        "summary": "일본 혼슈 동쪽 해역서 규모 7.4 지진이 발생하여 쓰나미 경보가 발령되었다. 이 지진은 일본의 경제와 인프라에 큰 영향을 미칠 수 있다.",
+        "political_intent": "일본 정부는 지진으로 인한 피해를 최소화하기 위해 긴급 대책을 마련하고 있다.",
+        "economic_interest": "일본의 지진은 경제와 인프라에 큰 영향을 미칠 수 있다. 특히, 일본의 산업과 수출에 큰 영향을 미칠 수 있다.",
+        "framing": "언론은 일본의 지진을 자연재해와 경제적 손실로 프레이밍하고 있다.",
+        "security_angle": "일본의 지진은 국가 안보에 큰 영향을 미칠 수 있다. 특히, 원자력 발전소의 안전성에 대한 우려가 있다.",
+        "market_impact": "일본의 지진은 일본의 경제와 글로벌 시장에 큰 영향을 미칠 수 있다.",
+        "sentiment": "negative"
+      },
+      {
+        "rank": 3,
+        "title": "코스피 6200선대 ‘출렁’",
+        "summary": "코스피는 6200선대에서 출렁이고 있다. 특히, 호르무즈 변수에 따른 변동성 확대와 미국과 이란의 군사 충돌로 인해 코스피가 하락할 가능성이 있다.",
+        "political_intent": "코스피의 출렁임은 정치적 의도와 경제적 실리와 관련이 있다. 특히, 정부의 경제 정책과 기업의 실적이 코스피에 큰 영향을 미칠 수 있다.",
+        "economic_interest": "코스피의 출렁임은 경제적 실리와 관련이 있다. 특히, 기업의 실적과 정부의 경제 정책이 코스피에 큰 영향을 미칠 수 있다.",
+        "framing": "언론은 코스피의 출렁임을 경제적 실리와 정부의 정책으로 프레이밍하고 있다.",
+        "security_angle": "코스피의 출렁임은 국가 안보에 큰 영향을 미칠 수 없다.",
+        "market_impact": "코스피의 출렁임은 글로벌 시장에 큰 영향을 미칠 수 있다.",
+        "sentiment": "cautious"
+      },
+      {
+        "rank": 4,
+        "title": "국힘 서울시장 후보 확정 오세훈",
+        "summary": "국힘 서울시장 후보가 확정되었다. 오세훈은 서울시장으로 당선될 경우, 서울의 경제와 정치에 큰 영향을 미칠 수 있다.",
+        "political_intent": "오세훈의 서울시장 후보 확정은 정치적 의도와 관련이 있다. 특히, 정부의 정책과 서울시의 정치가 오세훈의 당선에 큰 영향을 미칠 수 있다.",
+        "economic_interest": "오세훈의 서울시장 후보 확정은 경제적 실리와 관련이 있다. 특히, 서울시의 경제와 산업이 오세훈의 당선에 큰 영향을 미칠 수 있다.",
+        "framing": "언론은 오세훈의 서울시장 후보 확정을 정치적 의도와 경제적 실리로서 프레이밍하고 있다.",
+        "security_angle": "오세훈의 서울시장 후보 확정은 국가 안보에 큰 영향을 미칠 수 없다.",
+        "market_impact": "오세훈의 서울시장 후보 확정은 서울시의 경제와 산업에 큰 영향을 미칠 수 있다.",
+        "sentiment": "neutral"
+      },
+      {
+        "rank": 5,
+        "title": "WGBI 편입 효과 ‘쑥’",
+        "summary": "WGBI 편입 효과로 일본 투자자들이 한국 국채를大量으로 매수하고 있다. 이로 인해 한국의 자금 유입이 예상된다.",
+        "political_intent": "WGBI 편입 효과는 정치적 의도와 관련이 있다. 특히, 정부의 경제 정책과 국제 협력이 WGBI 편입 효과에 큰 영향을 미칠 수 있다.",
+        "economic_interest": "WGBI 편입 효과는 경제적 실리와 관련이 있다. 특히, 한국의 자금 유입과 경제 성장이 WGBI 편입 효과에 큰 영향을 미칠 수 있다.",
+        "framing": "언론은 WGBI 편입 효과를 경제적 실리와 정부의 정책으로 프레이밍하고 있다.",
+        "security_angle": "WGBI 편입 효과는 국가 안보에 큰 영향을 미칠 수 없다.",
+        "market_impact": "WGBI 편입 효과는 한국의 자금 유입과 경제 성장에 큰 영향을 미칠 수 있다.",
+        "sentiment": "positive"
+      }
+    ],
+    "country_stances": [
+      {
+        "issue_title": "이란과 미국의 군사 충돌",
+        "countries": [
+          {
+            "country": "미국",
+            "flag": "🇺🇸",
+            "official_position": "이란의 공격에 대한 자위권을 행사하고 있으며, 이란의 핵 개발을 방지하기 위해 모든 수단을 동원할 것임을 강조한다.",
+            "real_intent": "이란의 핵 개발을 방지하고 중동 지역에서 미국의 영향력을 유지하기 위해 군사 충돌을 감수하는 것으로 보인다.",
+            "stance_type": "지지"
+          },
+          {
+            "country": "이란",
+            "flag": "🇮🇷",
+            "official_position": "미국의 공격에 대한 반격을 준비하고 있으며, 미국의 군사 행동을 중단할 것을 요구한다.",
+            "real_intent": "이란의 핵 개발과 중동 지역에서의 영향력을 유지하기 위해 미국과의 군사 충돌을 피할 수 없다고 판단하는 것으로 보인다.",
+            "stance_type": "반대"
+          },
+          {
+            "country": "사우디아라비아",
+            "flag": "🇸🇦",
+            "official_position": "중동 지역의 안정성을 유지하기 위해 미국과 이란의 군사 충돌을 중단할 것을 촉구한다.",
+            "real_intent": "사우디아라비아는 미국의 핵심 동맹국으로, 미국의 군사 행동을 지지하면서도 이란과의 관계를 유지하기 위해 중립적인 입장을 취하는 것으로 보인다.",
+            "stance_type": "중립"
+          },
+          {
+            "country": "중국",
+            "flag": "🇨🇳",
+            "official_position": "군사 충돌을 중단하고 대화로 해결할 것을 촉구한다.",
+            "real_intent": "중국은 이란과 미국의 군사 충돌로 인해 발생하는 에너지 가격 상승과 글로벌 경제 불안정에 관심을 가지고 있으며, 중동 지역에서 자신의 영향력을 확대하기 위해 중립적인 입장을 취하는 것으로 보인다.",
+            "stance_type": "중립"
+          }
+        ]
+      },
+      {
+        "issue_title": "일본 혼슈 동쪽 해역서 규모 7.4 지진",
+        "countries": [
+          {
+            "country": "일본",
+            "flag": "🇯🇵",
+            "official_position": "지진으로 인한 피해를 최소화하기 위해 모든 노력을 다하고 있으며, 국제 사회의 지원을 요청한다.",
+            "real_intent": "일본은 지진으로 인한 경제적损失과 인프라 손실을 최소화하기 위해 모든 수단을 동원하는 것으로 보인다.",
+            "stance_type": "지지"
+          },
+          {
+            "country": "미국",
+            "flag": "🇺🇸",
+            "official_position": "일본에 지진 피해를 최소화하기 위해 지원을 제공할 것임을 발표했다.",
+            "real_intent": "미국은 일본과의 동맹 관계를 강화하고 아시아-태평양 지역에서 자신의 영향력을 유지하기 위해 일본에 지원을 제공하는 것으로 보인다.",
+            "stance_type": "지지"
+          },
+          {
+            "country": "중국",
+            "flag": "🇨🇳",
+            "official_position": "일본에 지진 피해를 최소화하기 위해 지원을 제공할 의향이 있다.",
+            "real_intent": "중국은 일본과의 경제적競争을 유지하면서도 아시아-태평양 지역에서 자신의 영향력을 확대하기 위해 일본에 지원을 제공하는 것으로 보인다.",
+            "stance_type": "중립"
+          },
+          {
+            "country": "한국",
+            "flag": "🇰🇷",
+            "official_position": "일본에 지진 피해를 최소화하기 위해 지원을 제공할 의향이 있다.",
+            "real_intent": "한국은 일본과의 경제적競争을 유지하면서도 아시아-태평양 지역에서 자신의 영향력을 확대하기 위해 일본에 지원을 제공하는 것으로 보인다.",
+            "stance_type": "중립"
+          }
+        ]
+      },
+      {
+        "issue_title": "코스피 6200선대 ‘출렁’",
+        "countries": [
+          {
+            "country": "한국",
+            "flag": "🇰🇷",
+            "official_position": "코스피의 안정성을 유지하기 위해 모든 노력을 다하고 있으며, 투자자들의 신뢰를 회복하기 위해 정책을 시행할 것임을 발표했다.",
+            "real_intent": "한국은 코스피의 안정성을 유지하기 위해 모든 수단을 동원하는 것으로 보인다.",
+            "stance_type": "지지"
+          },
+          {
+            "country": "미국",
+            "flag": "🇺🇸",
+            "official_position": "한국의 경제 안정성을 지원하기 위해 협력할 의향이 있다.",
+            "real_intent": "미국은 한국과의 동맹 관계를 강화하고 아시아-태평양 지역에서 자신의 영향력을 유지하기 위해 한국의 경제 안정성을 지원하는 것으로 보인다.",
+            "stance_type": "지지"
+          },
+          {
+            "country": "중국",
+            "flag": "🇨🇳",
+            "official_position": "한국의 경제 안정성을 지원하기 위해 협력할 의향이 있다.",
+            "real_intent": "중국은 한국과의 경제적競争을 유지하면서도 아시아-태평양 지역에서 자신의 영향력을 확대하기 위해 한국의 경제 안정성을 지원하는 것으로 보인다.",
+            "stance_type": "중립"
+          },
+          {
+            "country": "일본",
+            "flag": "🇯🇵",
+            "official_position": "한국의 경제 안정성을 지원하기 위해 협력할 의향이 있다.",
+            "real_intent": "일본은 한국과의 경제적競争을 유지하면서도 아시아-태평양 지역에서 자신의 영향력을 확대하기 위해 한국의 경제 안정성을 지원하는 것으로 보인다.",
+            "stance_type": "중립"
+          }
+        ]
+      }
+    ],
+    "market_data": {
+      "market_items": [
+        {
+          "market": "KOSPI",
+          "last_close": 5808.62,
+          "pred_close": 5251.54,
+          "change_pct": -9.59,
+          "pred_range": {
+            "high": 5788.85,
+            "low": 5157.82
+          },
+          "xgb_direction": "하락",
+          "xgb_confidence": 3.2,
+          "ai_confidence": 58,
+          "ai_reason": "코스피 6200선대 출렁과 휴전 종료 앞두고 갈등 고조로 코스피가 강보합 마감"
+        },
+        {
+          "market": "USD/KRW",
+          "last_close": 1482.18,
+          "pred_close": 1497.96,
+          "change_pct": 1.06,
+          "pred_range": {
+            "high": 1505.68,
+            "low": 1483.14
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": 62,
+          "ai_reason": "원/달러 환율이 상방 우세 전망"
+        },
+        {
+          "market": "삼성전자",
+          "last_close": 201000.0,
+          "pred_close": 197079.2,
+          "change_pct": -1.95,
+          "pred_range": {
+            "high": 203257.22,
+            "low": 190057.28
+          },
+          "xgb_direction": "하락",
+          "xgb_confidence": 1.8,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "skhynix",
+          "last_close": 1040000.0,
+          "pred_close": 977079.56,
+          "change_pct": -6.05,
+          "pred_range": {
+            "high": 1077452.0,
+            "low": 931741.38
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "NASDAQ",
+          "last_close": 22902.89,
+          "pred_close": 23309.18,
+          "change_pct": 1.77,
+          "pred_range": {
+            "high": 23414.94,
+            "low": 22536.25
+          },
+          "xgb_direction": "하락",
+          "xgb_confidence": 3.0,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "sp500",
+          "last_close": 6816.89,
+          "pred_close": 6826.26,
+          "change_pct": 0.14,
+          "pred_range": {
+            "high": 6859.07,
+            "low": 6760.19
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "dow",
+          "last_close": 47916.57,
+          "pred_close": 48751.34,
+          "change_pct": 1.74,
+          "pred_range": {
+            "high": 48898.92,
+            "low": 47743.45
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "nvidia",
+          "last_close": 188.63,
+          "pred_close": 195.01,
+          "change_pct": 3.38,
+          "pred_range": {
+            "high": 197.04,
+            "low": 184.95
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        }
+      ],
+      "news_impact": [
+        {
+          "category": "global_macro",
+          "label": "글로벌 매크로",
+          "positive": 4,
+          "negative": 21,
+          "neutral": 2,
+          "total": 27,
+          "net_score": -0.63,
+          "markets": [
+            "nasdaq",
+            "sp500",
+            "kospi",
+            "usd_krw"
+          ]
+        },
+        {
+          "category": "tech_industry",
+          "label": "기술·산업",
+          "positive": 11,
+          "negative": 2,
+          "neutral": 2,
+          "total": 15,
+          "net_score": 0.6,
+          "markets": [
+            "nasdaq",
+            "sp500",
+            "dow",
+            "nvidia",
+            "samsung",
+            "hynix"
+          ]
+        },
+        {
+          "category": "politics_economy",
+          "label": "정치·경제",
+          "positive": 9,
+          "negative": 6,
+          "neutral": 2,
+          "total": 17,
+          "net_score": 0.18,
+          "markets": [
+            "kospi",
+            "usd_krw"
+          ]
+        },
+        {
+          "category": "real_estate",
+          "label": "부동산",
+          "positive": 8,
+          "negative": 7,
+          "neutral": 0,
+          "total": 15,
+          "net_score": 0.07,
+          "markets": [
+            "kospi"
+          ]
+        }
+      ],
+      "key_sector": {
+        "name": "반도체",
+        "direction": "약세",
+        "reason": "삼성전자 총파업 예고로 글로벌 반도체 시장의 긴장감이 고조"
+      },
+      "overall_sentiment": "neutral"
+    },
+    "risk_watchlist": [
+      {
+        "event": "미국-이란 전쟁 가능성",
+        "scenario": "미국과 이란의 호르무즈 해협 충돌이 전쟁으로 확대될 가능성이 높아지고 있다. 이 경우 글로벌 경제에 큰 악영향을 미칠 수 있으며, 특히 유가 상승과 함께 금융 시장이 불안정해질 수 있다. 이러한 상황은 한국 경제에도 큰 영향을 미칠 수 있다.",
+        "expected_trend": "하락",
+        "risk_level": "HIGH",
+        "affected_markets": [
+          "KOSPI",
+          "USD/KRW",
+          "WTI"
+        ]
+      },
+      {
+        "event": "일본 지진의 경제적 영향",
+        "scenario": "일본 혼슈 동쪽 해역에서 발생한 규모 7.4 지진이 일본 경제에 큰 영향을 미칠 수 있다. 특히 쓰나미 경보가 발령된 경우 일본의 산업 생산과 수출에 큰 영향을 미칠 수 있다. 이 경우 한국 경제에도 영향을 미칠 수 있다.",
+        "expected_trend": "변동성확대",
+        "risk_level": "MEDIUM",
+        "affected_markets": [
+          "KOSPI",
+          "USD/JPY"
+        ]
+      },
+      {
+        "event": "한국-인도 정상회담",
+        "scenario": "한국과 인도가 새로운 경제 협력을 논의할 수 있다. 이 경우 한국의 수출과 산업 생산에 긍정적인 영향을 미칠 수 있다. 특히 인도가 세계 3위 경제대국으로 성장할 수 있는 가능성이 높아지고 있다.",
+        "expected_trend": "상승",
+        "risk_level": "LOW",
+        "affected_markets": [
+          "KOSPI",
+          "USD/INR"
+        ]
+      },
+      {
+        "event": "원/달러 환율 상방 우세 전망",
+        "scenario": "원/달러 환율이 상방 우세 전망이다. 이는 한국의 수출과 산업 생산에 부정적인 영향을 미칠 수 있다. 특히 배당 역송금과 종전 불확실성이 이중 압박을 가할 수 있다.",
+        "expected_trend": "하락",
+        "risk_level": "MEDIUM",
+        "affected_markets": [
+          "KOSPI",
+          "USD/KRW"
+        ]
+      },
+      {
+        "event": "코스피 6200선대 출렁",
+        "scenario": "코스피가 6200선대에서 출렁이고 있다. 이는 글로벌 경제의 불안정성과 한국 경제의 내부적 약점이 결합한 결과일 수 있다. 특히 호르무즈 해협 충돌과 미국-이란 전쟁 가능성이 코스피에 부정적인 영향을 미칠 수 있다.",
+        "expected_trend": "하락",
+        "risk_level": "HIGH",
+        "affected_markets": [
+          "KOSPI",
+          "USD/KRW"
+        ]
+      }
+    ],
+    "summary_matrix": {
+      "matrix": [
+        {
+          "category": "기술",
+          "category_en": "Technology",
+          "status": "긍정",
+          "key_trend": "글로벌 반도체 시장의 성장과 AI 기술의 발전",
+          "risk": "삼성전자 총파업 예고로 인한 반도체 섹터의 약세",
+          "opportunity": "신기술 개발과 투자 기회"
+        },
+        {
+          "category": "경제",
+          "category_en": "Economy",
+          "status": "중립",
+          "key_trend": "코스피의 상승 가능성과 하락 위험이 공존",
+          "risk": "미국과 이란의 전쟁 가능성과 원/달러 환율 상방 우세 전망",
+          "opportunity": "글로벌 투자은행들의 코스피 전망 상향 조정"
+        },
+        {
+          "category": "정치",
+          "category_en": "Politics",
+          "status": "중립",
+          "key_trend": "휴전 종료 앞두고 갈등 고조",
+          "risk": "미국과 이란의 전쟁 가능성",
+          "opportunity": "갈등 해결과 평화 협상"
+        },
+        {
+          "category": "안보",
+          "category_en": "Security",
+          "status": "부정",
+          "key_trend": "미국과 이란의 전쟁 가능성",
+          "risk": "전쟁으로 인한 글로벌 안보 위협",
+          "opportunity": "안보 협력과 평화 유지 노력"
+        },
+        {
+          "category": "금융",
+          "category_en": "Finance",
+          "status": "중립",
+          "key_trend": "글로벌 투자은행들의 코스피 전망 상향 조정",
+          "risk": "원/달러 환율 상방 우세 전망",
+          "opportunity": "투자 기회와 금융 시장의 성장"
+        },
+        {
+          "category": "시장",
+          "category_en": "Market",
+          "status": "중립",
+          "key_trend": "코스피의 상승 가능성과 하락 위험이 공존",
+          "risk": "시장의 불안정성과 투자 위험",
+          "opportunity": "시장의 성장과 투자 기회"
+        }
+      ],
+      "structural_analysis": "현재의 글로벌 정세는 기술, 경제, 정치, 안보, 금융, 시장 등 다양한 축에서 복잡하게 얽혀 있습니다. 기술의 발전과 경제의 성장은 기회를 제공하지만, 정치와 안보의 불안정성은 위험을 가중시킵니다. 금융 시장의 성장은 투자 기회를 제공하지만, 시장의 불안정성은 투자 위험을 증가시킵니다. 이러한 대전환의 시대에 생존 전략은 다양화와 다각화에 있습니다. 즉, 다양한 기술과 산업에 투자하고, 글로벌 시장에 진출하며, 안보 협력과 평화 유지 노력을 통해 위험을 관리하고 기회를 잡아야 합니다. 또한, 시장의 성장과 투자 기회를 포착하기 위해 지속적인 분석과 연구가 필요합니다. 이러한 구조적 분석을 통해 우리는 현재의 글로벌 정세를 이해하고, 미래의 기회와 위험을 예측하여 성공적인 전략을 수립할 수 있습니다."
+    }
+  }
+}

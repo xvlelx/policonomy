@@ -1,0 +1,736 @@
+[
+  {
+    "week": "2026-04-15",
+    "predictions": {
+      "kospi": {
+        "name": "kospi",
+        "last_close": 5872.34,
+        "pred_close": 5546.93,
+        "change_pct": -5.54,
+        "direction": "하락",
+        "pred_range": {
+          "high": 5993.47,
+          "low": 5483.17
+        }
+      },
+      "usd_krw": {
+        "name": "usd_krw",
+        "last_close": 1499.13,
+        "pred_close": 1502.51,
+        "change_pct": 0.23,
+        "direction": "상승",
+        "pred_range": {
+          "high": 1519.47,
+          "low": 1495.5
+        }
+      },
+      "samsung": {
+        "name": "samsung",
+        "last_close": 210500.0,
+        "pred_close": 204760.33,
+        "change_pct": -2.73,
+        "direction": "하락",
+        "pred_range": {
+          "high": 216273.0,
+          "low": 200868.33
+        }
+      },
+      "nasdaq": {
+        "name": "nasdaq",
+        "last_close": 22017.85,
+        "pred_close": 22192.93,
+        "change_pct": 0.8,
+        "direction": "상승",
+        "pred_range": {
+          "high": 22439.85,
+          "low": 21651.23
+        }
+      }
+    },
+    "verified": true,
+    "results": [
+      {
+        "name": "kospi",
+        "pred_direction": "하락",
+        "pred_close": 5436.88,
+        "actual_close": 6119.99,
+        "actual_change": 4.22,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "usd_krw",
+        "pred_direction": "상승",
+        "pred_close": 1507.16,
+        "actual_close": 1473.19,
+        "actual_change": -1.73,
+        "actual_direction": "하락",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "samsung",
+        "pred_direction": "하락",
+        "pred_close": 199192.88,
+        "actual_close": 213000.0,
+        "actual_change": 1.19,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": true
+      },
+      {
+        "name": "nasdaq",
+        "pred_direction": "하락",
+        "pred_close": 22002.5,
+        "actual_close": 23639.08,
+        "actual_change": 7.36,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      }
+    ],
+    "verification_date": "2026-04-15T14:53:07.623721"
+  },
+  {
+    "week": "2026-04-16",
+    "predictions": {
+      "kospi": {
+        "name": "kospi",
+        "last_close": 5778.01,
+        "pred_close": 5635.73,
+        "change_pct": -2.46,
+        "direction": "하락",
+        "pred_range": {
+          "high": 5782.96,
+          "low": 5474.67
+        }
+      },
+      "usd_krw": {
+        "name": "usd_krw",
+        "last_close": 1477.6,
+        "pred_close": 1495.18,
+        "change_pct": 1.19,
+        "direction": "상승",
+        "pred_range": {
+          "high": 1503.9,
+          "low": 1476.26
+        }
+      },
+      "samsung": {
+        "name": "samsung",
+        "last_close": 204000.0,
+        "pred_close": 186125.34,
+        "change_pct": -8.76,
+        "direction": "하락",
+        "pred_range": {
+          "high": 198025.52,
+          "low": 178083.72
+        }
+      },
+      "nasdaq": {
+        "name": "nasdaq",
+        "last_close": 22822.42,
+        "pred_close": 22721.71,
+        "change_pct": -0.44,
+        "direction": "하락",
+        "pred_range": {
+          "high": 22950.0,
+          "low": 22340.11
+        }
+      }
+    },
+    "verified": true,
+    "results": [
+      {
+        "name": "kospi",
+        "pred_direction": "하락",
+        "pred_close": 5337.94,
+        "actual_close": 5967.75,
+        "actual_change": 8.61,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "usd_krw",
+        "pred_direction": "상승",
+        "pred_close": 1508.07,
+        "actual_close": 1475.01,
+        "actual_change": -1.61,
+        "actual_direction": "하락",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "samsung",
+        "pred_direction": "하락",
+        "pred_close": 195197.84,
+        "actual_close": 211000.0,
+        "actual_change": 7.38,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "nasdaq",
+        "pred_direction": "상승",
+        "pred_close": 22842.28,
+        "actual_close": 24016.02,
+        "actual_change": 6.1,
+        "actual_direction": "상승",
+        "direction_hit": true,
+        "range_hit": false
+      }
+    ],
+    "verification_date": "2026-04-16T08:42:48.525265"
+  },
+  {
+    "week": "2026-04-17",
+    "predictions": {
+      "kospi": {
+        "name": "kospi",
+        "last_close": 5858.87,
+        "pred_close": 5640.67,
+        "change_pct": -3.72,
+        "direction": "하락",
+        "pred_range": {
+          "high": 5902.14,
+          "low": 5544.3
+        }
+      },
+      "usd_krw": {
+        "name": "usd_krw",
+        "last_close": 1473.28,
+        "pred_close": 1495.31,
+        "change_pct": 1.5,
+        "direction": "상승",
+        "pred_range": {
+          "high": 1504.51,
+          "low": 1476.41
+        }
+      },
+      "samsung": {
+        "name": "samsung",
+        "last_close": 206000.0,
+        "pred_close": 199444.78,
+        "change_pct": -3.18,
+        "direction": "하락",
+        "pred_range": {
+          "high": 218930.05,
+          "low": 194968.38
+        }
+      },
+      "hynix": {
+        "name": "hynix",
+        "last_close": 1027000.0,
+        "pred_close": 1017374.38,
+        "change_pct": -0.94,
+        "direction": "하락",
+        "pred_range": {
+          "high": 1077135.25,
+          "low": 964307.5
+        }
+      },
+      "nasdaq": {
+        "name": "nasdaq",
+        "last_close": 22822.42,
+        "pred_close": 23049.79,
+        "change_pct": 1.0,
+        "direction": "상승",
+        "pred_range": {
+          "high": 23189.46,
+          "low": 22752.74
+        }
+      },
+      "sp500": {
+        "name": "sp500",
+        "last_close": 6824.66,
+        "pred_close": 6813.04,
+        "change_pct": -0.17,
+        "direction": "하락",
+        "pred_range": {
+          "high": 6850.7,
+          "low": 6739.94
+        }
+      },
+      "dow": {
+        "name": "dow",
+        "last_close": 48185.8,
+        "pred_close": 47826.55,
+        "change_pct": -0.75,
+        "direction": "하락",
+        "pred_range": {
+          "high": 48377.57,
+          "low": 47295.18
+        }
+      },
+      "nvidia": {
+        "name": "nvidia",
+        "last_close": 183.91,
+        "pred_close": 190.85,
+        "change_pct": 3.78,
+        "direction": "상승",
+        "pred_range": {
+          "high": 197.22,
+          "low": 182.38
+        }
+      }
+    },
+    "verified": true,
+    "results": [
+      {
+        "name": "kospi",
+        "pred_direction": "하락",
+        "pred_close": 5327.0,
+        "actual_close": 6195.24,
+        "actual_change": 5.5,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "usd_krw",
+        "pred_direction": "상승",
+        "pred_close": 1482.74,
+        "actual_close": 1481.08,
+        "actual_change": 0.24,
+        "actual_direction": "상승",
+        "direction_hit": true,
+        "range_hit": true
+      },
+      {
+        "name": "samsung",
+        "pred_direction": "하락",
+        "pred_close": 196334.92,
+        "actual_close": 216250.0,
+        "actual_change": 2.73,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": true
+      },
+      {
+        "name": "nasdaq",
+        "pred_direction": "하락",
+        "pred_close": 22346.86,
+        "actual_close": 24102.7,
+        "actual_change": 5.61,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      }
+    ],
+    "verification_date": "2026-04-17T15:26:32.907374"
+  },
+  {
+    "week": "2026-04-18",
+    "predictions": {
+      "kospi": {
+        "name": "kospi",
+        "last_close": 5858.87,
+        "pred_close": 5780.27,
+        "change_pct": -1.34,
+        "direction": "하락",
+        "pred_range": {
+          "high": 5936.47,
+          "low": 5592.61
+        }
+      },
+      "usd_krw": {
+        "name": "usd_krw",
+        "last_close": 1473.28,
+        "pred_close": 1498.17,
+        "change_pct": 1.69,
+        "direction": "상승",
+        "pred_range": {
+          "high": 1512.14,
+          "low": 1469.88
+        }
+      },
+      "samsung": {
+        "name": "samsung",
+        "last_close": 206000.0,
+        "pred_close": 207021.95,
+        "change_pct": 0.5,
+        "direction": "상승",
+        "pred_range": {
+          "high": 224841.41,
+          "low": 201944.78
+        }
+      },
+      "skhynix": {
+        "name": "skhynix",
+        "last_close": 1027000.0,
+        "pred_close": 919510.19,
+        "change_pct": -10.47,
+        "direction": "하락",
+        "pred_range": {
+          "high": 1050150.38,
+          "low": 875347.81
+        }
+      },
+      "nasdaq": {
+        "name": "nasdaq",
+        "last_close": 22902.89,
+        "pred_close": 22675.0,
+        "change_pct": -1.0,
+        "direction": "하락",
+        "pred_range": {
+          "high": 22974.91,
+          "low": 22371.54
+        }
+      },
+      "sp500": {
+        "name": "sp500",
+        "last_close": 6816.89,
+        "pred_close": 6855.8,
+        "change_pct": 0.57,
+        "direction": "상승",
+        "pred_range": {
+          "high": 6877.62,
+          "low": 6746.58
+        }
+      },
+      "dow": {
+        "name": "dow",
+        "last_close": 47916.57,
+        "pred_close": 48174.05,
+        "change_pct": 0.54,
+        "direction": "상승",
+        "pred_range": {
+          "high": 48428.08,
+          "low": 47617.98
+        }
+      },
+      "nvidia": {
+        "name": "nvidia",
+        "last_close": 188.63,
+        "pred_close": 199.94,
+        "change_pct": 6.0,
+        "direction": "상승",
+        "pred_range": {
+          "high": 206.75,
+          "low": 189.55
+        }
+      }
+    },
+    "verified": true,
+    "results": [
+      {
+        "name": "kospi",
+        "pred_direction": "하락",
+        "pred_close": 5395.07,
+        "actual_close": NaN,
+        "actual_change": NaN,
+        "actual_direction": "하락",
+        "direction_hit": true,
+        "range_hit": false
+      },
+      {
+        "name": "usd_krw",
+        "pred_direction": "상승",
+        "pred_close": 1498.28,
+        "actual_close": 1465.97,
+        "actual_change": -0.5,
+        "actual_direction": "하락",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "samsung",
+        "pred_direction": "하락",
+        "pred_close": 199276.78,
+        "actual_close": 216000.0,
+        "actual_change": 5.88,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "nasdaq",
+        "pred_direction": "상승",
+        "pred_close": 22997.3,
+        "actual_close": 24424.18,
+        "actual_change": 6.64,
+        "actual_direction": "상승",
+        "direction_hit": true,
+        "range_hit": false
+      }
+    ],
+    "verification_date": "2026-04-18T04:04:23.284254"
+  },
+  {
+    "week": "2026-04-19",
+    "predictions": {
+      "kospi": {
+        "name": "kospi",
+        "last_close": 5858.87,
+        "pred_close": 5673.64,
+        "change_pct": -3.16,
+        "direction": "하락",
+        "pred_range": {
+          "high": 5898.4,
+          "low": 5499.19
+        }
+      },
+      "usd_krw": {
+        "name": "usd_krw",
+        "last_close": 1473.28,
+        "pred_close": 1497.88,
+        "change_pct": 1.67,
+        "direction": "상승",
+        "pred_range": {
+          "high": 1507.23,
+          "low": 1473.99
+        }
+      },
+      "samsung": {
+        "name": "samsung",
+        "last_close": 206000.0,
+        "pred_close": 206637.61,
+        "change_pct": 0.31,
+        "direction": "상승",
+        "pred_range": {
+          "high": 218444.97,
+          "low": 201945.25
+        }
+      },
+      "skhynix": {
+        "name": "skhynix",
+        "last_close": 1027000.0,
+        "pred_close": 1024055.12,
+        "change_pct": -0.29,
+        "direction": "하락",
+        "pred_range": {
+          "high": 1062782.38,
+          "low": 980386.31
+        }
+      },
+      "nasdaq": {
+        "name": "nasdaq",
+        "last_close": 22902.89,
+        "pred_close": 23341.89,
+        "change_pct": 1.92,
+        "direction": "상승",
+        "pred_range": {
+          "high": 23425.61,
+          "low": 22683.93
+        }
+      },
+      "sp500": {
+        "name": "sp500",
+        "last_close": 6816.89,
+        "pred_close": 6822.36,
+        "change_pct": 0.08,
+        "direction": "상승",
+        "pred_range": {
+          "high": 6869.89,
+          "low": 6719.06
+        }
+      },
+      "dow": {
+        "name": "dow",
+        "last_close": 47916.57,
+        "pred_close": 48053.19,
+        "change_pct": 0.29,
+        "direction": "상승",
+        "pred_range": {
+          "high": 48431.47,
+          "low": 47696.86
+        }
+      },
+      "nvidia": {
+        "name": "nvidia",
+        "last_close": 188.63,
+        "pred_close": 191.78,
+        "change_pct": 1.67,
+        "direction": "상승",
+        "pred_range": {
+          "high": 197.59,
+          "low": 187.04
+        }
+      }
+    },
+    "verified": true,
+    "results": [
+      {
+        "name": "kospi",
+        "pred_direction": "하락",
+        "pred_close": 5511.54,
+        "actual_close": 6191.92,
+        "actual_change": 5.68,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "usd_krw",
+        "pred_direction": "상승",
+        "pred_close": 1485.89,
+        "actual_close": 1465.68,
+        "actual_change": -0.52,
+        "actual_direction": "하락",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "samsung",
+        "pred_direction": "상승",
+        "pred_close": 208939.72,
+        "actual_close": 216000.0,
+        "actual_change": 4.85,
+        "actual_direction": "상승",
+        "direction_hit": true,
+        "range_hit": true
+      },
+      {
+        "name": "nasdaq",
+        "pred_direction": "상승",
+        "pred_close": 23295.16,
+        "actual_close": 24468.48,
+        "actual_change": 6.84,
+        "actual_direction": "상승",
+        "direction_hit": true,
+        "range_hit": false
+      }
+    ],
+    "verification_date": "2026-04-19T06:28:15.797522"
+  },
+  {
+    "week": "2026-04-20",
+    "predictions": {
+      "kospi": {
+        "name": "kospi",
+        "last_close": 5808.62,
+        "pred_close": 5251.54,
+        "change_pct": -9.59,
+        "direction": "하락",
+        "pred_range": {
+          "high": 5788.85,
+          "low": 5157.82
+        }
+      },
+      "usd_krw": {
+        "name": "usd_krw",
+        "last_close": 1482.18,
+        "pred_close": 1497.96,
+        "change_pct": 1.06,
+        "direction": "상승",
+        "pred_range": {
+          "high": 1505.68,
+          "low": 1483.14
+        }
+      },
+      "samsung": {
+        "name": "samsung",
+        "last_close": 201000.0,
+        "pred_close": 197079.2,
+        "change_pct": -1.95,
+        "direction": "하락",
+        "pred_range": {
+          "high": 203257.22,
+          "low": 190057.28
+        }
+      },
+      "skhynix": {
+        "name": "skhynix",
+        "last_close": 1040000.0,
+        "pred_close": 977079.56,
+        "change_pct": -6.05,
+        "direction": "하락",
+        "pred_range": {
+          "high": 1077452.0,
+          "low": 931741.38
+        }
+      },
+      "nasdaq": {
+        "name": "nasdaq",
+        "last_close": 22902.89,
+        "pred_close": 23309.18,
+        "change_pct": 1.77,
+        "direction": "상승",
+        "pred_range": {
+          "high": 23414.94,
+          "low": 22536.25
+        }
+      },
+      "sp500": {
+        "name": "sp500",
+        "last_close": 6816.89,
+        "pred_close": 6826.26,
+        "change_pct": 0.14,
+        "direction": "상승",
+        "pred_range": {
+          "high": 6859.07,
+          "low": 6760.19
+        }
+      },
+      "dow": {
+        "name": "dow",
+        "last_close": 47916.57,
+        "pred_close": 48751.34,
+        "change_pct": 1.74,
+        "direction": "상승",
+        "pred_range": {
+          "high": 48898.92,
+          "low": 47743.45
+        }
+      },
+      "nvidia": {
+        "name": "nvidia",
+        "last_close": 188.63,
+        "pred_close": 195.01,
+        "change_pct": 3.38,
+        "direction": "상승",
+        "pred_range": {
+          "high": 197.04,
+          "low": 184.95
+        }
+      }
+    },
+    "verified": true,
+    "results": [
+      {
+        "name": "kospi",
+        "pred_direction": "하락",
+        "pred_close": 5509.71,
+        "actual_close": 6191.92,
+        "actual_change": 6.6,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "usd_krw",
+        "pred_direction": "상승",
+        "pred_close": 1495.24,
+        "actual_close": 1477.92,
+        "actual_change": -0.29,
+        "actual_direction": "하락",
+        "direction_hit": false,
+        "range_hit": true
+      },
+      {
+        "name": "samsung",
+        "pred_direction": "상승",
+        "pred_close": 224225.77,
+        "actual_close": 216000.0,
+        "actual_change": 4.85,
+        "actual_direction": "상승",
+        "direction_hit": true,
+        "range_hit": true
+      },
+      {
+        "name": "nasdaq",
+        "pred_direction": "하락",
+        "pred_close": 22677.86,
+        "actual_close": 24468.48,
+        "actual_change": 6.84,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      }
+    ],
+    "verification_date": "2026-04-20T20:14:18.655257"
+  }
+]

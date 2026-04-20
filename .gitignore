@@ -13,6 +13,9 @@ __pycache__/
 # Runtime data (Railway volume에서 관리)
 data/*
 !data/.gitkeep
+!data/*.json
+!data/models/
+!data/reports/
 logs/
 *.db
 

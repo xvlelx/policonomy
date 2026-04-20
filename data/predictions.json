@@ -1,0 +1,525 @@
+{
+  "generated_at": "2026-04-20T20:15:08.030643",
+  "kronos_predictions": {
+    "kospi": {
+      "name": "kospi",
+      "last_close": 5808.62,
+      "pred_close": 5251.54,
+      "change_pct": -9.59,
+      "direction": "하락",
+      "pred_range": {
+        "high": 5788.85,
+        "low": 5157.82
+      }
+    },
+    "usd_krw": {
+      "name": "usd_krw",
+      "last_close": 1482.18,
+      "pred_close": 1497.96,
+      "change_pct": 1.06,
+      "direction": "상승",
+      "pred_range": {
+        "high": 1505.68,
+        "low": 1483.14
+      }
+    },
+    "samsung": {
+      "name": "samsung",
+      "last_close": 201000.0,
+      "pred_close": 197079.2,
+      "change_pct": -1.95,
+      "direction": "하락",
+      "pred_range": {
+        "high": 203257.22,
+        "low": 190057.28
+      }
+    },
+    "skhynix": {
+      "name": "skhynix",
+      "last_close": 1040000.0,
+      "pred_close": 977079.56,
+      "change_pct": -6.05,
+      "direction": "하락",
+      "pred_range": {
+        "high": 1077452.0,
+        "low": 931741.38
+      }
+    },
+    "nasdaq": {
+      "name": "nasdaq",
+      "last_close": 22902.89,
+      "pred_close": 23309.18,
+      "change_pct": 1.77,
+      "direction": "상승",
+      "pred_range": {
+        "high": 23414.94,
+        "low": 22536.25
+      }
+    },
+    "sp500": {
+      "name": "sp500",
+      "last_close": 6816.89,
+      "pred_close": 6826.26,
+      "change_pct": 0.14,
+      "direction": "상승",
+      "pred_range": {
+        "high": 6859.07,
+        "low": 6760.19
+      }
+    },
+    "dow": {
+      "name": "dow",
+      "last_close": 47916.57,
+      "pred_close": 48751.34,
+      "change_pct": 1.74,
+      "direction": "상승",
+      "pred_range": {
+        "high": 48898.92,
+        "low": 47743.45
+      }
+    },
+    "nvidia": {
+      "name": "nvidia",
+      "last_close": 188.63,
+      "pred_close": 195.01,
+      "change_pct": 3.38,
+      "direction": "상승",
+      "pred_range": {
+        "high": 197.04,
+        "low": 184.95
+      }
+    }
+  },
+  "xgb_predictions": {
+    "kospi": {
+      "direction": "하락",
+      "confidence": 3.2,
+      "source": "xgboost"
+    },
+    "usdkrw": {
+      "direction": "하락",
+      "confidence": 1.5,
+      "source": "xgboost"
+    },
+    "samsung": {
+      "direction": "하락",
+      "confidence": 1.8,
+      "source": "xgboost"
+    },
+    "nasdaq": {
+      "direction": "하락",
+      "confidence": 3.0,
+      "source": "xgboost"
+    }
+  },
+  "fused_analysis": {
+    "kospi": {
+      "direction": "하락",
+      "reason": "코스피 6200선대 출렁과 휴전 종료 앞두고 갈등 고조로 코스피가 강보합 마감",
+      "confidence": 58
+    },
+    "usd_krw": {
+      "direction": "상승",
+      "reason": "원/달러 환율이 상방 우세 전망",
+      "confidence": 62
+    },
+    "samsung": {
+      "direction": "하락",
+      "reason": "삼성전자 총파업 예고로 글로벌 반도체 시장의 긴장감이 고조",
+      "confidence": 60
+    },
+    "nasdaq": {
+      "direction": "상승",
+      "reason": "글로벌 투자은행들이 코스피에 대한 전망을 상향 조정함",
+      "confidence": 68
+    },
+    "key_sector": {
+      "name": "반도체",
+      "direction": "약세",
+      "reason": "삼성전자 총파업 예고로 글로벌 반도체 시장의 긴장감이 고조"
+    },
+    "overall_sentiment": "neutral",
+    "weekly_summary": "이번 주 시장은 코스피 6200선대 출렁과 휴전 종료 앞두고 갈등 고조로 코스피가 강보합 마감했으며, 글로벌 투자은행들이 코스피에 대한 전망을 상향 조정했다. 그러나 삼성전자 총파업 예고로 글로벌 반도체 시장의 긴장감이 고조되며, 반도체 섹터는 약세를 보였다.",
+    "sentiment_score": -0.079,
+    "corrected_predictions": {
+      "kospi": {
+        "name": "kospi",
+        "last_close": 5808.62,
+        "pred_close": 5251.54,
+        "change_pct": -9.59,
+        "direction": "하락",
+        "pred_range": {
+          "high": 5788.85,
+          "low": 5157.82
+        }
+      },
+      "usd_krw": {
+        "name": "usd_krw",
+        "last_close": 1482.18,
+        "pred_close": 1497.96,
+        "change_pct": 1.06,
+        "direction": "상승",
+        "pred_range": {
+          "high": 1505.68,
+          "low": 1483.14
+        }
+      },
+      "samsung": {
+        "name": "samsung",
+        "last_close": 201000.0,
+        "pred_close": 197079.2,
+        "change_pct": -1.95,
+        "direction": "하락",
+        "pred_range": {
+          "high": 203257.22,
+          "low": 190057.28
+        }
+      },
+      "skhynix": {
+        "name": "skhynix",
+        "last_close": 1040000.0,
+        "pred_close": 977079.56,
+        "change_pct": -6.05,
+        "direction": "하락",
+        "pred_range": {
+          "high": 1077452.0,
+          "low": 931741.38
+        }
+      },
+      "nasdaq": {
+        "name": "nasdaq",
+        "last_close": 22902.89,
+        "pred_close": 23309.18,
+        "change_pct": 1.77,
+        "direction": "상승",
+        "pred_range": {
+          "high": 23414.94,
+          "low": 22536.25
+        }
+      },
+      "sp500": {
+        "name": "sp500",
+        "last_close": 6816.89,
+        "pred_close": 6826.26,
+        "change_pct": 0.14,
+        "direction": "상승",
+        "pred_range": {
+          "high": 6859.07,
+          "low": 6760.19
+        }
+      },
+      "dow": {
+        "name": "dow",
+        "last_close": 47916.57,
+        "pred_close": 48751.34,
+        "change_pct": 1.74,
+        "direction": "상승",
+        "pred_range": {
+          "high": 48898.92,
+          "low": 47743.45
+        }
+      },
+      "nvidia": {
+        "name": "nvidia",
+        "last_close": 188.63,
+        "pred_close": 195.01,
+        "change_pct": 3.38,
+        "direction": "상승",
+        "pred_range": {
+          "high": 197.04,
+          "low": 184.95
+        }
+      }
+    },
+    "news_impact": [
+      {
+        "category": "global_macro",
+        "label": "글로벌 매크로",
+        "positive": 4,
+        "negative": 21,
+        "neutral": 2,
+        "total": 27,
+        "net_score": -0.63,
+        "markets": [
+          "nasdaq",
+          "sp500",
+          "kospi",
+          "usd_krw"
+        ]
+      },
+      {
+        "category": "tech_industry",
+        "label": "기술·산업",
+        "positive": 11,
+        "negative": 2,
+        "neutral": 2,
+        "total": 15,
+        "net_score": 0.6,
+        "markets": [
+          "nasdaq",
+          "sp500",
+          "dow",
+          "nvidia",
+          "samsung",
+          "hynix"
+        ]
+      },
+      {
+        "category": "politics_economy",
+        "label": "정치·경제",
+        "positive": 9,
+        "negative": 6,
+        "neutral": 2,
+        "total": 17,
+        "net_score": 0.18,
+        "markets": [
+          "kospi",
+          "usd_krw"
+        ]
+      },
+      {
+        "category": "real_estate",
+        "label": "부동산",
+        "positive": 8,
+        "negative": 7,
+        "neutral": 0,
+        "total": 15,
+        "net_score": 0.07,
+        "markets": [
+          "kospi"
+        ]
+      }
+    ],
+    "kospi_debate": {
+      "bull": {
+        "bull_case": "코스피 799개사 지난해 31조1000억원 결산배당이 역대 최고치로 나타났으며, 글로벌 투자은행들이 코스피에 대한 전망을 상향 조정하고 한국 주식시장의 상승 가능성을 낙관하고 있어 상승 가능성이 높다. 또한, WGBI 편입 효과로 일본 투자자들이 한국 국채를大量으로 매수하고 있어 자금 유입이 예상된다.",
+        "key_catalyst": "글로벌 투자은행들의 코스피 전망 상향 조정",
+        "target_markets": [
+          "코스피",
+          "한국 주식시장"
+        ],
+        "confidence": 75
+      },
+      "bear": {
+        "bear_case": "서울시장 선거에서 오세훈 후보의 확정과 정권폭주에 대한 우려, 미국과 이란의 전쟁 가능성, 원/달러 환율 상방 우세 전망 등으로 코스피가 하락할 가능성이 높다. 또한, 삼성전자 총파업 예고와 글로벌 반도체 시장의 긴장감 고조로 하락 위험이 커질 수 있다.",
+        "key_risk": "미국과 이란의 전쟁 가능성",
+        "vulnerable_markets": [
+          "코스피",
+          "원/달러 환율"
+        ],
+        "confidence": 70
+      },
+      "consensus": {
+        "consensus": "코스피의 상승 가능성과 하락 위험이 공존하는 상황에서, 글로벌 투자은행들의 코스피 전망 상향 조정과 한국 주식시장의 상승 가능성을 고려하여 균형 잡힌 판단을 내린다. 그러나 미국과 이란의 전쟁 가능성과 원/달러 환율 상방 우세 전망 등으로 하락 위험이 존재한다.",
+        "bull_weight": 52,
+        "bear_weight": 48,
+        "net_direction": "횡보",
+        "key_risk": "미국과 이란의 전쟁 가능성",
+        "key_opportunity": "글로벌 투자은행들의 코스피 전망 상향 조정",
+        "agent_confidence": 68
+      }
+    },
+    "us_debate": {
+      "bull": {
+        "bull_case": "포드 자동차의 주가 상승 전망과 삼성SDI의 벤츠에 전기차 배터리 공급 시작, 오픈AI의 차기 모델 GPT-5.5 공개 예정 등 기술과 산업의 발전이 주가 상승의 근거가 됩니다. 또한, Kronos 시계열 예측에서 나스닥, S&P 500, 다우 존스 지수가 모두 상승할 것으로 예상됩니다.",
+        "key_catalyst": "기술 발전과 산업의 성장",
+        "target_markets": [
+          "기술 산업",
+          "자동차 산업"
+        ],
+        "confidence": 70
+      },
+      "bear": {
+        "bear_case": "이란과 미국의 군사적 충돌, 일본 혼슈 동쪽 해역에서 발생한 지진, 크로스체인 브릿지 해킹으로 인한 가상자산 유출 등으로 인해 세계 경제에 불안이 조성되고 있으며, 이에 따른 원유 가격의 급등과 석유 주가에 부정적인 영향을 미칠 수 있습니다. 또한, 미국과 이란 간의 전쟁이 장기간 지속될 경우, 물가 상승의 부담이 장기간 지속될 수 있습니다.",
+        "key_risk": "군사적 충돌",
+        "vulnerable_markets": [
+          "원유 시장",
+          "석유 주가",
+          "글로벌 경제"
+        ],
+        "confidence": 70
+      },
+      "consensus": {
+        "consensus": "기술 발전과 산업의 성장으로 인한 주가 상승 전망과 군사적 충돌 및 지진 등으로 인한 세계 경제 불안으로 인해 균형 잡힌 판단이 필요합니다. 기술 발전과 산업의 성장으로 인한 기회와 군사적 충돌 및 지진 등으로 인한 리스크를 모두 고려하여 균형 잡힌 판단을 내리겠습니다.",
+        "bull_weight": 52,
+        "bear_weight": 48,
+        "net_direction": "상승",
+        "key_risk": "군사적 충돌과 지진 등으로 인한 세계 경제 불안",
+        "key_opportunity": "기술 발전과 산업의 성장",
+        "agent_confidence": 68
+      }
+    },
+    "agent_debate": {
+      "bull": {
+        "bull_case": "코스피 799개사 지난해 31조1000억원 결산배당이 역대 최고치로 나타났으며, 글로벌 투자은행들이 코스피에 대한 전망을 상향 조정하고 한국 주식시장의 상승 가능성을 낙관하고 있어 상승 가능성이 높다. 또한, WGBI 편입 효과로 일본 투자자들이 한국 국채를大量으로 매수하고 있어 자금 유입이 예상된다.",
+        "key_catalyst": "글로벌 투자은행들의 코스피 전망 상향 조정",
+        "target_markets": [
+          "코스피",
+          "한국 주식시장"
+        ],
+        "confidence": 75
+      },
+      "bear": {
+        "bear_case": "서울시장 선거에서 오세훈 후보의 확정과 정권폭주에 대한 우려, 미국과 이란의 전쟁 가능성, 원/달러 환율 상방 우세 전망 등으로 코스피가 하락할 가능성이 높다. 또한, 삼성전자 총파업 예고와 글로벌 반도체 시장의 긴장감 고조로 하락 위험이 커질 수 있다.",
+        "key_risk": "미국과 이란의 전쟁 가능성",
+        "vulnerable_markets": [
+          "코스피",
+          "원/달러 환율"
+        ],
+        "confidence": 70
+      },
+      "consensus": {
+        "consensus": "코스피의 상승 가능성과 하락 위험이 공존하는 상황에서, 글로벌 투자은행들의 코스피 전망 상향 조정과 한국 주식시장의 상승 가능성을 고려하여 균형 잡힌 판단을 내린다. 그러나 미국과 이란의 전쟁 가능성과 원/달러 환율 상방 우세 전망 등으로 하락 위험이 존재한다.",
+        "bull_weight": 52,
+        "bear_weight": 48,
+        "net_direction": "횡보",
+        "key_risk": "미국과 이란의 전쟁 가능성",
+        "key_opportunity": "글로벌 투자은행들의 코스피 전망 상향 조정",
+        "agent_confidence": 68
+      }
+    }
+  },
+  "last_verification": {
+    "week": "2026-04-20",
+    "predictions": {
+      "kospi": {
+        "name": "kospi",
+        "last_close": 5808.62,
+        "pred_close": 5509.71,
+        "change_pct": -5.15,
+        "direction": "하락",
+        "pred_range": {
+          "high": 5868.52,
+          "low": 5426.67
+        }
+      },
+      "usd_krw": {
+        "name": "usd_krw",
+        "last_close": 1482.18,
+        "pred_close": 1495.24,
+        "change_pct": 0.88,
+        "direction": "상승",
+        "pred_range": {
+          "high": 1503.55,
+          "low": 1475.63
+        }
+      },
+      "samsung": {
+        "name": "samsung",
+        "last_close": 206000.0,
+        "pred_close": 224225.77,
+        "change_pct": 8.85,
+        "direction": "상승",
+        "pred_range": {
+          "high": 238407.75,
+          "low": 209896.47
+        }
+      },
+      "skhynix": {
+        "name": "skhynix",
+        "last_close": 1027000.0,
+        "pred_close": 898694.25,
+        "change_pct": -12.49,
+        "direction": "하락",
+        "pred_range": {
+          "high": 1039763.75,
+          "low": 859426.25
+        }
+      },
+      "nasdaq": {
+        "name": "nasdaq",
+        "last_close": 22902.89,
+        "pred_close": 22677.86,
+        "change_pct": -0.98,
+        "direction": "하락",
+        "pred_range": {
+          "high": 23088.51,
+          "low": 22566.75
+        }
+      },
+      "sp500": {
+        "name": "sp500",
+        "last_close": 6816.89,
+        "pred_close": 6807.12,
+        "change_pct": -0.14,
+        "direction": "하락",
+        "pred_range": {
+          "high": 6872.27,
+          "low": 6737.44
+        }
+      },
+      "dow": {
+        "name": "dow",
+        "last_close": 47916.57,
+        "pred_close": 48634.86,
+        "change_pct": 1.5,
+        "direction": "상승",
+        "pred_range": {
+          "high": 48852.8,
+          "low": 47796.96
+        }
+      },
+      "nvidia": {
+        "name": "nvidia",
+        "last_close": 188.63,
+        "pred_close": 195.43,
+        "change_pct": 3.61,
+        "direction": "상승",
+        "pred_range": {
+          "high": 200.7,
+          "low": 187.45
+        }
+      }
+    },
+    "verified": true,
+    "results": [
+      {
+        "name": "kospi",
+        "pred_direction": "하락",
+        "pred_close": 5509.71,
+        "actual_close": 6191.92,
+        "actual_change": 6.6,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      },
+      {
+        "name": "usd_krw",
+        "pred_direction": "상승",
+        "pred_close": 1495.24,
+        "actual_close": 1477.92,
+        "actual_change": -0.29,
+        "actual_direction": "하락",
+        "direction_hit": false,
+        "range_hit": true
+      },
+      {
+        "name": "samsung",
+        "pred_direction": "상승",
+        "pred_close": 224225.77,
+        "actual_close": 216000.0,
+        "actual_change": 4.85,
+        "actual_direction": "상승",
+        "direction_hit": true,
+        "range_hit": true
+      },
+      {
+        "name": "nasdaq",
+        "pred_direction": "하락",
+        "pred_close": 22677.86,
+        "actual_close": 24468.48,
+        "actual_change": 6.84,
+        "actual_direction": "상승",
+        "direction_hit": false,
+        "range_hit": false
+      }
+    ],
+    "verification_date": "2026-04-20T20:14:18.655257"
+  },
+  "accuracy": {
+    "direction_accuracy": 29.2,
+    "range_accuracy": 25.0,
+    "total_weeks": 6,
+    "total_predictions": 24
+  }
+}

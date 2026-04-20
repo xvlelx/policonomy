@@ -1,0 +1,420 @@
+{
+  "updated_at": "2026-04-20T20:38:09.479754",
+  "funds": [
+    {
+      "name": "Berkshire Hathaway",
+      "short": "BRK",
+      "cik": "0001067983",
+      "quarter": "Q4 2025",
+      "report_date": "2025-12-31",
+      "filed_at": "2026-02-17",
+      "total_value": 274160086701,
+      "total_value_fmt": "$274.2B",
+      "holdings_count": 42,
+      "top_holdings": [
+        {
+          "name": "APPLE INC",
+          "cusip": "037833100",
+          "value_usd": 61961735283,
+          "shares": 227917808,
+          "pct": 22.6
+        },
+        {
+          "name": "AMERICAN EXPRESS CO",
+          "cusip": "025816109",
+          "value_usd": 56088378465,
+          "shares": 151610700,
+          "pct": 20.5
+        },
+        {
+          "name": "BANK AMERICA CORP",
+          "cusip": "060505104",
+          "value_usd": 28451276370,
+          "shares": 517295934,
+          "pct": 10.4
+        },
+        {
+          "name": "COCA COLA CO",
+          "cusip": "191216100",
+          "value_usd": 27964000000,
+          "shares": 400000000,
+          "pct": 10.2
+        },
+        {
+          "name": "CHEVRON CORP NEW",
+          "cusip": "166764100",
+          "value_usd": 19837131131,
+          "shares": 130156362,
+          "pct": 7.2
+        },
+        {
+          "name": "MOODYS CORP",
+          "cusip": "615369105",
+          "value_usd": 12602556092,
+          "shares": 24669778,
+          "pct": 4.6
+        },
+        {
+          "name": "OCCIDENTAL PETE CORP",
+          "cusip": "674599105",
+          "value_usd": 10894391643,
+          "shares": 264941431,
+          "pct": 4.0
+        },
+        {
+          "name": "CHUBB LIMITED",
+          "cusip": "H1467J104",
+          "value_usd": 10689854998,
+          "shares": 34249183,
+          "pct": 3.9
+        },
+        {
+          "name": "KRAFT HEINZ CO",
+          "cusip": "500754106",
+          "value_usd": 7896644337,
+          "shares": 325634818,
+          "pct": 2.9
+        },
+        {
+          "name": "ALPHABET INC",
+          "cusip": "02079K305",
+          "value_usd": 5585842446,
+          "shares": 17846142,
+          "pct": 2.0
+        }
+      ]
+    },
+    {
+      "name": "Renaissance Technologies",
+      "short": "RenTec",
+      "cik": "0001037389",
+      "quarter": "Q4 2025",
+      "report_date": "2025-12-31",
+      "filed_at": "2026-02-12",
+      "total_value": 64461244358,
+      "total_value_fmt": "$64.5B",
+      "holdings_count": 3185,
+      "top_holdings": [
+        {
+          "name": "PALANTIR TECHNOLOGIES INC",
+          "cusip": "69608A108",
+          "value_usd": 1563618224,
+          "shares": 8796727,
+          "pct": 2.4
+        },
+        {
+          "name": "UNITED THERAPEUTICS CORP DEL",
+          "cusip": "91307C102",
+          "value_usd": 930286448,
+          "shares": 1909259,
+          "pct": 1.4
+        },
+        {
+          "name": "MICRON TECHNOLOGY INC",
+          "cusip": "595112103",
+          "value_usd": 859411122,
+          "shares": 3011143,
+          "pct": 1.3
+        },
+        {
+          "name": "KINROSS GOLD CORP",
+          "cusip": "496902404",
+          "value_usd": 703304814,
+          "shares": 24975313,
+          "pct": 1.1
+        },
+        {
+          "name": "VERISIGN INC",
+          "cusip": "92343E102",
+          "value_usd": 675243325,
+          "shares": 2779351,
+          "pct": 1.0
+        },
+        {
+          "name": "NETFLIX INC",
+          "cusip": "64110L106",
+          "value_usd": 673035740,
+          "shares": 7178287,
+          "pct": 1.0
+        },
+        {
+          "name": "TESLA INC",
+          "cusip": "88160R101",
+          "value_usd": 612583061,
+          "shares": 1362122,
+          "pct": 1.0
+        },
+        {
+          "name": "EXELIXIS INC",
+          "cusip": "30161Q104",
+          "value_usd": 609852505,
+          "shares": 13914043,
+          "pct": 0.9
+        },
+        {
+          "name": "COSTCO WHSL CORP NEW",
+          "cusip": "22160K105",
+          "value_usd": 597603722,
+          "shares": 693002,
+          "pct": 0.9
+        },
+        {
+          "name": "CARVANA CO",
+          "cusip": "146869102",
+          "value_usd": 593950104,
+          "shares": 1407398,
+          "pct": 0.9
+        }
+      ]
+    },
+    {
+      "name": "Pershing Square",
+      "short": "Pershing",
+      "cik": "0001336528",
+      "quarter": "Q4 2025",
+      "report_date": "2025-12-31",
+      "filed_at": "2026-02-17",
+      "total_value": 15526737802,
+      "total_value_fmt": "$15.5B",
+      "holdings_count": 11,
+      "top_holdings": [
+        {
+          "name": "BROOKFIELD CORP",
+          "cusip": "11271J107",
+          "value_usd": 2817787754,
+          "shares": 61403089,
+          "pct": 18.1
+        },
+        {
+          "name": "UBER TECHNOLOGIES INC",
+          "cusip": "90353T100",
+          "value_usd": 2468273945,
+          "shares": 30207734,
+          "pct": 15.9
+        },
+        {
+          "name": "AMAZON COM INC",
+          "cusip": "023135106",
+          "value_usd": 2217677936,
+          "shares": 9607824,
+          "pct": 14.3
+        },
+        {
+          "name": "ALPHABET INC",
+          "cusip": "02079K107",
+          "value_usd": 1934222720,
+          "shares": 6163871,
+          "pct": 12.5
+        },
+        {
+          "name": "META PLATFORMS INC",
+          "cusip": "30303M102",
+          "value_usd": 1764796161,
+          "shares": 2673569,
+          "pct": 11.4
+        },
+        {
+          "name": "RESTAURANT BRANDS INTL INC",
+          "cusip": "76131D103",
+          "value_usd": 1560199922,
+          "shares": 22866773,
+          "pct": 10.0
+        },
+        {
+          "name": "HOWARD HUGHES HOLDINGS INC",
+          "cusip": "44267T102",
+          "value_usd": 1503829145,
+          "shares": 18852064,
+          "pct": 9.7
+        },
+        {
+          "name": "HILTON WORLDWIDE HLDGS INC",
+          "cusip": "43300A203",
+          "value_usd": 869983734,
+          "shares": 3028664,
+          "pct": 5.6
+        },
+        {
+          "name": "ALPHABET INC",
+          "cusip": "02079K305",
+          "value_usd": 212306961,
+          "shares": 678297,
+          "pct": 1.4
+        },
+        {
+          "name": "SEAPORT ENTMT GROUP INC",
+          "cusip": "812215200",
+          "value_usd": 99320131,
+          "shares": 5023780,
+          "pct": 0.6
+        }
+      ]
+    },
+    {
+      "name": "Tiger Global",
+      "short": "Tiger",
+      "cik": "0001167483",
+      "quarter": "Q4 2025",
+      "report_date": "2025-12-31",
+      "filed_at": "2026-02-17",
+      "total_value": 29714313270,
+      "total_value_fmt": "$29.7B",
+      "holdings_count": 54,
+      "top_holdings": [
+        {
+          "name": "ALPHABET INC",
+          "cusip": "02079K305",
+          "value_usd": 3327628826,
+          "shares": 10631402,
+          "pct": 11.2
+        },
+        {
+          "name": "MICROSOFT CORP",
+          "cusip": "594918104",
+          "value_usd": 2649148004,
+          "shares": 5477747,
+          "pct": 8.9
+        },
+        {
+          "name": "AMAZON COM INC",
+          "cusip": "023135106",
+          "value_usd": 2310826501,
+          "shares": 10011379,
+          "pct": 7.8
+        },
+        {
+          "name": "NVIDIA CORPORATION",
+          "cusip": "67066G104",
+          "value_usd": 2053691748,
+          "shares": 11011752,
+          "pct": 6.9
+        },
+        {
+          "name": "SEA LTD",
+          "cusip": "81141R100",
+          "value_usd": 1966598071,
+          "shares": 15415835,
+          "pct": 6.6
+        },
+        {
+          "name": "META PLATFORMS INC",
+          "cusip": "30303M102",
+          "value_usd": 1815653455,
+          "shares": 2750615,
+          "pct": 6.1
+        },
+        {
+          "name": "TAKE-TWO INTERACTIVE SOFTWAR",
+          "cusip": "874054109",
+          "value_usd": 1495024714,
+          "shares": 5839256,
+          "pct": 5.0
+        },
+        {
+          "name": "TAIWAN SEMICONDUCTOR MFG LTD",
+          "cusip": "874039100",
+          "value_usd": 1132134294,
+          "shares": 3725474,
+          "pct": 3.8
+        },
+        {
+          "name": "BROADCOM INC",
+          "cusip": "11135F101",
+          "value_usd": 995250005,
+          "shares": 2875614,
+          "pct": 3.3
+        },
+        {
+          "name": "APOLLO GLOBAL MGMT INC",
+          "cusip": "03769M106",
+          "value_usd": 898886641,
+          "shares": 6209496,
+          "pct": 3.0
+        }
+      ]
+    },
+    {
+      "name": "Appaloosa Management",
+      "short": "Appaloosa",
+      "cik": "0001006438",
+      "quarter": "Q4 2015",
+      "report_date": "2015-12-31",
+      "filed_at": "2016-02-12",
+      "total_value": 5014293,
+      "total_value_fmt": "$5M",
+      "holdings_count": 51,
+      "top_holdings": [
+        {
+          "name": "SPDR S&amp;P 500 ETF TR",
+          "cusip": "78462F103",
+          "value_usd": 616330,
+          "shares": 3022854,
+          "pct": 12.3
+        },
+        {
+          "name": "GENERAL MTRS CO",
+          "cusip": "37045V100",
+          "value_usd": 428026,
+          "shares": 12585294,
+          "pct": 8.5
+        },
+        {
+          "name": "ALPHABET INC",
+          "cusip": "02079K107",
+          "value_usd": 406874,
+          "shares": 536150,
+          "pct": 8.1
+        },
+        {
+          "name": "DELTA AIR LINES INC DEL",
+          "cusip": "247361702",
+          "value_usd": 371224,
+          "shares": 7323415,
+          "pct": 7.4
+        },
+        {
+          "name": "HCA HOLDINGS INC",
+          "cusip": "40412C101",
+          "value_usd": 306842,
+          "shares": 4537063,
+          "pct": 6.1
+        },
+        {
+          "name": "WHIRLPOOL CORP",
+          "cusip": "963320106",
+          "value_usd": 237181,
+          "shares": 1614903,
+          "pct": 4.7
+        },
+        {
+          "name": "SOUTHWEST AIRLS CO",
+          "cusip": "844741108",
+          "value_usd": 184834,
+          "shares": 4292484,
+          "pct": 3.7
+        },
+        {
+          "name": "ALLSTATE CORP",
+          "cusip": "020002101",
+          "value_usd": 181364,
+          "shares": 2920987,
+          "pct": 3.6
+        },
+        {
+          "name": "ENERGY TRANSFER PRTNRS L P",
+          "cusip": "29273R109",
+          "value_usd": 173476,
+          "shares": 5143082,
+          "pct": 3.5
+        },
+        {
+          "name": "OWENS CORNING NEW",
+          "cusip": "690742101",
+          "value_usd": 158008,
+          "shares": 3359738,
+          "pct": 3.2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "trained_at": "2026-04-20T20:15:06.359585",
+  "total_weeks": 1684,
+  "results": {
+    "kospi": {
+      "cv_accuracy": 74.4,
+      "n_samples": 328,
+      "model_path": "/Users/honghyeongi/policonomy/data/models/kospi_xgb.pkl"
+    },
+    "usdkrw": {
+      "cv_accuracy": 79.3,
+      "n_samples": 328,
+      "model_path": "/Users/honghyeongi/policonomy/data/models/usdkrw_xgb.pkl"
+    },
+    "samsung": {
+      "cv_accuracy": 81.9,
+      "n_samples": 328,
+      "model_path": "/Users/honghyeongi/policonomy/data/models/samsung_xgb.pkl"
+    },
+    "nasdaq": {
+      "cv_accuracy": 82.2,
+      "n_samples": 328,
+      "model_path": "/Users/honghyeongi/policonomy/data/models/nasdaq_xgb.pkl"
+    }
+  }
+}

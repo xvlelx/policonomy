@@ -1,0 +1,625 @@
+{
+  "date": "2026-04-17",
+  "generated_at": "2026-04-17T15:40:38.170938",
+  "articles_count": 66,
+  "sections": {
+    "headlines": [
+      {
+        "outlet": "한겨레",
+        "region": "KR",
+        "title": "이 대통령, ‘영·프 주도’ 호르무즈 정상회의 참석…‘종전 뒤 발언권’ 포석",
+        "link": "https://www.hani.co.kr/arti/politics/politics_general/1254604.html",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "이 대통령, '영·프 주도' 호르무즈 정상회의 참석…'종전 뒤 발언권' 포석"
+      },
+      {
+        "outlet": "연합뉴스",
+        "region": "KR",
+        "title": "[뉴욕유가] 결국은 호르무즈가 열려야 하는데…WTI 4% 급등",
+        "link": "https://www.yna.co.kr/view/AKR20260417004700009",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "뉴욕유가 급등"
+      },
+      {
+        "outlet": "아시아경제",
+        "region": "KR",
+        "title": "구 부총리, G20에서 중동전쟁 'K위기탈출법' 소개…5월 G7 초대받아",
+        "link": "https://www.asiae.co.kr/article/2026041711252931843",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "국제 경제 협력과 대외 불확실성 대응에 대한 한국 정부의 전략을 소개하는 기사"
+      },
+      {
+        "outlet": "전자신문",
+        "region": "KR",
+        "title": "[속보] 트럼프 “이스라엘-레바논, 열흘 휴전 합의”",
+        "link": "https://www.etnews.com/20260417000019",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "tech_industry",
+        "one_line": "이스라엘-레바논의 휴전 합의에 트럼프가 개입"
+      },
+      {
+        "outlet": "매일경제",
+        "region": "KR",
+        "title": "“한국기업 황금기 10년이상 쭉”…코스피 7500 간다는 JP모건",
+        "link": "https://www.mk.co.kr/news/stock/12019556",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "real_estate",
+        "one_line": "한국기업 황금기 10년이상 쭉"
+      },
+      {
+        "outlet": "SBS",
+        "region": "KR",
+        "title": "트럼프 \"이란과 주말 협상 가능성…합의 시 내가 파키스탄 갈 수도\"",
+        "link": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008521763",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "real_estate",
+        "one_line": "트럼프, 이란과 주말 협상 가능성"
+      },
+      {
+        "outlet": "Bloomberg",
+        "region": "US",
+        "title": "Henry Paulson Suggests US Make a Break-Glass Treasuries Plan",
+        "link": "https://www.bloomberg.com/news/articles/2026-04-16/paulson-says-us-should-prepare-for-vicious-crash-in-treasuries",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "미국 국채 수요 감소 위기 대비 백업 계획 제안"
+      },
+      {
+        "outlet": "MarketWatch",
+        "region": "US",
+        "title": "Former Treasury Secretary Henry Paulson warns U.S. needs an emergency ‘break-the-glass’ plan if Treasury demand collapses",
+        "link": "https://www.marketwatch.com/story/former-treasury-secretary-henry-paulson-warns-u-s-needs-an-emergency-break-the-glass-plan-if-treasury-demand-collapses-051e2a2c?mod=mw_rss_topstories",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "미국 정부 채권 시장 위기 대비 '비상 계획' 필요"
+      },
+      {
+        "outlet": "NYT",
+        "region": "US",
+        "title": "White House Shrugs Off Shaky Economy as War Exceeds Trump’s Timeline",
+        "link": "https://www.nytimes.com/2026/04/16/us/politics/trump-economy-iran-war.html",
+        "sentiment": "negative",
+        "importance": 7,
+        "category": "global_macro",
+        "one_line": "미국 경제가 전쟁으로 인해 어려움을 겪고 있다."
+      },
+      {
+        "outlet": "CNBC",
+        "region": "US",
+        "title": "Charles Schwab to launch direct bitcoin, ether trading to compete with Robinhood",
+        "link": "https://www.cnbc.com/2026/04/16/charles-schwab-to-launch-direct-bitcoin-ethereum-trading-to-compete-with-robinhood.html",
+        "sentiment": "positive",
+        "importance": 7,
+        "category": "global_macro",
+        "one_line": "Charles Schwab, Robinhood와의 경쟁을 위해 비트코인 및 이더리움 직접 거래를 시작한다."
+      },
+      {
+        "outlet": "khan.co.kr",
+        "region": "XX",
+        "title": "이 대통령, 19~24일 인도·베트남 순방…공급망 공조 논의",
+        "link": "https://www.khan.co.kr/article/202604162033025/?utm_source=khan_rss&utm_medium=rss&utm_campaign=politic_news",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "이 대통령, 19~24일 인도·베트남 순방…공급망 공조 논의"
+      },
+      {
+        "outlet": "Google News",
+        "region": "XX",
+        "title": "사상 최대 경상수지 흑자에도 환율은 뛴다?…과거 공식 깨진 이유는 - 아시아경제",
+        "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9GS3RrUWZNV0FFenpKa3p6d0tFeTVpelF1Q3ZpbTdCT255MkpIU3MtUDk2bTZrX1haU2pGT2FKWnQ4R3I1cFNpUXpVZWg3RVU3aVhoalFyVkZNX0R5RnJ2Zg?oc=5",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "politics_economy",
+        "one_line": "사상 최대 경상수지 흑자에도 환율은 뛴다?"
+      },
+      {
+        "outlet": "seekingalpha.com",
+        "region": "XX",
+        "title": "MercadoLibre: Brazil Hypergrowth Justifies The Premium",
+        "link": "https://seekingalpha.com/article/4891430-mercadolibre-brazil-hypergrowth-justifies-the-premium?source=feed_all_articles",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "global_macro",
+        "one_line": "MercadoLibre의 브라질 시장 성장률이 프리미엄 가격을 정당화한다."
+      },
+      {
+        "outlet": "arstechnica.com",
+        "region": "XX",
+        "title": "New undersea cable cutter risks Internet’s backbone",
+        "link": "https://arstechnica.com/gadgets/2026/04/china-tests-an-undersea-cable-cutter-as-suspected-sabotage-incidents-grow/",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "tech_industry",
+        "one_line": "인터넷의 주요 backbone에 대한 위협"
+      },
+      {
+        "outlet": "techcrunch.com",
+        "region": "XX",
+        "title": "Physical Intelligence, a hot robotics startup, says its new robot brain can figure out tasks it was never taught",
+        "link": "https://techcrunch.com/2026/04/16/physical-intelligence-a-hot-robotics-startup-says-its-new-robot-brain-can-figure-out-tasks-it-was-never-taught/",
+        "sentiment": "positive",
+        "importance": 8,
+        "category": "tech_industry",
+        "one_line": "로봇 인텔리전스 기술 개발"
+      },
+      {
+        "outlet": "thehackernews.com",
+        "region": "XX",
+        "title": "Apache ActiveMQ CVE-2026-34197 Added to CISA KEV Amid Active Exploitation",
+        "link": "https://thehackernews.com/2026/04/apache-activemq-cve-2026-34197-added-to.html",
+        "sentiment": "negative",
+        "importance": 8,
+        "category": "tech_industry",
+        "one_line": "Apache ActiveMQ 보안 취약점"
+      },
+      {
+        "outlet": "venturebeat.com",
+        "region": "XX",
+        "title": "Anthropic releases Claude Opus 4.7, narrowly retaking lead for most powerful generally available LLM",
+        "link": "https://venturebeat.com/technology/anthropic-releases-claude-opus-4-7-narrowly-retaking-lead-for-most-powerful-generally-available-llm",
+        "sentiment": "positive",
+        "importance": 7,
+        "category": "tech_industry",
+        "one_line": "Anthropic가 가장 강력한 대규모 언어 모델을 공개함"
+      }
+    ],
+    "top_issues": [
+      {
+        "rank": 1,
+        "title": "글로벌 공급망 협력 강화",
+        "summary": "이재명 대통령의 인도와 베트남 순방으로 글로벌 공급망 협력 강화 기대감이 높아지고 있습니다. 이번 순방을 통해 국제적 협력 증진과 경제적 기대감이 증가하고 있습니다.",
+        "political_intent": "경제적 협력 강화와 국제적 위상 제고",
+        "economic_interest": "글로벌 공급망 안정화와 경제 성장 촉진",
+        "framing": "경제 협력과 외교 성과 강조",
+        "security_angle": "글로벌 경제 안정과 안보 강화",
+        "market_impact": "시장에 긍정적 영향, 투자 심리 개선",
+        "sentiment": "positive"
+      },
+      {
+        "rank": 2,
+        "title": "중동 전쟁 리스크와 경제 영향",
+        "summary": "중동 전쟁 리스크 확대로 경기 하방 위험이 증대하고 있습니다. 고환율과 수입물가 상승이 경제에 부담을 주고 있습니다.",
+        "political_intent": "위기 관리와 경제 안정화 노력",
+        "economic_interest": "경제 성장 둔화와 물가 상승 억제",
+        "framing": "경제 위험과 정책 대응 강조",
+        "security_angle": "지역 안보와 글로벌 경제 안정",
+        "market_impact": "시장에 부정적 영향, 투자 심리 위축",
+        "sentiment": "negative"
+      },
+      {
+        "rank": 3,
+        "title": "호르무즈 정상회의와 국제 협력",
+        "summary": "이재명 대통령이 호르무즈 정상회의에 참석하여 국제적 협력과 경제 안정을 논의할 예정입니다. 이번 회의는 중동 지역의 안정과 경제 협력 강화에 중요한 역할을 할 것으로 기대됩니다.",
+        "political_intent": "국제적 협력 강화와 경제 안정화",
+        "economic_interest": "글로벌 경제 성장과 안정 촉진",
+        "framing": "국제 협력과 경제 외교 강조",
+        "security_angle": "지역 안보와 글로벌 경제 안정",
+        "market_impact": "시장에 긍정적 영향, 투자 심리 개선",
+        "sentiment": "positive"
+      },
+      {
+        "rank": 4,
+        "title": "사상 최대 경상수지 흑자에도 환율 상승",
+        "summary": "한국의 경상수지 흑자가 사상 최대치를 기록했음에도 불구하고 환율이 상승하고 있습니다. 이는 글로벌 경제의 불확실성과 국내 경제의 구조적 문제점들을 반영하고 있습니다.",
+        "political_intent": "경제 정책과 시장 안정화 노력",
+        "economic_interest": "경제 성장과 물가 안정",
+        "framing": "경제 성과와 정책 과제 강조",
+        "security_angle": "경제 안보와 글로벌 경제 협력",
+        "market_impact": "시장에 혼조세, 투자 심리 불확실",
+        "sentiment": "cautious"
+      },
+      {
+        "rank": 5,
+        "title": "미국-이란 협상과 글로벌 경제 영향",
+        "summary": "미국과 이란의 협상이 진행되면서 글로벌 경제에 미치는 영향이 주목되고 있습니다. 협상 결과에 따라 국제 유가와 경제 성장에 변동성이 예상됩니다.",
+        "political_intent": "위기 관리와 국제 협력 강화",
+        "economic_interest": "글로벌 경제 성장과 안정 촉진",
+        "framing": "국제 정치와 경제 영향 강조",
+        "security_angle": "지역 안보와 글로벌 경제 안정",
+        "market_impact": "시장에 불확실성, 투자 심리 위축",
+        "sentiment": "cautious"
+      }
+    ],
+    "country_stances": [
+      {
+        "issue_title": "글로벌 공급망 협력 강화",
+        "countries": [
+          {
+            "country": "대한민국",
+            "flag": "🇰🇷",
+            "official_position": "글로벌 공급망 협력을 강화하여 경제 안정성을 높이고 국제적 협력을 증진할 것",
+            "real_intent": "국내 산업의 글로벌 경쟁력 강화와 경제 성장 도모",
+            "stance_type": "지지"
+          },
+          {
+            "country": "인도",
+            "flag": "🇮🇳",
+            "official_position": "한국과의 협력 강화로 지역 경제 발전과 글로벌 공급망 안정성 증진 기대",
+            "real_intent": "국내 산업 경쟁력 강화와 외국인 투자 유치 확대",
+            "stance_type": "지지"
+          },
+          {
+            "country": "베트남",
+            "flag": "🇻🇳",
+            "official_position": "한국과의 협력으로 경제 발전과 글로벌 공급망 강화 기대",
+            "real_intent": "국내 산업 경쟁력 강화와 수출 확대",
+            "stance_type": "지지"
+          },
+          {
+            "country": "중국",
+            "flag": "🇨🇳",
+            "official_position": "글로벌 공급망 협력에 관심 있으나, 자국 산업 보호에 중점을 둘 것",
+            "real_intent": "자국 산업 경쟁력 강화와 글로벌 영향력 확대",
+            "stance_type": "관망"
+          }
+        ]
+      },
+      {
+        "issue_title": "중동 전쟁 리스크와 경제 영향",
+        "countries": [
+          {
+            "country": "대한민국",
+            "flag": "🇰🇷",
+            "official_position": "중동 전쟁 리스크 관리와 경제 안정화 대책 마련 필요",
+            "real_intent": "국내 경제 영향 최소화를 위한 긴급 대책 수립",
+            "stance_type": "관망"
+          },
+          {
+            "country": "이스라엘",
+            "flag": "🇮🇱",
+            "official_position": "안보 위협에 대비하여 군사적 대응 강화",
+            "real_intent": "자국 안보와 국민 안전 보장",
+            "stance_type": "지지"
+          },
+          {
+            "country": "이란",
+            "flag": "🇮🇷",
+            "official_position": "적극적 대응을 통해 자국 이익 보호",
+            "real_intent": "지역 내 영향력 확대와 자국 안보 강화",
+            "stance_type": "지지"
+          },
+          {
+            "country": "미국",
+            "flag": "🇺🇸",
+            "official_position": "중동 안정과 평화적 해결 촉구",
+            "real_intent": "지역 내 자국 이익 보호와 동맹국 지원",
+            "stance_type": "지지"
+          }
+        ]
+      },
+      {
+        "issue_title": "호르무즈 정상회의와 국제 협력",
+        "countries": [
+          {
+            "country": "대한민국",
+            "flag": "🇰🇷",
+            "official_position": "국제 협력과 경제 안정을 위한 회의 참석",
+            "real_intent": "글로벌 리더십 강화와 경제 협력 확대",
+            "stance_type": "지지"
+          },
+          {
+            "country": "이스라엘",
+            "flag": "🇮🇱",
+            "official_position": "회의 참석을 통해 안보와 경제 협력 강화 기대",
+            "real_intent": "자국 안보와 경제 이익 보호",
+            "stance_type": "지지"
+          },
+          {
+            "country": "사우디아라비아",
+            "flag": "🇸🇦",
+            "official_position": "지역 안정과 경제 협력을 위한 회의 참석",
+            "real_intent": "지역 내 영향력 확대와 경제 발전",
+            "stance_type": "지지"
+          },
+          {
+            "country": "이란",
+            "flag": "🇮🇷",
+            "official_position": "회의 참석 여부는 미정이나, 국제 협력에 관심 표명",
+            "real_intent": "자국 이익 보호와 지역 내 영향력 확대",
+            "stance_type": "관망"
+          }
+        ]
+      }
+    ],
+    "market_data": {
+      "market_items": [
+        {
+          "market": "KOSPI",
+          "last_close": 5858.87,
+          "pred_close": 5640.67,
+          "change_pct": -3.72,
+          "pred_range": {
+            "high": 5902.14,
+            "low": 5544.3
+          },
+          "xgb_direction": "하락",
+          "xgb_confidence": 16.6,
+          "ai_confidence": 72,
+          "ai_reason": "종전 기대와 유가 부담 사이에서 숨 고르기하며 6300선을 앞두고 상승 전환"
+        },
+        {
+          "market": "USD/KRW",
+          "last_close": 1473.28,
+          "pred_close": 1495.31,
+          "change_pct": 1.5,
+          "pred_range": {
+            "high": 1504.51,
+            "low": 1476.41
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": 65,
+          "ai_reason": "사상 최대 경상수지 흑자에도 불구하고 환율이 상승하는 현상이 완화되며 약세 전환"
+        },
+        {
+          "market": "삼성전자",
+          "last_close": 206000.0,
+          "pred_close": 199444.78,
+          "change_pct": -3.18,
+          "pred_range": {
+            "high": 218930.05,
+            "low": 194968.38
+          },
+          "xgb_direction": "상승",
+          "xgb_confidence": 81.7,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "hynix",
+          "last_close": 1027000.0,
+          "pred_close": 1017374.38,
+          "change_pct": -0.94,
+          "pred_range": {
+            "high": 1077135.25,
+            "low": 964307.5
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "NASDAQ",
+          "last_close": 22822.42,
+          "pred_close": 23049.79,
+          "change_pct": 1.0,
+          "pred_range": {
+            "high": 23189.46,
+            "low": 22752.74
+          },
+          "xgb_direction": "하락",
+          "xgb_confidence": 22.9,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "sp500",
+          "last_close": 6824.66,
+          "pred_close": 6813.04,
+          "change_pct": -0.17,
+          "pred_range": {
+            "high": 6850.7,
+            "low": 6739.94
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "dow",
+          "last_close": 48185.8,
+          "pred_close": 47826.55,
+          "change_pct": -0.75,
+          "pred_range": {
+            "high": 48377.57,
+            "low": 47295.18
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        },
+        {
+          "market": "nvidia",
+          "last_close": 183.91,
+          "pred_close": 190.85,
+          "change_pct": 3.78,
+          "pred_range": {
+            "high": 197.22,
+            "low": 182.38
+          },
+          "xgb_direction": null,
+          "xgb_confidence": null,
+          "ai_confidence": null,
+          "ai_reason": null
+        }
+      ],
+      "news_impact": [
+        {
+          "category": "real_estate",
+          "label": "부동산",
+          "positive": 11,
+          "negative": 4,
+          "neutral": 0,
+          "total": 15,
+          "net_score": 0.47,
+          "markets": [
+            "kospi"
+          ]
+        },
+        {
+          "category": "tech_industry",
+          "label": "기술·산업",
+          "positive": 10,
+          "negative": 6,
+          "neutral": 1,
+          "total": 17,
+          "net_score": 0.24,
+          "markets": [
+            "nasdaq",
+            "sp500",
+            "dow",
+            "nvidia",
+            "samsung",
+            "hynix"
+          ]
+        },
+        {
+          "category": "politics_economy",
+          "label": "정치·경제",
+          "positive": 5,
+          "negative": 8,
+          "neutral": 3,
+          "total": 16,
+          "net_score": -0.19,
+          "markets": [
+            "kospi",
+            "usd_krw"
+          ]
+        },
+        {
+          "category": "global_macro",
+          "label": "글로벌 매크로",
+          "positive": 8,
+          "negative": 9,
+          "neutral": 1,
+          "total": 18,
+          "net_score": -0.06,
+          "markets": [
+            "nasdaq",
+            "sp500",
+            "kospi",
+            "usd_krw"
+          ]
+        }
+      ],
+      "key_sector": {
+        "name": "반도체",
+        "direction": "강세",
+        "reason": "삼성전자와 Hynix의 영업이익 증가 예상으로 반도체 섹터 강세"
+      },
+      "overall_sentiment": "positive"
+    },
+    "risk_watchlist": [
+      {
+        "event": "중동 전쟁 리스크 확대",
+        "scenario": "미국과 이란의 2차 협상이 진행되는 가운데, 중동 지역의 긴장감이 고조되고 있습니다. 이에 따라 국제 유가가 급등하고 있으며, 이는 인플레이션과 경기 하방 위험을 증대시킬 수 있습니다. 중동 전쟁 리스크가 현실화될 경우, 글로벌 경제에 큰 충격을 줄 수 있습니다.",
+        "expected_trend": "변동성확대",
+        "risk_level": "HIGH",
+        "affected_markets": [
+          "KOSPI",
+          "USD/KRW",
+          "WTI"
+        ]
+      },
+      {
+        "event": "미국-이란 2차 협상",
+        "scenario": "미국과 이란의 2차 협상이 진행되고 있지만, 아직까지 뚜렷한 성과는 나오지 않고 있습니다. 협상이 결렬될 경우, 중동 지역의 긴장감은 더욱 고조될 수 있습니다. 이에 따라 국제 유가가 급등하고, 글로벌 경제에 큰 충격을 줄 수 있습니다.",
+        "expected_trend": "변동성확대",
+        "risk_level": "HIGH",
+        "affected_markets": [
+          "KOSPI",
+          "USD/KRW",
+          "WTI"
+        ]
+      },
+      {
+        "event": "원달러 환율 상승",
+        "scenario": "원달러 환율이 상승하고 있습니다. 이는 고환율에 따른 수입물가 상승으로 이어질 수 있습니다. 특히, 美소고기값과 한우 가격 차이가 절반으로 축소되는 등 국내 물가 상승에 영향을 줄 수 있습니다.",
+        "expected_trend": "상승",
+        "risk_level": "MEDIUM",
+        "affected_markets": [
+          "USD/KRW",
+          "KOSPI"
+        ]
+      },
+      {
+        "event": "코스피 하락",
+        "scenario": "코스피가 하락하고 있습니다. 이는 중동 전쟁 리스크 확대와 미국-이란 2차 협상 불확실성에 따른 것으로 보입니다. 코스피가 추가 하락할 경우, 국내 경제에 큰 충격을 줄 수 있습니다.",
+        "expected_trend": "하락",
+        "risk_level": "MEDIUM",
+        "affected_markets": [
+          "KOSPI"
+        ]
+      },
+      {
+        "event": "글로벌 경기 하방 위험",
+        "scenario": "중동 전쟁 리스크 확대와 미국-이란 2차 협상 불확실성으로 인해 글로벌 경기 하방 위험이 증대되고 있습니다. 이에 따라 글로벌 경제에 큰 충격을 줄 수 있습니다.",
+        "expected_trend": "변동성확대",
+        "risk_level": "HIGH",
+        "affected_markets": [
+          "KOSPI",
+          "USD/KRW",
+          "WTI"
+        ]
+      }
+    ],
+    "summary_matrix": {
+      "matrix": [
+        {
+          "category": "기술",
+          "category_en": "Technology",
+          "status": "긍정",
+          "key_trend": "반도체 섹터 강세, AI 관련 기대감 상승",
+          "risk": "고환율로 인한 수입물가 상승 부담",
+          "opportunity": "글로벌 경제 협력 증진과 기업 실적 개선 전망"
+        },
+        {
+          "category": "경제",
+          "category_en": "Economy",
+          "status": "중립",
+          "key_trend": "유가 부담과 기대감 사이에서 숨 고르기",
+          "risk": "중동 전쟁 리스크 확대와 고환율로 인한 수입물가 상승",
+          "opportunity": "미국과 이란의 협상 진전으로 인한 긍정적 영향"
+        },
+        {
+          "category": "정치",
+          "category_en": "Politics",
+          "status": "부정",
+          "key_trend": "글로벌 경제 협력 증진과 기업 실적 개선 전망",
+          "risk": "중동 전쟁 리스크 확대",
+          "opportunity": "미국과 이란의 협상 진전으로 인한 긍정적 영향"
+        },
+        {
+          "category": "안보",
+          "category_en": "Security",
+          "status": "부정",
+          "key_trend": "중동 전쟁 리스크 확대",
+          "risk": "글로벌 경제 협력 증진과 기업 실적 개선 전망 부정적 영향",
+          "opportunity": "미국과 이란의 협상 진전으로 인한 긍정적 영향"
+        },
+        {
+          "category": "금융",
+          "category_en": "Finance",
+          "status": "중립",
+          "key_trend": "시장 상승과 하락 제한된 횡보세",
+          "risk": "고환율로 인한 수입물가 상승 부담",
+          "opportunity": "글로벌 경제 협력 증진과 기업 실적 개선 전망"
+        },
+        {
+          "category": "시장",
+          "category_en": "Market",
+          "status": "긍정",
+          "key_trend": "코스피 상승 전환, 반도체 섹터 강세",
+          "risk": "중동 전쟁 리스크 확대와 고환율로 인한 수입물가 상승",
+          "opportunity": "미국과 이란의 협상 진전으로 인한 긍정적 영향"
+        }
+      ],
+      "structural_analysis": "현재 글로벌 이슈는 기술, 경제, 정치, 안보, 금융, 시장 전반에 걸쳐 복합적인 영향을 미치고 있습니다. 특히, 미국의 이란 협상 진전과 반도체 섹터의 강세는 긍정적인 요인으로 작용하고 있으나, 중동 전쟁 리스크 확대와 고환율로 인한 수입물가 상승은 부담으로 작용하고 있습니다. 이러한 상황에서는 시장의 상승과 하락이 제한된 횡보세를 보일 것으로 예상됩니다. 따라서, 기업과 투자자는 이러한 복합적인 요인들을 면밀히 분석하고, 글로벌 경제 협력 증진과 기업 실적 개선 전망에 대비해야 합니다. 생존 전략으로는, 기술 혁신과 글로벌 협력을 강화하고, 위험 관리와 기회 포착을 균형 있게 추진하는 것이 중요합니다."
+    }
+  }
+}

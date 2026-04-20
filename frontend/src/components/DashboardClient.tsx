@@ -217,7 +217,7 @@ export default function DashboardClient() {
                 </span>
               </h3>
               <div className="space-y-3">
-                {Object.entries(articleStats.by_category).map(([cat, count]) => (
+                {Object.entries(articleStats.by_category ?? {}).map(([cat, count]) => (
                   <div key={cat} className="flex items-center gap-3">
                     <div className="text-xs text-gray-400 w-20 flex-shrink-0">
                       {

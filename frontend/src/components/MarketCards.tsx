@@ -133,7 +133,7 @@ export default function MarketCards({ predictions, markets }: Props) {
     <div className="space-y-3">
       <h2 className="text-sm font-semibold text-gray-400">시장 예측 (Kronos + XGBoost + AI 융합)</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-        {Object.entries(kronos_predictions).filter(([key]) => !markets || markets.includes(key)).map(([key, pred]) => {
+        {Object.entries(kronos_predictions ?? {}).filter(([key]) => !markets || markets.includes(key)).map(([key, pred]) => {
           const isUp = pred.change_pct >= 0;
           const isBig = Math.abs(pred.change_pct) >= 3;
           const Icon = isUp ? TrendingUp : pred.change_pct === 0 ? Minus : TrendingDown;

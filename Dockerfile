@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.prod.txt .
+# CPU-only torch 먼저 설치 (CUDA 제외 → 이미지 ~2GB 절약)
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 RUN pip install --no-cache-dir -r requirements.prod.txt
 
 COPY src ./src

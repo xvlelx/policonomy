@@ -52,7 +52,7 @@ export default function DashboardClient() {
       prevStatusRef.current = s.pipeline.status;
       setError(null);
     } catch {
-      setError("백엔드 서버에 연결할 수 없습니다. (http://localhost:8000)");
+      setError("백엔드 서버에 연결할 수 없습니다.");
     } finally {
       setLoading(false);
     }

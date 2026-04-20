@@ -57,6 +57,11 @@ app.add_middleware(
 app.include_router(settings_router)
 
 
+@app.get('/health')
+def health():
+    return {'status': 'ok'}
+
+
 def _db_connect(path) -> sqlite3.Connection:
     conn = sqlite3.connect(path, timeout=30)
     conn.execute('PRAGMA journal_mode=WAL')

@@ -15,6 +15,7 @@ data/*
 !data/.gitkeep
 !data/*.json
 !data/*.db
+!data/*.html
 !data/models/
 !data/reports/
 logs/

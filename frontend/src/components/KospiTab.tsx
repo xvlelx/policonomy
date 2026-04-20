@@ -57,7 +57,7 @@ export default function KospiTab({ predictions }: Props) {
   return (
     <div className="space-y-4">
       {/* 국장 시장 예측 카드 */}
-      <MarketCards predictions={predictions} markets={["kospi", "usd_krw", "samsung", "hynix"]} />
+      <MarketCards predictions={predictions} markets={["kospi", "usd_krw", "samsung", "skhynix"]} />
 
       {/* AI 에이전트 토론 */}
       {(predictions.fused_analysis?.kospi_debate ?? predictions.fused_analysis?.agent_debate) && (

@@ -13,7 +13,7 @@ const MARKET_LABELS: Record<string, string> = {
   kospi: "KOSPI",
   usd_krw: "USD/KRW",
   samsung: "삼성전자",
-  hynix: "SK하이닉스",
+  skhynix: "SK하이닉스",
   nasdaq: "NASDAQ",
   sp500: "S&P500",
   dow: "다우존스",
@@ -24,7 +24,7 @@ const MARKET_UNITS: Record<string, string> = {
   kospi: "pt",
   usd_krw: "₩",
   samsung: "₩",
-  hynix: "₩",
+  skhynix: "₩",
   nasdaq: "pt",
   sp500: "pt",
   dow: "pt",
@@ -36,7 +36,7 @@ const MARKET_PARAM: Record<string, string> = {
   kospi: "kospi",
   usd_krw: "usd_krw",
   samsung: "samsung",
-  hynix: "hynix",
+  skhynix: "skhynix",
   nasdaq: "nasdaq",
   sp500: "sp500",
   dow: "dow",
@@ -52,7 +52,7 @@ const SENTIMENT_COLORS: Record<string, string> = {
 
 function formatNum(val: number, key: string): string {
   if (key === "usd_krw") return val.toFixed(2);
-  if (key === "samsung" || key === "hynix") return (val / 1000).toFixed(0) + "K";
+  if (key === "samsung" || key === "skhynix") return (val / 1000).toFixed(0) + "K";
   if (key === "nvidia") return val.toFixed(2);
   return val.toLocaleString("ko-KR", { maximumFractionDigits: 0 });
 }

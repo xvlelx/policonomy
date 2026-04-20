@@ -29,7 +29,7 @@ const HINTS: Record<string, string> = {
 const DISPLAY_ORDER = ["negative", "cautious", "neutral", "mixed", "positive"];
 
 export default function SentimentChart({ data }: Props) {
-  const total = Object.values(data).reduce((a, b) => a + b, 0);
+  const total = Object.values(data ?? {}).reduce((a, b) => a + b, 0);
 
   const items = DISPLAY_ORDER
     .filter((key) => (data[key] ?? 0) > 0)

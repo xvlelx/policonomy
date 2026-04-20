@@ -48,7 +48,7 @@ export default function DashboardClient() {
       ]);
       setSummary(s);
       setPredictions(preds?.kronos_predictions ? preds : null);
-      setArticleStats(stats);
+      setArticleStats(stats?.total_articles != null ? stats : null);
       prevStatusRef.current = s.pipeline.status;
       setError(null);
     } catch {

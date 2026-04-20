@@ -29,15 +29,16 @@ const HINTS: Record<string, string> = {
 const DISPLAY_ORDER = ["negative", "cautious", "neutral", "mixed", "positive"];
 
 export default function SentimentChart({ data }: Props) {
-  const total = Object.values(data ?? {}).reduce((a, b) => a + b, 0);
+  const d = data ?? {};
+  const total = Object.values(d).reduce((a, b) => a + b, 0);
 
   const items = DISPLAY_ORDER
-    .filter((key) => (data[key] ?? 0) > 0)
+    .filter((key) => (d[key] ?? 0) > 0)
     .map((key) => ({
       key,
       name: LABELS[key] || key,
-      value: data[key] ?? 0,
-      pct: total > 0 ? Math.round(((data[key] ?? 0) / total) * 100) : 0,
+      value: d[key] ?? 0,
+      pct: total > 0 ? Math.round(((d[key] ?? 0) / total) * 100) : 0,
       color: COLORS[key] || "#6b7280",
     }));
 

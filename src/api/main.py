@@ -825,7 +825,7 @@ def get_latest_report(generate: bool = Query(False)):
 
     report = gen.load_latest()
     if report is None:
-        return gen.generate()
+        raise HTTPException(status_code=404, detail='리포트 없음 — 파이프라인을 실행하세요')
     return report
 
 

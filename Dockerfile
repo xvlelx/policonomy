@@ -20,12 +20,16 @@ RUN mkdir -p /app/data/models /app/logs
 
 # startup: seed data into volume-mounted /app/data if not already present
 RUN printf '#!/bin/sh\n\
-for f in /app/data_seed/*.json /app/data_seed/*.db; do\n\
+for f in /app/data_seed/*.json /app/data_seed/*.db /app/data_seed/*.html; do\n\
   [ -f "$f" ] && [ ! -f "/app/data/$(basename $f)" ] && cp "$f" /app/data/;\n\
 done\n\
 [ ! -d /app/data/models ] && mkdir -p /app/data/models\n\
 for f in /app/data_seed/models/*; do\n\
   [ ! -f "/app/data/models/$(basename $f)" ] && cp "$f" /app/data/models/;\n\
+done\n\
+[ ! -d /app/data/reports ] && mkdir -p /app/data/reports\n\
+for f in /app/data_seed/reports/*; do\n\
+  [ -f "$f" ] && [ ! -f "/app/data/reports/$(basename $f)" ] && cp "$f" /app/data/reports/;\n\
 done\n\
 exec "$@"\n' > /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 

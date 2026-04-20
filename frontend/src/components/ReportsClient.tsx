@@ -344,7 +344,10 @@ export default function ReportsClient() {
         setSelectedDate(r.date);
         setSelectedRunType(r.run_type ?? 'morning');
       })
-      .catch((e: unknown) => setError(`오류: ${e instanceof Error ? e.message : String(e)}`))
+      .catch((e: unknown) => {
+        const msg = e instanceof Error ? e.message : String(e);
+        setError(msg.includes('404') ? '아직 생성된 브리핑이 없습니다.' : `리포트를 불러오지 못했습니다.`);
+      })
       .finally(() => setLoading(false));
   };
 

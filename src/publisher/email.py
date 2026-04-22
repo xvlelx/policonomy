@@ -117,11 +117,12 @@ class EmailSender:
             return False
 
     def send_confirmation_email(self, email: str, name: str, token: str) -> bool:
-        """이메일 확인 링크 발송"""
+        """이메일 확인 링크 발송 (텍스트 + HTML)"""
         base_url = os.getenv('SITE_URL', 'http://localhost:3000')
         confirm_url = f'{base_url}/confirm?token={token}'
         subject = '[Policonomy] 이메일 구독 확인'
-        body = f"""안녕하세요{', ' + name if name else ''}!
+        greeting = f', {name}' if name else ''
+        text_body = f"""안녕하세요{greeting}!
 
 Policonomy 구독 신청을 확인해주세요.
 
@@ -133,7 +134,31 @@ Policonomy 구독 신청을 확인해주세요.
 감사합니다.
 — Policonomy 팀
 """
-        return self._send_raw(email, subject, body)
+        html_body = f"""<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#0f172a;font-family:-apple-system,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a;padding:40px 16px;">
+    <tr><td align="center">
+      <table width="100%" style="max-width:480px;background:#1e293b;border-radius:12px;padding:40px;color:#e2e8f0;">
+        <tr><td>
+          <h1 style="margin:0 0 8px;font-size:22px;color:#60a5fa;">Poli<span style="color:#e2e8f0;">conomy</span></h1>
+          <p style="margin:0 0 24px;font-size:13px;color:#94a3b8;">AI 정치·경제 분석 & 예측</p>
+          <p style="margin:0 0 16px;font-size:15px;">안녕하세요{greeting}!</p>
+          <p style="margin:0 0 28px;font-size:14px;color:#94a3b8;line-height:1.6;">
+            Policonomy 구독 신청을 해주셨습니다.<br>아래 버튼을 눌러 이메일을 확인하면 구독이 완료됩니다.
+          </p>
+          <a href="{confirm_url}" style="display:inline-block;background:#3b82f6;color:#fff;text-decoration:none;padding:14px 32px;border-radius:8px;font-size:15px;font-weight:600;">
+            구독 확인하기
+          </a>
+          <p style="margin:28px 0 0;font-size:12px;color:#64748b;">링크는 24시간 동안 유효합니다.<br>본인이 신청하지 않으셨다면 이 메일을 무시해주세요.</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>"""
+        return self._send_html(email, subject, text_body, html_body)
 
     def unsubscribe(self, email: str) -> bool:
         try:
@@ -158,6 +183,29 @@ Policonomy 구독 신청을 확인해주세요.
     # ------------------------------------------------------------------ #
     # 발송                                                                 #
     # ------------------------------------------------------------------ #
+    def _send_html(self, to_email: str, subject: str, text: str, html: str) -> bool:
+        """텍스트 + HTML 멀티파트 이메일 발송"""
+        if not self.from_email:
+            logger.warning('SES_FROM_EMAIL 미설정 — 발송 스킵')
+            return False
+        try:
+            client = boto3.client('ses', region_name=self.region)
+            client.send_email(
+                Source=self.from_email,
+                Destination={'ToAddresses': [to_email]},
+                Message={
+                    'Subject': {'Data': subject, 'Charset': 'UTF-8'},
+                    'Body': {
+                        'Text': {'Data': text, 'Charset': 'UTF-8'},
+                        'Html': {'Data': html, 'Charset': 'UTF-8'},
+                    },
+                },
+            )
+            return True
+        except ClientError as e:
+            logger.error(f'이메일 발송 실패 ({to_email}): {e.response["Error"]["Message"]}')
+            return False
+
     def _send_raw(self, to_email: str, subject: str, body: str) -> bool:
         """단순 텍스트 이메일 발송"""
         if not self.from_email:
@@ -193,16 +241,26 @@ Policonomy 구독 신청을 확인해주세요.
             logger.warning('SES_FROM_EMAIL 미설정 — 발송 스킵')
             return {'sent': 0, 'failed': 0, 'error': 'SES_FROM_EMAIL not set'}
 
+        site_url = os.getenv('SITE_URL', 'http://localhost:3000')
         client = boto3.client('ses', region_name=self.region)
         sent = failed = 0
         for sub in subscribers:
             try:
+                # 구독자별 수신거부 링크 개인화
+                personalized_html = html.replace(
+                    'subscriber_email=',
+                    f'subscriber_email={sub["email"]}'
+                ).replace(
+                    "{{ site_url }}", site_url
+                ).replace(
+                    "{{ subscriber_email }}", sub['email']
+                )
                 client.send_email(
                     Source=self.from_email,
                     Destination={'ToAddresses': [sub['email']]},
                     Message={
                         'Subject': {'Data': subject, 'Charset': 'UTF-8'},
-                        'Body': {'Html': {'Data': html, 'Charset': 'UTF-8'}},
+                        'Body': {'Html': {'Data': personalized_html, 'Charset': 'UTF-8'}},
                     },
                 )
                 sent += 1

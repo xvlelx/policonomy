@@ -12,6 +12,9 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 
+import logging
+logger = logging.getLogger('pipeline_runner')
+
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / 'data'
 LOCK_FILE = DATA_DIR / '.pipeline.lock'
@@ -41,6 +44,26 @@ def _is_running() -> bool:
     except (ValueError, ProcessLookupError, PermissionError):
         LOCK_FILE.unlink(missing_ok=True)
         return False
+
+
+def _alert_failure(reason: str):
+    """파이프라인 실패 시 관리자 이메일 발송 (ADMIN_EMAIL 설정 시)"""
+    admin = os.getenv('ADMIN_EMAIL')
+    if not admin:
+        logger.warning(f'파이프라인 실패 알림 스킵 (ADMIN_EMAIL 미설정): {reason}')
+        return
+    try:
+        sys.path.insert(0, str(BASE_DIR / 'src'))
+        from publisher.email import EmailManager
+        mgr = EmailManager()
+        mgr._send_raw(
+            admin,
+            '[Policonomy] 파이프라인 실패 알림',
+            f'파이프라인이 실패했습니다.\n\n사유: {reason}\n\n시각: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n',
+        )
+        logger.info(f'실패 알림 발송 → {admin}')
+    except Exception as e:
+        logger.error(f'실패 알림 발송 실패: {e}')
 
 
 def run_pipeline():
@@ -74,8 +97,10 @@ def run_pipeline():
             _write_status('completed', '완료')
         else:
             _write_status('error', f'종료코드 {result.returncode}')
+            _alert_failure(f'파이프라인 비정상 종료 (코드 {result.returncode})')
     except Exception as e:
         _write_status('error', str(e))
+        _alert_failure(str(e))
     finally:
         _cleanup()
 

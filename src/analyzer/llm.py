@@ -174,6 +174,13 @@ class ArticleAnalyzer:
 Title: {article.title}
 Summary: {article.summary[:200] if article.summary else '없음'}
 
+is_urgent 판단 기준 (아래 중 하나라도 해당하면 true):
+- 전쟁, 테러, 분쟁 발발 또는 확전
+- 대통령 탄핵, 사임, 비상계엄 등 정치 격변
+- 중앙은행 긴급 금리 결정 (예정 외 임시회의)
+- 주요국 금융위기, 은행 파산, 시장 서킷브레이커 발동
+- 대형 자연재해·사고로 인한 공급망 즉각 타격
+
 설명 없이 JSON만 답해:
 {{"importance": 7, "one_line": "요약", "is_urgent": false, "keywords": ["키워드"]}}
 
@@ -194,7 +201,9 @@ Summary: {article.summary[:300]}
 Category: {article.category}
 
 다음 JSON 형식으로만 답해:
-{{"issue": "핵심 이슈 한 문장", "cause": "배경/원인", "economic_impact": "경제적 파급효과 2~3문장", "affected_sectors": ["섹터"], "sentiment": "positive/negative/neutral", "prediction": "향후 1~2주 예상"}}
+{{"issue": "핵심 이슈 한 문장", "cause": "배경/원인", "economic_impact": "경제적 파급효과 2~3문장", "affected_sectors": ["섹터"], "sentiment": "positive/negative/neutral/cautious", "prediction": "향후 1~2주 예상"}}
+
+sentiment 기준: positive(명확한 호재), negative(명확한 악재), cautious(방향 불확실·상충 신호·해석 분분), neutral(시장 영향 미미)
 
 JSON:''',
                 max_tokens=450,

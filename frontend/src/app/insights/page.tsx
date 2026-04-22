@@ -4,9 +4,17 @@ import { useEffect, useState } from "react";
 import { api, WeeklyInsight } from "@/lib/api";
 import { TrendingUp } from "lucide-react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import WeeklyTopArticles from "@/components/WeeklyTopArticles";
-import PredictionHistoryChart from "@/components/PredictionHistoryChart";
-import MarketCorrelationChart from "@/components/MarketCorrelationChart";
+
+const PredictionHistoryChart = dynamic(
+  () => import("@/components/PredictionHistoryChart"),
+  { loading: () => <div className="h-[240px] bg-gray-900 rounded-xl animate-pulse" /> }
+);
+const MarketCorrelationChart = dynamic(
+  () => import("@/components/MarketCorrelationChart"),
+  { loading: () => <div className="h-[220px] bg-gray-900 rounded-xl animate-pulse" /> }
+);
 
 function SentimentBar({ value }: { value: number | null }) {
   if (value === null) return <span className="text-gray-600 text-xs">-</span>;
@@ -119,7 +127,7 @@ export default function InsightsPage() {
           className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden"
         >
           {/* 카드 헤더 */}
-          <div className="flex items-center justify-between px-5 py-3 bg-gray-800/50 border-b border-gray-800">
+          <div className="flex flex-wrap items-center justify-between gap-y-2 px-5 py-3 bg-gray-800/50 border-b border-gray-800">
             <div>
               <span className="text-sm font-semibold text-gray-200">
                 {w.week_start} ~ {w.week_end}

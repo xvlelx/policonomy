@@ -125,14 +125,31 @@ function RelatedArticles({ marketKey }: { marketKey: string }) {
   );
 }
 
+// frontend key → meta.json key 매핑
+const MODEL_ACC_KEY: Record<string, string> = {
+  kospi: "kospi",
+  usd_krw: "usdkrw",
+  samsung: "samsung",
+  nasdaq: "nasdaq",
+};
+
+function AccuracyBadge({ acc }: { acc: number }) {
+  const color = acc >= 80 ? "text-green-400" : acc >= 70 ? "text-yellow-400" : "text-gray-400";
+  return (
+    <span className={`text-[10px] font-medium ${color}`} title="XGBoost 교차검증 정확도">
+      {acc}%
+    </span>
+  );
+}
+
 export default function MarketCards({ predictions, markets }: Props) {
-  const { kronos_predictions, xgb_predictions, fused_analysis } = predictions;
+  const { kronos_predictions, xgb_predictions, fused_analysis, model_accuracy } = predictions;
   const [expandedRelated, setExpandedRelated] = useState<string | null>(null);
 
   return (
     <div className="space-y-3">
       <h2 className="text-sm font-semibold text-gray-400">시장 예측 (Kronos + XGBoost + AI 융합)</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {Object.entries(kronos_predictions ?? {}).filter(([key]) => !markets || markets.includes(key)).map(([key, pred]) => {
           const isUp = pred.change_pct >= 0;
           const isBig = Math.abs(pred.change_pct) >= 3;
@@ -142,11 +159,12 @@ export default function MarketCards({ predictions, markets }: Props) {
           const fused = fusedKey ? fused_analysis?.[fusedKey] : null;
           const xgb = xgb_predictions?.[key];
           const isExpanded = expandedRelated === key;
+          const cvAcc = model_accuracy?.[MODEL_ACC_KEY[key] ?? ""];
 
           return (
             <div
               key={key}
-              className={`bg-gray-900 rounded-xl p-4 border transition-colors ${
+              className={`bg-gray-900 rounded-xl p-3 sm:p-4 border transition-colors ${
                 isBig
                   ? isUp
                     ? "border-green-500/40"
@@ -177,14 +195,17 @@ export default function MarketCards({ predictions, markets }: Props) {
                   {isUp ? "+" : ""}{pred.change_pct.toFixed(2)}%
                 </span>
               </div>
-              <div className="mt-2 text-xs text-gray-500">
+              <div className="mt-2 text-xs text-gray-500 truncate">
                 <span className="text-gray-600">범위 </span>
                 {formatNum(pred.pred_range.low, key)} ~ {formatNum(pred.pred_range.high, key)}
               </div>
               {xgb && (
                 <div className="mt-2 pt-2 border-t border-gray-800">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500">XGBoost</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs text-gray-500">XGBoost</span>
+                      {cvAcc != null && <AccuracyBadge acc={cvAcc} />}
+                    </div>
                     <span className={`text-xs font-semibold ${xgb.direction === "상승" ? "text-green-400" : "text-red-400"}`}>
                       {xgb.direction} {xgb.confidence}%
                     </span>

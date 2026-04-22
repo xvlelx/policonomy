@@ -33,8 +33,14 @@ export default function DashboardClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("kospi");
+  const [mountedTabs, setMountedTabs] = useState<Set<Tab>>(new Set(["kospi"]));
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [statsVisible, setStatsVisible] = useState(false);
+
+  const handleTabChange = (tab: Tab) => {
+    setMountedTabs(prev => new Set([...prev, tab]));
+    setActiveTab(tab);
+  };
 
   const prevStatusRef = useRef<string>("unknown");
   const touchStartXRef = useRef<number>(0);
@@ -134,7 +140,14 @@ export default function DashboardClient() {
         </nav>
       </header>
 
-      {/* ── 2. 메타 라인 ── */}
+      {/* ── 2. 파이프라인 상태 ── */}
+      {summary && (
+        <div className="mt-3">
+          <PipelineStatus status={summary.pipeline} onPipelineStart={fetchAll} />
+        </div>
+      )}
+
+      {/* ── 메타 라인 ── */}
       <div className="mt-3 flex flex-wrap items-center gap-x-3 sm:gap-x-5 gap-y-1 text-xs text-gray-400">
         {summary?.generated_at && (
           <span>
@@ -169,13 +182,15 @@ export default function DashboardClient() {
         )}
       </div>
 
-      {/* ── 3. 오늘의 요약 + 긴급 이슈 + CTA ── */}
+      {/* ── 3. 긴급 배너 (독립 렌더) ── */}
+      <div className="mt-4">
+        <UrgentNewsBanner />
+      </div>
+
+      {/* ── 오늘의 요약 + CTA ── */}
       {summary?.weekly_summary && (
         <section className="mt-8">
           <SectionLabel>오늘의 요약</SectionLabel>
-          <div className="mb-3">
-            <UrgentNewsBanner />
-          </div>
           <WeeklySummary
             summary={summary.weekly_summary}
             sentiment={summary.overall_sentiment}
@@ -249,7 +264,7 @@ export default function DashboardClient() {
       {/* ── 5. 시장 분석 ── */}
       <section className="mt-8">
         <SectionLabel>시장 분석</SectionLabel>
-        <DashboardTabs active={activeTab} onChange={setActiveTab} />
+        <DashboardTabs active={activeTab} onChange={handleTabChange} />
         <div
           onTouchStart={(e) => { touchStartXRef.current = e.touches[0].clientX; }}
           onTouchEnd={(e) => {
@@ -266,7 +281,7 @@ export default function DashboardClient() {
             aria-labelledby="tab-kospi"
             className={`mt-6 ${activeTab === "kospi" ? "" : "hidden"}`}
           >
-            {predictions && <KospiTab predictions={predictions} />}
+            {mountedTabs.has("kospi") && predictions && <KospiTab predictions={predictions} />}
           </div>
           <div
             role="tabpanel"
@@ -274,7 +289,7 @@ export default function DashboardClient() {
             aria-labelledby="tab-us"
             className={`mt-6 ${activeTab === "us" ? "" : "hidden"}`}
           >
-            {predictions && <UsMarketTab predictions={predictions} />}
+            {mountedTabs.has("us") && predictions && <UsMarketTab predictions={predictions} />}
           </div>
           <div
             role="tabpanel"
@@ -282,18 +297,10 @@ export default function DashboardClient() {
             aria-labelledby="tab-unofficial"
             className={`mt-6 ${activeTab === "unofficial" ? "" : "hidden"}`}
           >
-            <UnofficialIndicatorsTab />
+            {mountedTabs.has("unofficial") && <UnofficialIndicatorsTab />}
           </div>
         </div>
       </section>
-
-      {/* ── 6. 시스템 상태 (하단) ── */}
-      {summary && (
-        <section className="mt-12 pt-6 border-t border-gray-800/60">
-          <SectionLabel>시스템 상태</SectionLabel>
-          <PipelineStatus status={summary.pipeline} onPipelineStart={fetchAll} />
-        </section>
-      )}
 
       <div className="h-16" />
 

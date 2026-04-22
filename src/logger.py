@@ -1,6 +1,10 @@
 import logging
+import os
 import sys
+from logging.handlers import RotatingFileHandler
 from pathlib import Path
+
+_FMT = '[%(asctime)s] %(name)s %(levelname)s - %(message)s'
 
 def get_logger(name: str) -> logging.Logger:
     logger = logging.getLogger(name)
@@ -10,23 +14,23 @@ def get_logger(name: str) -> logging.Logger:
 
     logger.setLevel(logging.INFO)
 
-    # 콘솔 핸들러
     console = logging.StreamHandler(sys.stdout)
     console.setLevel(logging.INFO)
-    console.setFormatter(logging.Formatter(
-        '[%(asctime)s] %(name)s %(levelname)s - %(message)s',
-        datefmt='%H:%M:%S'
-    ))
-
-    # 파일 핸들러
-    log_dir = Path(__file__).parent.parent / 'logs'
-    log_dir.mkdir(exist_ok=True)
-    file_handler = logging.FileHandler(log_dir / 'pipeline.log', encoding='utf-8')
-    file_handler.setLevel(logging.INFO)
-    file_handler.setFormatter(logging.Formatter(
-        '[%(asctime)s] %(name)s %(levelname)s - %(message)s'
-    ))
-
+    console.setFormatter(logging.Formatter(_FMT, datefmt='%H:%M:%S'))
     logger.addHandler(console)
-    logger.addHandler(file_handler)
+
+    # Railway는 stdout만 수집 — 파일 핸들러는 로컬 전용
+    if not os.getenv('RAILWAY_ENVIRONMENT'):
+        log_dir = Path(__file__).parent.parent / 'logs'
+        log_dir.mkdir(exist_ok=True)
+        fh = RotatingFileHandler(
+            log_dir / 'pipeline.log',
+            maxBytes=10 * 1024 * 1024,  # 10 MB
+            backupCount=5,
+            encoding='utf-8',
+        )
+        fh.setLevel(logging.INFO)
+        fh.setFormatter(logging.Formatter(_FMT))
+        logger.addHandler(fh)
+
     return logger

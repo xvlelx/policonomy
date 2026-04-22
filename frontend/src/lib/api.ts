@@ -73,6 +73,7 @@ export type Predictions = {
   }
   last_verification?: unknown
   accuracy?: unknown
+  model_accuracy?: Record<string, number | null>
 }
 
 export type ArticlesResponse = {

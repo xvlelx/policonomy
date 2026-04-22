@@ -35,8 +35,9 @@ function ArticleCard({ article, onClick }: { article: Article; onClick: () => vo
   const sent = article.sentiment || "neutral";
 
   return (
-    <div
-      className="bg-gray-900 rounded-xl border border-gray-700/60 hover:border-gray-600 hover:bg-gray-800/40 transition-colors cursor-pointer"
+    <button
+      type="button"
+      className="w-full text-left bg-gray-900 rounded-xl border border-gray-700/60 hover:border-gray-600 hover:bg-gray-800/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
       onClick={onClick}
     >
       <div className="p-4">
@@ -79,7 +80,7 @@ function ArticleCard({ article, onClick }: { article: Article; onClick: () => vo
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }
 

@@ -26,8 +26,10 @@ export default function UrgentNewsBanner() {
   return (
     <div className="rounded-xl border border-red-800 bg-red-950/40 overflow-hidden">
       {/* 배너 헤더 */}
-      <div
-        className="flex items-center justify-between px-4 py-2.5 bg-red-900/30 border-b border-red-800 cursor-pointer hover:bg-red-900/50 transition-colors"
+      <button
+        type="button"
+        aria-expanded={!collapsed}
+        className="w-full flex items-center justify-between px-4 py-2.5 bg-red-900/30 border-b border-red-800 hover:bg-red-900/50 transition-colors text-left"
         onClick={() => setCollapsed(!collapsed)}
       >
         <div className="flex items-center gap-2">
@@ -51,7 +53,7 @@ export default function UrgentNewsBanner() {
             ×
           </button>
         </div>
-      </div>
+      </button>
 
       {/* 기사 목록 */}
       {!collapsed && (

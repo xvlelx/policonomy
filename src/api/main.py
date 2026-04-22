@@ -5,6 +5,7 @@ import math
 import os
 import sqlite3
 import sys
+import time
 from pathlib import Path
 from datetime import datetime
 from typing import Optional
@@ -86,6 +87,9 @@ def _sanitize_floats(obj):
     return obj
 
 
+_json_cache: dict[str, tuple[float, object]] = {}
+_JSON_CACHE_TTL = 60.0  # seconds
+
 def _load_json(filename: str):
     if filename not in _ALLOWED_FILES:
         raise ValueError(f'허용되지 않은 파일: {filename}')
@@ -95,9 +99,17 @@ def _load_json(filename: str):
     path = resolved
     if not path.exists():
         return None
+
+    now = time.monotonic()
+    cached = _json_cache.get(filename)
+    if cached and now - cached[0] < _JSON_CACHE_TTL:
+        return cached[1]
+
     with open(path, encoding='utf-8') as f:
         data = json.load(f)
-    return _sanitize_floats(data)
+    result = _sanitize_floats(data)
+    _json_cache[filename] = (now, result)
+    return result
 
 
 def _parse_pipeline_status() -> dict:
@@ -205,8 +217,19 @@ def get_article_stats():
 
 @app.get('/api/predictions')
 def get_predictions():
-    data = _load_json('predictions.json')
-    return data if data is not None else {}
+    data = _load_json('predictions.json') or {}
+    # XGBoost 모델 정확도 주입 (meta.json)
+    meta_path = DATA_DIR / 'models' / 'meta.json'
+    if meta_path.exists() and 'model_accuracy' not in data:
+        try:
+            with open(meta_path, encoding='utf-8') as f:
+                meta = json.load(f)
+            data['model_accuracy'] = {
+                k: v.get('cv_accuracy') for k, v in meta.get('results', {}).items()
+            }
+        except Exception:
+            pass
+    return data
 
 
 @app.get('/api/pipeline/status')
@@ -707,13 +730,21 @@ def get_related_articles(market: str = Query(...)):
         'kospi': ['코스피', '주가', '증시', '한국 주식', '삼성', 'SK하이닉스', '현대차'],
         'usd_krw': ['환율', '달러', '원화', '달러/원', '외환'],
         'nasdaq': ['나스닥', '미국 증시', '미국 주식', '실리콘밸리', 'AI', '빅테크'],
+        'sp500': ['S&P 500', 'S&P500', '미국 증시', '뉴욕 증시', '미국 주식'],
+        'dow': ['다우', '다우존스', '다우 지수', '미국 증시', '블루칩'],
         'samsung': ['삼성전자', '삼성', '반도체', 'HBM', '스마트폰'],
+        'skhynix': ['SK하이닉스', 'SK 하이닉스', '하이닉스', 'HBM', '반도체'],
+        'nvidia': ['엔비디아', 'NVIDIA', 'GPU', 'AI 칩', '데이터센터'],
     }
     MARKET_CATEGORIES: dict[str, list[str]] = {
         'kospi': ['politics_economy', 'tech_industry'],
         'usd_krw': ['politics_economy', 'global_macro'],
         'nasdaq': ['global_macro', 'tech_industry'],
+        'sp500': ['global_macro', 'tech_industry'],
+        'dow': ['global_macro', 'politics_economy'],
         'samsung': ['tech_industry', 'politics_economy'],
+        'skhynix': ['tech_industry', 'politics_economy'],
+        'nvidia': ['tech_industry', 'global_macro'],
     }
 
     if market not in MARKET_KEYWORDS:
@@ -853,6 +884,3 @@ def get_hedge_funds(force: bool = Query(False)):
     return collector.collect(force=force)
 
 
-@app.get('/api/health')
-def health():
-    return {'status': 'ok', 'timestamp': datetime.now().isoformat()}

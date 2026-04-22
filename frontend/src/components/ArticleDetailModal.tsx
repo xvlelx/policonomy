@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Article } from "@/lib/api";
 import { ExternalLink, X, TrendingUp, TrendingDown, Minus } from "lucide-react";
 
@@ -40,17 +40,31 @@ export default function ArticleDetailModal({ article, onClose }: Props) {
   const isUp = sent === "positive";
   const isDown = sent === "negative";
   const Icon = isUp ? TrendingUp : isDown ? TrendingDown : Minus;
+  const panelRef = useRef<HTMLDivElement>(null);
 
-  // ESC 키로 닫기, 배경 스크롤 잠금
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
+    const firstFocusable = panelRef.current?.querySelector<HTMLElement>(
+      'button, [href], input, select, [tabindex]:not([tabindex="-1"])'
+    );
+    firstFocusable?.focus();
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") { onClose(); return; }
+    if (e.key !== "Tab") return;
+    const focusable = panelRef.current?.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusable?.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+      e.preventDefault();
+      (e.shiftKey ? last : first).focus();
+    }
+  };
 
   return (
     <div
@@ -62,8 +76,13 @@ export default function ArticleDetailModal({ article, onClose }: Props) {
 
       {/* 모달 패널 */}
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
         className="relative w-full sm:max-w-2xl max-h-[90dvh] overflow-y-auto bg-gray-900 rounded-t-2xl sm:rounded-2xl border border-gray-700 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={handleKeyDown}
       >
         {/* 모바일 드래그 핸들 */}
         <div className="sm:hidden flex justify-center pt-3 pb-1">
@@ -89,7 +108,7 @@ export default function ArticleDetailModal({ article, onClose }: Props) {
                 </span>
               )}
             </div>
-            <h2 className="text-sm font-semibold text-gray-100 leading-snug">{article.title}</h2>
+            <h2 id="modal-title" className="text-sm font-semibold text-gray-100 leading-snug">{article.title}</h2>
           </div>
           <button
             onClick={onClose}

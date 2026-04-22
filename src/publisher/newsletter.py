@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from logger import get_logger
@@ -54,6 +55,8 @@ class NewsletterPublisher:
             'weekly_summary': fused.get('weekly_summary', ''),
             'last_verification': predictions.get('last_verification'),
             'accuracy': predictions.get('accuracy', {}),
+            'site_url': os.getenv('SITE_URL', 'http://localhost:3000'),
+            'subscriber_email': '',  # send_newsletter()에서 per-subscriber 렌더링 시 치환
         }
 
     def publish(self, analyzed: list[dict], predictions: dict) -> str:

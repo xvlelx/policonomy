@@ -5,8 +5,6 @@ import { PipelineStatus as PS, api } from "@/lib/api";
 
 type Props = { status: PS; onPipelineStart?: () => void };
 
-let _adminKeyMemory = "";
-
 export default function PipelineStatus({ status, onPipelineStart }: Props) {
   const isRunning = status.status === "running";
   const isCompleted = status.status === "completed";
@@ -14,7 +12,7 @@ export default function PipelineStatus({ status, onPipelineStart }: Props) {
   const [running, setRunning] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showKeyInput, setShowKeyInput] = useState(false);
-  const [adminKey, setAdminKey] = useState(() => _adminKeyMemory);
+  const [adminKey, setAdminKey] = useState("");
 
   const statusColor = isRunning
     ? "text-yellow-400 bg-yellow-400/10 border-yellow-400/30"
@@ -39,7 +37,6 @@ export default function PipelineStatus({ status, onPipelineStart }: Props) {
     setError(null);
     try {
       await api.runPipeline(adminKey);
-      _adminKeyMemory = adminKey;
       setShowKeyInput(false);
       onPipelineStart?.();
     } catch (e: unknown) {

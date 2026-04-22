@@ -122,6 +122,10 @@ const MODEL_ACC_KEY: Record<string, string> = {
   usd_krw: "usdkrw",
   samsung: "samsung",
   nasdaq: "nasdaq",
+  sp500: "sp500",
+  dow: "dow",
+  nvidia: "nvidia",
+  skhynix: "skhynix",
 };
 
 function AccuracyBadge({ acc }: { acc: number }) {

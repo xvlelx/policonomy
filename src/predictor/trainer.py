@@ -25,7 +25,7 @@ from config import config
 
 logger = get_logger('predictor.trainer')
 
-_TARGETS = ['kospi', 'usdkrw', 'samsung', 'nasdaq']
+_TARGETS = ['kospi', 'usdkrw', 'samsung', 'nasdaq', 'sp500', 'dow', 'nvidia', 'skhynix']
 _MODEL_DIR = config.paths.data / 'models'
 
 
@@ -47,12 +47,20 @@ class WeeklyTrainer:
         """backfill_records + weekly_records 통합 로드"""
         with self._conn() as conn:
             # 백필 데이터
+            # backfill_records 컬럼 동적 조회 (신규 마켓 컬럼 유무 체크)
+            bf_cols = [r[1] for r in conn.execute('PRAGMA table_info(backfill_records)').fetchall()]
+            _new_mkts = ['sp500', 'dow', 'nvidia', 'skhynix']
+            _extra = ', '.join(
+                f'{m}_actual_change, {m}_next_dir'
+                for m in _new_mkts if f'{m}_actual_change' in bf_cols
+            )
             bf = pd.DataFrame([dict(r) for r in conn.execute(
-                '''SELECT week, sentiment_score,
+                f'''SELECT week, sentiment_score,
                           kospi_actual_change, usdkrw_actual_change,
                           samsung_actual_change, nasdaq_actual_change,
                           kospi_next_dir, usdkrw_next_dir,
                           samsung_next_dir, nasdaq_next_dir
+                          {", " + _extra if _extra else ""}
                    FROM backfill_records
                    WHERE kospi_actual_change IS NOT NULL
                    ORDER BY week'''
@@ -73,8 +81,14 @@ class WeeklyTrainer:
                        tech_pos * 1.0 / NULLIF(total_articles, 0) AS tech_pos_ratio,
                        kospi_actual_change, usdkrw_actual_change,
                        samsung_actual_change, nasdaq_actual_change,
+                       COALESCE(sp500_actual_change, NULL) AS sp500_actual_change,
+                       COALESCE(dow_actual_change, NULL) AS dow_actual_change,
+                       COALESCE(nvidia_actual_change, NULL) AS nvidia_actual_change,
+                       COALESCE(skhynix_actual_change, NULL) AS skhynix_actual_change,
                        NULL AS kospi_next_dir, NULL AS usdkrw_next_dir,
-                       NULL AS samsung_next_dir, NULL AS nasdaq_next_dir
+                       NULL AS samsung_next_dir, NULL AS nasdaq_next_dir,
+                       NULL AS sp500_next_dir, NULL AS dow_next_dir,
+                       NULL AS nvidia_next_dir, NULL AS skhynix_next_dir
                 FROM weekly_records
                 WHERE verified_at IS NOT NULL AND kospi_actual_change IS NOT NULL
             '''
@@ -98,8 +112,12 @@ class WeeklyTrainer:
                        tech_pos * 1.0 / NULLIF(total_articles, 0) AS tech_pos_ratio,
                        kospi_actual_change, usdkrw_actual_change,
                        samsung_actual_change, nasdaq_actual_change,
+                       sp500_actual_change, dow_actual_change,
+                       nvidia_actual_change, skhynix_actual_change,
                        NULL AS kospi_next_dir, NULL AS usdkrw_next_dir,
-                       NULL AS samsung_next_dir, NULL AS nasdaq_next_dir
+                       NULL AS samsung_next_dir, NULL AS nasdaq_next_dir,
+                       NULL AS sp500_next_dir, NULL AS dow_next_dir,
+                       NULL AS nvidia_next_dir, NULL AS skhynix_next_dir
                 FROM daily_records
                 WHERE verified_at IS NOT NULL AND kospi_actual_change IS NOT NULL
                 '''
@@ -127,7 +145,9 @@ class WeeklyTrainer:
 
         # 피처: 이번 주 등락률 + lag 2주
         price_cols = ['kospi_actual_change', 'usdkrw_actual_change',
-                      'samsung_actual_change', 'nasdaq_actual_change']
+                      'samsung_actual_change', 'nasdaq_actual_change',
+                      'sp500_actual_change', 'dow_actual_change',
+                      'nvidia_actual_change', 'skhynix_actual_change']
         for col in price_cols:
             df[f'{col}_lag1'] = df[col].shift(1)
             df[f'{col}_lag2'] = df[col].shift(2)
@@ -151,10 +171,16 @@ class WeeklyTrainer:
             'sentiment_score', 'sentiment_ma4',
             'kospi_actual_change', 'usdkrw_actual_change',
             'samsung_actual_change', 'nasdaq_actual_change',
+            'sp500_actual_change', 'dow_actual_change',
+            'nvidia_actual_change', 'skhynix_actual_change',
             'kospi_actual_change_lag1', 'usdkrw_actual_change_lag1',
             'samsung_actual_change_lag1', 'nasdaq_actual_change_lag1',
+            'sp500_actual_change_lag1', 'dow_actual_change_lag1',
+            'nvidia_actual_change_lag1', 'skhynix_actual_change_lag1',
             'kospi_actual_change_lag2', 'usdkrw_actual_change_lag2',
             'samsung_actual_change_lag2', 'nasdaq_actual_change_lag2',
+            'sp500_actual_change_lag2', 'dow_actual_change_lag2',
+            'nvidia_actual_change_lag2', 'skhynix_actual_change_lag2',
             'month', 'quarter',
             # 카테고리별 감성 (실시간 데이터 축적 시 활성화)
             'politics_ratio', 'global_ratio', 'tech_ratio', 'realestate_ratio',
@@ -259,9 +285,12 @@ class WeeklyTrainer:
         tickers = {
             'kospi': '^KS11', 'usd_krw': 'KRW=X',
             'samsung': '005930.KS', 'nasdaq': '^IXIC',
+            'sp500': '^GSPC', 'dow': '^DJI',
+            'nvidia': 'NVDA', 'skhynix': '000660.KS',
         }
         result = {}
         for name, ticker in tickers.items():
+            key = name if name != 'usd_krw' else 'usdkrw'
             try:
                 df = yf.Ticker(ticker).history(
                     start=week_start.strftime('%Y-%m-%d'),
@@ -269,11 +298,11 @@ class WeeklyTrainer:
                 )
                 if len(df) >= 2:
                     chg = (float(df['Close'].iloc[-1]) - float(df['Close'].iloc[0])) / float(df['Close'].iloc[0]) * 100
-                    result[f'{name}_actual_change'] = round(chg, 2)
+                    result[f'{key}_actual_change'] = round(chg, 2)
                 else:
-                    result[f'{name}_actual_change'] = 0.0
+                    result[f'{key}_actual_change'] = 0.0
             except Exception:
-                result[f'{name}_actual_change'] = 0.0
+                result[f'{key}_actual_change'] = 0.0
         return result
 
     def predict(self, this_week_data: dict) -> dict:

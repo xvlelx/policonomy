@@ -1,26 +1,46 @@
 {
-  "trained_at": "2026-04-20T20:15:06.359585",
+  "trained_at": "2026-04-22T15:33:22.304682",
   "total_weeks": 1684,
   "results": {
     "kospi": {
-      "cv_accuracy": 74.4,
-      "n_samples": 328,
+      "cv_accuracy": 75.6,
+      "n_samples": 302,
       "model_path": "/Users/honghyeongi/policonomy/data/models/kospi_xgb.pkl"
     },
     "usdkrw": {
-      "cv_accuracy": 79.3,
-      "n_samples": 328,
+      "cv_accuracy": 82.4,
+      "n_samples": 302,
       "model_path": "/Users/honghyeongi/policonomy/data/models/usdkrw_xgb.pkl"
     },
     "samsung": {
-      "cv_accuracy": 81.9,
-      "n_samples": 328,
+      "cv_accuracy": 88.4,
+      "n_samples": 302,
       "model_path": "/Users/honghyeongi/policonomy/data/models/samsung_xgb.pkl"
     },
     "nasdaq": {
-      "cv_accuracy": 82.2,
-      "n_samples": 328,
+      "cv_accuracy": 81.6,
+      "n_samples": 302,
       "model_path": "/Users/honghyeongi/policonomy/data/models/nasdaq_xgb.pkl"
+    },
+    "sp500": {
+      "cv_accuracy": 69.2,
+      "n_samples": 301,
+      "model_path": "/Users/honghyeongi/policonomy/data/models/sp500_xgb.pkl"
+    },
+    "dow": {
+      "cv_accuracy": 72.8,
+      "n_samples": 301,
+      "model_path": "/Users/honghyeongi/policonomy/data/models/dow_xgb.pkl"
+    },
+    "nvidia": {
+      "cv_accuracy": 74.4,
+      "n_samples": 301,
+      "model_path": "/Users/honghyeongi/policonomy/data/models/nvidia_xgb.pkl"
+    },
+    "skhynix": {
+      "cv_accuracy": 77.6,
+      "n_samples": 301,
+      "model_path": "/Users/honghyeongi/policonomy/data/models/skhynix_xgb.pkl"
     }
   }
 }

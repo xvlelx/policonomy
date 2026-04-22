@@ -762,9 +762,11 @@ def get_related_articles(market: str = Query(...)):
     scored = []
     for art in articles:
         title = (art.get('title') or '').lower()
-        summary = (art.get('summary') or '').lower()
+        one_line = (art.get('one_line') or '').lower()
+        issue = (art.get('issue') or '').lower()
+        kws = ' '.join(art.get('keywords') or []).lower()
         cat = art.get('category', '')
-        text = title + ' ' + summary
+        text = title + ' ' + one_line + ' ' + issue + ' ' + kws
 
         score = sum(1 for kw in keywords if kw in text)
         if cat in target_cats:
@@ -772,7 +774,10 @@ def get_related_articles(market: str = Query(...)):
         if score > 0:
             scored.append((score, art))
 
-    scored.sort(key=lambda x: (-x[0], -(x[1].get('importance', 0) or 0)))
+    try:
+        scored.sort(key=lambda x: (-x[0], -(int(x[1].get('importance') or 0))))
+    except (TypeError, ValueError):
+        scored.sort(key=lambda x: -x[0])
     top = [a for _, a in scored[:5]]
 
     return {'articles': top, 'market': market}

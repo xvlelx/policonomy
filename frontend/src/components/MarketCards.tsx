@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Predictions, Article, api } from "@/lib/api";
 import { TrendingUp, TrendingDown, Minus, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 
@@ -66,32 +66,23 @@ function RelatedArticles({ marketKey }: { marketKey: string }) {
 
   if (!marketParam) return null;
 
-  const load = () => {
-    if (articles !== null || loading) return;
+  useEffect(() => {
     setLoading(true);
     api
       .relatedArticles(marketParam)
       .then((res) => setArticles(res.articles))
       .catch(() => setError(true))
       .finally(() => setLoading(false));
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [marketParam]);
 
   return (
     <div className="mt-2 pt-2 border-t border-gray-800">
-      {articles === null && !loading && !error && (
-        <button
-          onClick={load}
-          className="text-xs text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
-        >
-          관련 기사 보기
-          <ChevronDown size={11} />
-        </button>
-      )}
       {loading && (
-        <p className="text-xs text-gray-600">관련 기사 로딩 중...</p>
+        <p className="text-xs text-gray-500">로딩 중...</p>
       )}
       {error && (
-        <p className="text-xs text-red-400">불러오기 실패</p>
+        <p className="text-xs text-gray-500">관련 기사 없음</p>
       )}
       {articles !== null && articles.length === 0 && (
         <p className="text-xs text-gray-600">관련 기사 없음</p>

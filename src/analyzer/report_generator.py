@@ -76,7 +76,7 @@ def _top_by_outlet(articles: list[dict], max_per_outlet: int = 2) -> list[dict]:
     groups = _group_by_outlet(articles)
     result = []
     for outlet, arts in groups.items():
-        sorted_arts = sorted(arts, key=lambda x: x.get('importance', 0), reverse=True)
+        sorted_arts = sorted(arts, key=lambda x: x.get('importance') or 0, reverse=True)
         for a in sorted_arts[:max_per_outlet]:
             outlet_name, region = _detect_outlet(a.get('link', ''))
             result.append({
@@ -91,7 +91,7 @@ def _top_by_outlet(articles: list[dict], max_per_outlet: int = 2) -> list[dict]:
             })
     # 중요도 + region 정렬 (KR → US → UK → JP → CN → XX)
     region_order = {'KR': 0, 'US': 1, 'UK': 2, 'JP': 3, 'CN': 4, 'XX': 5}
-    result.sort(key=lambda x: (region_order.get(x['region'], 9), -x['importance']))
+    result.sort(key=lambda x: (region_order.get(x['region'], 9), -(x['importance'] or 0)))
     return result
 
 
@@ -144,7 +144,7 @@ class ReportGenerator:
 
     def _build_section2(self, articles: list[dict], predictions: dict) -> list[dict]:
         """② TOP 5 이슈 4축 입체 분석"""
-        top = sorted(articles, key=lambda x: x.get('importance', 0), reverse=True)[:15]
+        top = sorted(articles, key=lambda x: x.get('importance') or 0, reverse=True)[:15]
         summaries = [
             f"[{a.get('category','')}][중요도{a.get('importance',0)}] {a.get('title','')} — {a.get('one_line','')}"
             for a in top
@@ -253,7 +253,7 @@ AI 분석 (약세론): {bear}
     def _build_section5(self, articles: list[dict], predictions: dict) -> list[dict]:
         """⑤ 48시간 리스크 Watchlist"""
         urgent = [a for a in articles if a.get('is_urgent')]
-        high_imp = sorted(articles, key=lambda x: x.get('importance', 0), reverse=True)[:10]
+        high_imp = sorted(articles, key=lambda x: x.get('importance') or 0, reverse=True)[:10]
         fused = predictions.get('fused_analysis', {})
         bear = fused.get('agent_debate', {}).get('bear', {})
 

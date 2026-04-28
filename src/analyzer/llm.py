@@ -273,7 +273,7 @@ JSON:''',
         for i, a in enumerate(capped):
             logger.info(f'  스코어링 {i+1}/{len(capped)} - {a.title[:40]}')
             scored = self.score(a)
-            a.importance = scored.get('importance', 3)
+            a.importance = int(scored.get('importance') or 3)
             a.one_line = scored.get('one_line', a.title)
             a.is_urgent = scored.get('is_urgent', False)
             a.keywords = scored.get('keywords', [])
@@ -284,7 +284,7 @@ JSON:''',
         for category in config.collector.sources.keys():
             cat_arts = sorted(
                 [a for a in capped if a.category == category],
-                key=lambda x: x.importance,
+                key=lambda x: x.importance or 0,
                 reverse=True
             )
             top_articles.extend(cat_arts[:ANALYZE_LIMIT])

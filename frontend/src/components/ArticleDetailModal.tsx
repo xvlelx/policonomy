@@ -112,7 +112,8 @@ export default function ArticleDetailModal({ article, onClose }: Props) {
           </div>
           <button
             onClick={onClose}
-            className="flex-shrink-0 p-1.5 rounded-lg hover:bg-gray-800 text-gray-500 hover:text-gray-300 transition-colors"
+            aria-label="닫기"
+            className="-mr-2 -my-2 flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-lg hover:bg-gray-800 text-gray-500 hover:text-gray-300 transition-colors"
           >
             <X size={16} />
           </button>
@@ -191,7 +192,7 @@ export default function ArticleDetailModal({ article, onClose }: Props) {
 
         {/* 푸터 */}
         {article.link && (
-          <div className="sticky bottom-0 bg-gray-900 border-t border-gray-800 px-5 py-3">
+          <div className="sticky bottom-0 bg-gray-900 border-t border-gray-800 px-5 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
             <a
               href={article.link}
               target="_blank"

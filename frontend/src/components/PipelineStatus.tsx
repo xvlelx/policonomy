@@ -74,21 +74,25 @@ export default function PipelineStatus({ status, onPipelineStart }: Props) {
         {status.stage && (
           <span className="text-xs opacity-75">{status.stage}</span>
         )}
-        {status.progress_pct !== null && (
-          <div className="flex items-center gap-2 ml-auto">
-            <div className="w-20 sm:w-32 bg-black/20 rounded-full h-1.5">
-              <div
-                className="bg-yellow-400 h-1.5 rounded-full transition-all"
-                style={{ width: `${status.progress_pct}%` }}
-              />
-            </div>
-            <span className="text-xs">{status.progress_pct}%</span>
+        {(status.progress_pct !== null || status.last_updated) && (
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 ml-auto min-w-0">
+            {status.progress_pct !== null && (
+              <div className="flex items-center gap-2">
+                <div className="w-20 sm:w-32 bg-black/20 rounded-full h-1.5">
+                  <div
+                    className="bg-yellow-400 h-1.5 rounded-full transition-all"
+                    style={{ width: `${status.progress_pct}%` }}
+                  />
+                </div>
+                <span className="text-xs tabular-nums">{status.progress_pct}%</span>
+              </div>
+            )}
+            {status.last_updated && (
+              <span className="text-xs opacity-50">
+                {status.last_updated}
+              </span>
+            )}
           </div>
-        )}
-        {status.last_updated && (
-          <span className="text-xs opacity-50 ml-auto">
-            {status.last_updated}
-          </span>
         )}
 
         {/* 지금 실행 버튼 */}
@@ -96,7 +100,7 @@ export default function PipelineStatus({ status, onPipelineStart }: Props) {
           <button
             onClick={handleRun}
             disabled={running}
-            className="ml-auto flex-shrink-0 px-3 py-1 text-xs font-medium rounded-lg bg-blue-600 hover:bg-blue-500 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-shrink-0 min-h-[44px] px-3 py-1 text-xs font-medium rounded-lg bg-blue-600 hover:bg-blue-500 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {running ? "시작 중..." : "지금 실행"}
           </button>
@@ -112,7 +116,7 @@ export default function PipelineStatus({ status, onPipelineStart }: Props) {
             value={adminKey}
             onChange={(e) => setAdminKey(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleRun()}
-            className="flex-1 px-3 py-1.5 text-sm rounded-lg bg-gray-800 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-blue-500"
+            className="flex-1 min-w-0 px-3 py-1.5 text-base sm:text-sm rounded-lg bg-gray-800 border border-gray-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-blue-500"
           />
           <button
             onClick={handleRun}

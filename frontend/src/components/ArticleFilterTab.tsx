@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Predictions, ArticlesResponse, api } from "@/lib/api";
+import { Predictions, ArticlesResponse, AgentDebate, api } from "@/lib/api";
 import { Search, X } from "lucide-react";
 import MarketCards from "./MarketCards";
 import AgentConsensusCard from "./AgentConsensusCard";
 import ArticleList from "./ArticleList";
-import { AgentDebate } from "@/lib/api";
 
 const SENTIMENT_LABELS = [
   { key: "", label: "전체", active: "bg-gray-600 text-white" },
@@ -35,18 +34,18 @@ export default function ArticleFilterTab({
   debate,
   extraSection,
 }: Props) {
-  const [articles, setArticles] = useState<ArticlesResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [fetchError, setFetchError] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
   const [selectedSentiment, setSelectedSentiment] = useState("");
   const [minImportance, setMinImportance] = useState(4);
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // 요청 키와 함께 결과를 저장해 로딩/에러 상태를 파생 (effect 내 동기 setState 회피)
+  const requestKey = `${selectedCategory}|${selectedSentiment}|${minImportance}|${page}`;
+  const [result, setResult] = useState<{ key: string; data: ArticlesResponse | null } | null>(null);
+
   useEffect(() => {
-    setLoading(true);
-    setFetchError(false);
+    let cancelled = false;
     api.articles({
       category: selectedCategory || undefined,
       sentiment: selectedSentiment || undefined,
@@ -54,10 +53,14 @@ export default function ArticleFilterTab({
       page,
       page_size: 10,
     })
-      .then(setArticles)
-      .catch(() => setFetchError(true))
-      .finally(() => setLoading(false));
-  }, [selectedCategory, selectedSentiment, minImportance, page]);
+      .then((res) => { if (!cancelled) setResult({ key: requestKey, data: res }); })
+      .catch(() => { if (!cancelled) setResult({ key: requestKey, data: null }); });
+    return () => { cancelled = true; };
+  }, [requestKey, selectedCategory, selectedSentiment, minImportance, page]);
+
+  const loading = result?.key !== requestKey;
+  const fetchError = !loading && result?.data == null;
+  const articles = result?.data ?? null;
 
   const handleCategory = (cat: string) => { setSelectedCategory(cat); setPage(1); };
   const handleSentiment = (s: string) => { setSelectedSentiment(s); setPage(1); };
@@ -128,7 +131,7 @@ export default function ArticleFilterTab({
             <select
               value={minImportance}
               onChange={(e) => { setMinImportance(Number(e.target.value)); setPage(1); }}
-              className="bg-gray-800 border border-gray-700 rounded px-2 py-1 text-gray-300 text-xs min-h-[44px]"
+              className="bg-gray-800 border border-gray-700 rounded px-2 py-1 text-gray-300 text-base sm:text-xs min-h-[44px]"
             >
               {[3, 4, 5, 6, 7, 8].map((v) => (
                 <option key={v} value={v}>{v}</option>
@@ -144,12 +147,13 @@ export default function ArticleFilterTab({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="제목으로 검색 (현재 페이지)..."
-            className="w-full bg-gray-800 border border-gray-700 rounded-lg pl-8 pr-3 py-2 text-xs text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-600 transition-colors"
+            className="w-full bg-gray-800 border border-gray-700 rounded-lg pl-8 pr-10 py-2 text-base sm:text-xs text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-600 transition-colors"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+              aria-label="검색어 지우기"
+              className="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center text-gray-500 hover:text-gray-300"
             >
               <X size={12} />
             </button>

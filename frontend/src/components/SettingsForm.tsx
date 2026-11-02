@@ -70,7 +70,7 @@ export default function SettingsForm({ data, onSubmit }: SettingsFormProps) {
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm text-gray-300 placeholder-gray-600"
+                className="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 min-h-[44px] text-base sm:text-sm text-gray-300 placeholder-gray-600"
                 placeholder="user@example.com"
               />
             </label>

@@ -10,7 +10,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
@@ -42,7 +41,8 @@ type Market = (typeof MARKET_GROUPS)[number]["markets"][number];
 function isHit(record: PredictionRecord, market: Market): boolean | null {
   const pred = record[market.pred as keyof PredictionRecord] as string | null;
   const actual = record[market.actual as keyof PredictionRecord] as number | null;
-  if (!pred || actual === null) return null;
+  // 실제 등락률이 0이면 상승/하락 어디에도 속하지 않으므로 미집계
+  if (!pred || actual === null || actual === 0) return null;
   const actualDir = actual > 0 ? "상승" : "하락";
   return pred === actualDir;
 }
@@ -52,13 +52,27 @@ function formatDay(day: string) {
   return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function CustomTooltip({ active, payload, label }: any) {
+type TooltipPayloadItem = {
+  dataKey?: string | number;
+  name?: string;
+  value?: number | string | null;
+  color?: string;
+};
+
+function CustomTooltip({
+  active,
+  payload,
+  label,
+}: {
+  active?: boolean;
+  payload?: TooltipPayloadItem[];
+  label?: string;
+}) {
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-gray-900 border border-gray-700 rounded-lg p-3 text-xs shadow-xl min-w-[160px]">
       <p className="text-gray-400 mb-2 font-medium">{label}</p>
-      {payload.map((p: any) => (
+      {payload.map((p) => (
         <div key={p.dataKey} className="flex justify-between gap-4">
           <span style={{ color: p.color }}>{p.name}</span>
           <span className="text-gray-200 font-medium">
@@ -77,6 +91,7 @@ function CustomTooltip({ active, payload, label }: any) {
 export default function PredictionHistoryChart() {
   const [records, setRecords] = useState<PredictionRecord[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [activeGroup, setActiveGroup] = useState<"국장" | "미장">("국장");
   const [selectedMarket, setSelectedMarket] = useState<Market>(
     MARKET_GROUPS[0].markets[0]
@@ -86,6 +101,7 @@ export default function PredictionHistoryChart() {
     api
       .predictionsHistory()
       .then((res) => setRecords(res.records))
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, []);
 
@@ -95,6 +111,14 @@ export default function PredictionHistoryChart() {
     return (
       <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 text-center text-gray-500 text-sm">
         로딩 중...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 text-center text-red-400 text-sm">
+        예측 히스토리를 불러오지 못했습니다.
       </div>
     );
   }
@@ -167,7 +191,7 @@ export default function PredictionHistoryChart() {
                   setActiveGroup(g.group as "국장" | "미장");
                   setSelectedMarket(g.markets[0]);
                 }}
-                className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${
+                className={`px-3 py-1 min-h-[44px] rounded-md text-xs font-semibold transition-colors ${
                   activeGroup === g.group
                     ? "bg-gray-600 text-white"
                     : "text-gray-400 hover:text-gray-200"
@@ -219,7 +243,7 @@ export default function PredictionHistoryChart() {
         <ResponsiveContainer width="100%" height={240}>
           <ComposedChart data={chartData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-            <XAxis dataKey="day" tick={{ fill: "#6b7280", fontSize: 11 }} />
+            <XAxis dataKey="day" tick={{ fill: "#6b7280", fontSize: 11 }} minTickGap={16} />
             <YAxis
               yAxisId="left"
               tick={{ fill: "#6b7280", fontSize: 11 }}
@@ -233,7 +257,6 @@ export default function PredictionHistoryChart() {
               tickFormatter={(v) => `${v}%`}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend wrapperStyle={{ fontSize: "11px", color: "#9ca3af" }} />
             <ReferenceLine yAxisId="left" y={0} stroke="#4b5563" />
             <Bar
               yAxisId="left"

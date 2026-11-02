@@ -62,7 +62,7 @@ export default function PrivacyPage() {
       <section className="space-y-3">
         <h2 className="text-base font-semibold text-gray-200">5. 수신거부 방법</h2>
         <p className="text-sm leading-relaxed text-gray-400">
-          뉴스레터 하단의 '수신거부' 링크를 클릭하거나,
+          뉴스레터 하단의 &lsquo;수신거부&rsquo; 링크를 클릭하거나,
           아래 이메일로 수신거부 요청을 보내주시면 즉시 처리합니다.
         </p>
         <p className="text-sm text-blue-400">xvlelx84@gmail.com</p>

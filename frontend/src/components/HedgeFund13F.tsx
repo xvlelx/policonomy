@@ -21,7 +21,7 @@ function FundCard({ fund }: { fund: HedgeFund }) {
       >
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-semibold text-gray-100 truncate">{fund.name}</span>
+            <span className="text-sm font-semibold text-gray-100 truncate min-w-0">{fund.name}</span>
             <span className="text-xs text-blue-400 bg-blue-400/10 px-1.5 py-0.5 rounded flex-shrink-0">
               {fund.quarter}
             </span>
@@ -43,7 +43,7 @@ function FundCard({ fund }: { fund: HedgeFund }) {
           <div className="space-y-1.5">
             {fund.top_holdings.map((h, i) => (
               <div key={h.cusip || i} className="flex items-center gap-2">
-                <span className="text-xs text-gray-600 w-4 flex-shrink-0 text-right">{i + 1}</span>
+                <span className="text-xs text-gray-600 w-4 flex-shrink-0 text-right tabular-nums">{i + 1}</span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-xs text-gray-300 truncate">{h.name}</span>
@@ -76,10 +76,7 @@ export default function HedgeFund13F() {
   const [error, setError] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  const load = (force = false) => {
-    if (force) setRefreshing(true);
-    else setLoading(true);
-    setError(false);
+  const fetchData = (force: boolean) => {
     api
       .hedgeFunds(force)
       .then(setData)
@@ -90,7 +87,14 @@ export default function HedgeFund13F() {
       });
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { fetchData(false); }, []);
+
+  const load = (force = false) => {
+    if (force) setRefreshing(true);
+    else setLoading(true);
+    setError(false);
+    fetchData(force);
+  };
 
   return (
     <div className="space-y-3">
@@ -100,7 +104,7 @@ export default function HedgeFund13F() {
           <button
             onClick={() => load(true)}
             disabled={refreshing}
-            className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors disabled:opacity-40"
+            className="-my-3 -mr-3 min-h-[44px] px-3 flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors disabled:opacity-40"
           >
             <RefreshCw size={11} className={refreshing ? "animate-spin" : ""} />
             새로고침
@@ -117,7 +121,7 @@ export default function HedgeFund13F() {
           <p className="text-xs text-red-400">데이터를 불러오지 못했습니다.</p>
           <button
             onClick={() => load()}
-            className="mt-2 text-xs text-blue-400 hover:text-blue-300"
+            className="mt-2 min-h-[44px] px-3 text-xs text-blue-400 hover:text-blue-300"
           >
             다시 시도
           </button>

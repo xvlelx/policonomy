@@ -60,8 +60,8 @@ export default function SentimentChart({ data }: Props) {
                 style={{ width: `${d.pct}%`, backgroundColor: d.color }}
               />
             </div>
-            <div className="text-xs text-gray-300 w-7 text-right flex-shrink-0">{d.value}건</div>
-            <div className="text-xs text-gray-600 w-8 text-right flex-shrink-0">{d.pct}%</div>
+            <div className="text-xs text-gray-300 min-w-[2.25rem] text-right tabular-nums flex-shrink-0 whitespace-nowrap">{d.value}건</div>
+            <div className="text-xs text-gray-600 min-w-[2.5rem] text-right tabular-nums flex-shrink-0">{d.pct}%</div>
           </div>
         ))}
       </div>

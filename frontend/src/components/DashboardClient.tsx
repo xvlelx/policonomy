@@ -44,14 +44,20 @@ export default function DashboardClient() {
 
   const prevStatusRef = useRef<string>("unknown");
   const touchStartXRef = useRef<number>(0);
+  const touchStartYRef = useRef<number>(0);
 
   const fetchAll = useCallback(async () => {
     try {
-      const [s, preds, stats] = await Promise.all([
+      const [sRes, predsRes, statsRes] = await Promise.allSettled([
         api.summary(),
         api.predictions(),
         api.articleStats(),
       ]);
+      // summary 실패만 전체 에러 처리 (연결 불가)
+      if (sRes.status === "rejected") throw sRes.reason;
+      const s = sRes.value;
+      const preds = predsRes.status === "fulfilled" ? predsRes.value : null;
+      const stats = statsRes.status === "fulfilled" ? statsRes.value : null;
       setSummary(s);
       setPredictions(preds?.kronos_predictions ? preds : null);
       setArticleStats(stats?.total_articles != null ? stats : null);
@@ -112,28 +118,29 @@ export default function DashboardClient() {
           </h1>
           <p className="text-gray-400 text-xs mt-0.5">AI 정치·경제 분석 & 예측</p>
         </div>
-        <nav className="flex items-center gap-2">
+        <nav className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           <Link
             href="/reports"
-            className="px-3 py-2 min-h-[44px] flex items-center rounded-lg text-xs font-medium text-blue-300 bg-blue-900/40 border border-blue-800 hover:bg-blue-800/60 transition-colors"
+            className="px-2.5 sm:px-3 py-2 min-h-[44px] flex items-center rounded-lg text-xs font-medium text-blue-300 bg-blue-900/40 border border-blue-800 hover:bg-blue-800/60 transition-colors"
           >
             브리핑
           </Link>
           <Link
             href="/insights"
-            className="px-3 py-2 min-h-[44px] flex items-center rounded-lg text-xs font-medium text-gray-400 bg-gray-800/60 border border-gray-700 hover:bg-gray-700 transition-colors"
+            className="px-2.5 sm:px-3 py-2 min-h-[44px] flex items-center rounded-lg text-xs font-medium text-gray-400 bg-gray-800/60 border border-gray-700 hover:bg-gray-700 transition-colors"
           >
-            트렌드 분석
+            <span className="sm:hidden">트렌드</span>
+            <span className="hidden sm:inline">트렌드 분석</span>
           </Link>
           <Link
             href="/newsletter"
-            className="px-3 py-2 min-h-[44px] flex items-center rounded-lg text-xs font-medium text-gray-400 bg-gray-800/60 border border-gray-700 hover:bg-gray-700 transition-colors"
+            className="px-2.5 sm:px-3 py-2 min-h-[44px] flex items-center rounded-lg text-xs font-medium text-gray-400 bg-gray-800/60 border border-gray-700 hover:bg-gray-700 transition-colors"
           >
             뉴스레터
           </Link>
           <button
             onClick={() => setSettingsOpen(true)}
-            className="px-3 py-2 min-h-[44px] flex items-center rounded-lg text-xs font-medium text-gray-500 hover:text-gray-300 transition-colors"
+            className="px-2.5 sm:px-3 py-2 min-h-[44px] flex items-center rounded-lg text-xs font-medium text-gray-500 hover:text-gray-300 transition-colors"
           >
             설정
           </button>
@@ -215,7 +222,7 @@ export default function DashboardClient() {
           <div className="flex items-center justify-between mb-4">
             <SectionLabel>데이터 개요</SectionLabel>
             <button
-              className="md:hidden text-gray-500 hover:text-gray-300 transition-colors"
+              className="md:hidden -my-3 -mr-3 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-500 hover:text-gray-300 transition-colors"
               onClick={() => setStatsVisible((v) => !v)}
               aria-label={statsVisible ? "접기" : "펼치기"}
             >
@@ -248,11 +255,11 @@ export default function DashboardClient() {
                       <div
                         className="bg-blue-500 h-1.5 rounded-full"
                         style={{
-                          width: `${Math.min(100, (count / articleStats.total_articles) * 100)}%`,
+                          width: `${articleStats.total_articles > 0 ? Math.min(100, (count / articleStats.total_articles) * 100) : 0}%`,
                         }}
                       />
                     </div>
-                    <div className="text-xs text-gray-300 w-6 text-right">{count}</div>
+                    <div className="text-xs text-gray-300 min-w-[1.5rem] text-right tabular-nums flex-shrink-0">{count}</div>
                   </div>
                 ))}
               </div>
@@ -266,13 +273,18 @@ export default function DashboardClient() {
         <SectionLabel>시장 분석</SectionLabel>
         <DashboardTabs active={activeTab} onChange={handleTabChange} />
         <div
-          onTouchStart={(e) => { touchStartXRef.current = e.touches[0].clientX; }}
+          onTouchStart={(e) => {
+            touchStartXRef.current = e.touches[0].clientX;
+            touchStartYRef.current = e.touches[0].clientY;
+          }}
           onTouchEnd={(e) => {
             const dx = e.changedTouches[0].clientX - touchStartXRef.current;
-            if (Math.abs(dx) < 100) return;
+            const dy = e.changedTouches[0].clientY - touchStartYRef.current;
+            // 세로 스크롤이 우세하면 탭 전환하지 않음
+            if (Math.abs(dx) < 100 || Math.abs(dy) >= Math.abs(dx)) return;
             const idx = TAB_ORDER.indexOf(activeTab);
-            if (dx < 0 && idx < TAB_ORDER.length - 1) setActiveTab(TAB_ORDER[idx + 1]);
-            if (dx > 0 && idx > 0) setActiveTab(TAB_ORDER[idx - 1]);
+            if (dx < 0 && idx < TAB_ORDER.length - 1) handleTabChange(TAB_ORDER[idx + 1]);
+            if (dx > 0 && idx > 0) handleTabChange(TAB_ORDER[idx - 1]);
           }}
         >
           <div

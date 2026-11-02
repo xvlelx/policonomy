@@ -213,8 +213,8 @@ export type Summary = {
   overall_sentiment: string | null
   weekly_summary: string | null
   accuracy: Accuracy
-  kospi: { last_close: number; pred_close: number; change_pct: number; direction: string }
-  usd_krw: { last_close: number; pred_close: number; change_pct: number; direction: string }
+  kospi: { last_close: number; pred_close: number; change_pct: number; direction: string } | null
+  usd_krw: { last_close: number; pred_close: number; change_pct: number; direction: string } | null
 }
 
 export type TopArticle = {
@@ -232,11 +232,6 @@ export type TopArticle = {
   economic_impact: string
   affected_sectors: string[]
   keywords: string[]
-}
-
-export type DailyTopResponse = {
-  day: string | null
-  articles: TopArticle[]
 }
 
 export type WeeklyTopResponse = {
@@ -319,14 +314,6 @@ export type PredictionRecord = {
   cumulative_accuracy: number | null
 }
 
-export type Subscriber = {
-  id: number
-  email: string
-  name: string
-  active: number
-  subscribed_at: string
-}
-
 export type FearGreedHistory = {
   date: string
   score: number
@@ -373,13 +360,22 @@ export type HedgeFundsResponse = {
   funds: HedgeFund[]
 }
 
+export class ApiError extends Error {
+  status: number
+  constructor(status: number) {
+    super(`API error: ${status}`)
+    this.name = 'ApiError'
+    this.status = status
+  }
+}
+
 async function get<T>(path: string, timeoutMs = 15000): Promise<T> {
   const res = await fetch(`${BASE}${path}`, {
     cache: 'no-store',
     headers: { 'ngrok-skip-browser-warning': 'true' },
     signal: AbortSignal.timeout(timeoutMs),
   })
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
+  if (!res.ok) throw new ApiError(res.status)
   return res.json()
 }
 
@@ -390,7 +386,7 @@ async function put<T>(path: string, body: unknown): Promise<T> {
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(10000),
   })
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
+  if (!res.ok) throw new ApiError(res.status)
   return res.json()
 }
 
@@ -401,7 +397,7 @@ async function post<T>(path: string, body: unknown, headers?: Record<string, str
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(10000),
   })
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
+  if (!res.ok) throw new ApiError(res.status)
   return res.json()
 }
 
@@ -426,36 +422,32 @@ export const api = {
   },
   articleStats: () => get<ArticleStats>('/api/articles/stats'),
   predictions: () => get<Predictions>('/api/predictions'),
-  pipelineStatus: () => get<PipelineStatus>('/api/pipeline/status'),
   settings: () => get<UserSettings>('/api/settings'),
   updateSettings: (data: UserSettings) => put<UserSettings>('/api/settings', data),
-  dailyTop: (day?: string) =>
-    get<DailyTopResponse>(`/api/articles/daily-top${day ? `?day=${day}` : ''}`),
-  dailyTopDays: () => get<{ days: string[] }>('/api/articles/daily-top/days'),
   weeklyTop: (week?: string) =>
-    get<WeeklyTopResponse>(`/api/articles/weekly-top${week ? `?week=${week}` : ''}`),
+    get<WeeklyTopResponse>(`/api/articles/weekly-top${week ? `?week=${encodeURIComponent(week)}` : ''}`),
   weeklyTopWeeks: () => get<{ weeks: string[] }>('/api/articles/weekly-top/weeks'),
   weeklyInsights: () => get<{ weeks: WeeklyInsight[] }>('/api/insights/weekly'),
   subscribe: (email: string, name?: string) =>
     post<{ success: boolean; email: string }>('/api/subscribe', { email, name: name ?? '' }),
-  unsubscribe: (email: string) =>
-    post<{ success: boolean }>('/api/unsubscribe', { email }),
-  subscribers: () => get<{ subscribers: Subscriber[] }>('/api/subscribers'),
+  confirm: (token: string) =>
+    get<{ success: boolean }>(`/api/confirm?token=${encodeURIComponent(token)}`),
+  unsubscribe: (email: string, token: string) =>
+    post<{ success: boolean }>('/api/unsubscribe', { email, token }),
   predictionsHistory: () => get<{ records: PredictionRecord[] }>('/api/predictions/history'),
   marketCorrelation: (days?: number) =>
     get<{ data: MarketCorrelationPoint[] }>(`/api/insights/market-correlation${days ? `?days=${days}` : ''}`),
   sectorTrends: () => get<SectorTrendsResponse>('/api/insights/sector-trends'),
   relatedArticles: (market: string) =>
-    get<{ articles: Article[]; market: string }>(`/api/articles/related?market=${market}`),
+    get<{ articles: Article[]; market: string }>(`/api/articles/related?market=${encodeURIComponent(market)}`),
   runPipeline: (adminKey: string) =>
     post<{ started: boolean; pid: number }>('/api/pipeline/run', {}, { 'X-Admin-Key': adminKey }),
   fearGreed: (refresh?: boolean) =>
     get<FearGreed>(`/api/fear-greed${refresh ? '?refresh=true' : ''}`),
   reportsList: () => get<{ dates: string[]; sessions: ReportSession[] }>('/api/reports', 30000),
-  latestReport: (generate?: boolean) =>
-    get<Report>(`/api/reports/latest${generate ? '?generate=true' : ''}`, 30000),
+  latestReport: () => get<Report>('/api/reports/latest', 30000),
   reportByDate: (date: string, runType: 'morning' | 'afternoon' = 'morning') =>
-    get<Report>(`/api/reports/${date}?run_type=${runType}`, 30000),
+    get<Report>(`/api/reports/${encodeURIComponent(date)}?run_type=${encodeURIComponent(runType)}`, 30000),
   hedgeFunds: (force?: boolean) =>
     get<HedgeFundsResponse>(`/api/hedge-funds${force ? '?force=true' : ''}`),
 }

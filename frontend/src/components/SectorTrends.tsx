@@ -29,6 +29,7 @@ export default function SectorTrends() {
   const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
   const [recentDays, setRecentDays] = useState<number | undefined>();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     api
@@ -38,6 +39,7 @@ export default function SectorTrends() {
         setHasData(res.has_data);
         setRecentDays(res.recent_days);
       })
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, []);
 
@@ -45,6 +47,14 @@ export default function SectorTrends() {
     return (
       <div className="bg-gray-900 rounded-xl border border-gray-800 p-4 text-center text-gray-500 text-xs">
         섹터 트렌드 로딩 중...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-gray-900 rounded-xl border border-gray-800 p-4 text-center text-red-400 text-xs">
+        섹터 트렌드를 불러오지 못했습니다.
       </div>
     );
   }

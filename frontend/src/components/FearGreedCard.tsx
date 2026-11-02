@@ -28,7 +28,7 @@ const RATING_BG: Record<string, string> = {
   "extreme greed": "bg-emerald-500/25 border-emerald-500/40",
 };
 
-function ScoreGauge({ score, color }: { score: number; color: string }) {
+function ScoreGauge({ score }: { score: number }) {
   // 게이지 바 — 0~100 선형, 5구간 색상
   const segments = [
     { label: "극공포", color: "#ef4444", from: 0, to: 25 },
@@ -57,13 +57,17 @@ function ScoreGauge({ score, color }: { score: number; color: string }) {
           style={{ left: `${Math.min(98, Math.max(1, score))}%` }}
         />
       </div>
-      {/* 라벨 */}
-      <div className="flex justify-between text-[10px] text-gray-500">
-        <span>극공포</span>
-        <span>공포</span>
-        <span>중립</span>
-        <span>탐욕</span>
-        <span>극탐욕</span>
+      {/* 라벨: 각 구간의 중앙에 배치 */}
+      <div className="relative h-4 text-[10px] text-gray-500">
+        {segments.map((s) => (
+          <span
+            key={s.label}
+            className="absolute top-0 -translate-x-1/2 whitespace-nowrap"
+            style={{ left: `${(s.from + s.to) / 2}%` }}
+          >
+            {s.label}
+          </span>
+        ))}
       </div>
     </div>
   );
@@ -92,16 +96,19 @@ export default function FearGreedCard() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const load = (refresh = false) => {
-    if (refresh) setRefreshing(true);
-    else setLoading(true);
+  const fetchData = (refresh: boolean) => {
     api.fearGreed(refresh)
       .then(setData)
       .catch(() => {})
       .finally(() => { setLoading(false); setRefreshing(false); });
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { fetchData(false); }, []);
+
+  const refresh = () => {
+    setRefreshing(true);
+    fetchData(true);
+  };
 
   if (loading) {
     return (
@@ -122,9 +129,9 @@ export default function FearGreedCard() {
         </div>
         <p className="text-xs text-gray-500">{data?.error ?? "데이터 없음 — 파이프라인 실행 후 갱신됩니다"}</p>
         <button
-          onClick={() => load(true)}
+          onClick={refresh}
           disabled={refreshing}
-          className="mt-2 flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 disabled:opacity-50"
+          className="mt-2 min-h-[44px] flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 disabled:opacity-50"
         >
           <RefreshCw size={11} className={refreshing ? "animate-spin" : ""} />
           지금 가져오기
@@ -144,9 +151,9 @@ export default function FearGreedCard() {
         <Activity size={14} className="text-yellow-400" />
         <span className="text-sm font-semibold text-gray-300">CNN Fear & Greed</span>
         <button
-          onClick={() => load(true)}
+          onClick={refresh}
           disabled={refreshing}
-          className="ml-auto text-gray-600 hover:text-gray-400 disabled:opacity-50"
+          className="ml-auto -my-3 -mr-3 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-600 hover:text-gray-400 disabled:opacity-50"
           title="새로고침"
         >
           <RefreshCw size={12} className={refreshing ? "animate-spin" : ""} />
@@ -162,7 +169,7 @@ export default function FearGreedCard() {
       </div>
 
       {/* 게이지 */}
-      <ScoreGauge score={data.score} color={data.color} />
+      <ScoreGauge score={data.score} />
 
       {/* 기간별 비교 */}
       <div className="space-y-1.5 pt-1 border-t border-gray-800">

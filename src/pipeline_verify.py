@@ -4,7 +4,7 @@
 - 미국장 마감: 05:00 KST (당일)
 → 07:00 실행 시 양쪽 종가 모두 확정 상태
 
-crontab: 0 7 * * * conda run -n Policonomy python /path/to/src/pipeline_verify.py
+crontab: 0 7 * * * conda run -n Policonomy python ~/policonomy/src/pipeline_verify.py
 """
 import sys
 from pathlib import Path

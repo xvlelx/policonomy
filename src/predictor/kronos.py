@@ -38,12 +38,17 @@ class MarketPredictor:
 
         raise RuntimeError('Kronos 모델 로드 실패 (MPS/CPU 모두 시도)')
 
-    def _get_ohlcv(self, ticker: str, period: str = '6mo', retries: int = 3) -> pd.DataFrame:
+    def _get_ohlcv(self, ticker: str, period: str = '2y', retries: int = 3) -> pd.DataFrame:
         from datetime import datetime, timedelta
         import yfinance as yf
 
-        # period → start/end 변환
-        months = int(period.replace('mo', '')) if 'mo' in period else 6
+        # period → start/end 변환 (OpenBB fallback용)
+        if period.endswith('mo'):
+            months = int(period[:-2])
+        elif period.endswith('y'):
+            months = int(period[:-1]) * 12
+        else:
+            months = 24
         end_dt = datetime.now()
         start_dt = end_dt - timedelta(days=months * 31)
 
@@ -71,7 +76,6 @@ class MarketPredictor:
         logger.info(f'{ticker}: OpenBB fallback 시도')
         df = fetch_ohlcv(ticker, start_dt, end_dt)
         if not df.empty and len(df) >= 30:
-            df = df.rename(columns={'close': 'close'})
             for col in ['open', 'high', 'low', 'volume']:
                 if col not in df.columns:
                     df[col] = df['close']
@@ -84,28 +88,31 @@ class MarketPredictor:
         lookback = config.predictor.lookback
 
         df = self._get_ohlcv(ticker)
-        lookback = min(lookback, len(df) - pred_days)
+        # 가장 최근 lookback 거래일을 입력으로, 마지막 거래일 이후 pred_days 영업일을 예측
+        lookback = min(lookback, len(df))
         if lookback < 10:
             raise ValueError(f'{name}: lookback={lookback} 너무 짧음 (데이터 {len(df)}행)')
 
+        hist = df.iloc[-lookback:]
+        hist_index = pd.to_datetime(hist.index)
+        if hist_index.tz is not None:
+            hist_index = hist_index.tz_localize(None)
+        future_index = pd.bdate_range(
+            start=hist_index[-1] + pd.Timedelta(days=1), periods=pred_days
+        )
+
         for attempt in range(2):
             try:
-                x_df = df.iloc[:lookback][['open', 'high', 'low', 'close', 'volume']].reset_index(drop=True)
-                x_ts = pd.Series(
-                    pd.to_datetime(df.index[:lookback]).tz_localize(None)
-                    if df.index.tz is not None else df.index[:lookback]
-                )
-                y_ts = pd.Series(
-                    pd.to_datetime(df.index[lookback:lookback+pred_days]).tz_localize(None)
-                    if df.index.tz is not None else df.index[lookback:lookback+pred_days]
-                )
+                x_df = hist[['open', 'high', 'low', 'close', 'volume']].reset_index(drop=True)
+                x_ts = pd.Series(hist_index)
+                y_ts = pd.Series(future_index)
 
                 pred_df = predictor.predict(
                     df=x_df, x_timestamp=x_ts, y_timestamp=y_ts,
                     pred_len=pred_days, T=1.0, top_p=0.9, sample_count=3
                 )
 
-                last_close = float(df['close'].iloc[lookback - 1])
+                last_close = float(hist['close'].iloc[-1])
                 pred_close = float(pred_df['close'].iloc[-1])
                 if last_close == 0:
                     raise ValueError(f'{name}: last_close=0, 등락률 계산 불가')

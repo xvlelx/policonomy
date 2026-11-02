@@ -27,28 +27,3 @@ class Article:
     @classmethod
     def from_dict(cls, data: dict) -> 'Article':
         return cls(**{k: v for k, v in data.items() if k in cls.__dataclass_fields__})
-
-
-@dataclass
-class MarketPrediction:
-    name: str
-    last_close: float
-    pred_close: float
-    change_pct: float
-    direction: str
-    pred_range: dict
-
-    def to_dict(self) -> dict:
-        return self.__dict__
-
-
-@dataclass
-class FusedPrediction:
-    kospi: dict
-    usd_krw: dict
-    key_sector: dict
-    overall_sentiment: str
-    weekly_summary: str
-
-    def to_dict(self) -> dict:
-        return self.__dict__

@@ -136,18 +136,19 @@ def load_historical_news(conn: sqlite3.Connection) -> dict[str, list[dict]]:
     """날짜별로 그룹핑된 historical_news 반환"""
     try:
         rows = conn.execute(
-            'SELECT date, category, title, summary FROM historical_news ORDER BY date'
+            'SELECT date, category, title, summary, link FROM historical_news ORDER BY date'
         ).fetchall()
     except Exception as e:
         print(f'historical_news 로딩 실패: {e}')
         return {}
 
     by_date: dict[str, list[dict]] = defaultdict(list)
-    for date, category, title, summary in rows:
+    for date, category, title, summary, link in rows:
         by_date[date].append({
             'category': category,
             'title': title or '',
             'summary': summary or '',
+            'link': link or '',
         })
     return dict(by_date)
 

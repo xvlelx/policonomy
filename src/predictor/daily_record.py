@@ -338,6 +338,8 @@ class DailyRecorder:
             'nvidia': row['nvidia_pred_dir'],
         }
         for name, actual_change in actuals.items():
+            if actual_change is None:
+                continue
             actual_dir = '상승' if actual_change > 0 else '하락'
             pred_dir = pred_dirs.get(name)
             if pred_dir:

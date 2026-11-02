@@ -14,10 +14,13 @@ __pycache__/
 data/*
 !data/.gitkeep
 !data/*.json
-!data/*.db
 !data/*.html
 !data/models/
 !data/reports/
+# 구독자 PII 포함 — 절대 커밋 금지 (Railway 볼륨에서 관리)
+data/*.db
+data/*.db-*
+data/settings.json
 logs/
 *.db
 

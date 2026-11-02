@@ -56,7 +56,8 @@ class NewsletterPublisher:
             'last_verification': predictions.get('last_verification'),
             'accuracy': predictions.get('accuracy', {}),
             'site_url': os.getenv('SITE_URL', 'http://localhost:3000'),
-            'subscriber_email': '',  # send_newsletter()에서 per-subscriber 렌더링 시 치환
+            # send_newsletter()에서 구독자별 서명 링크로 치환
+            'unsubscribe_url': '__UNSUBSCRIBE_URL__',
         }
 
     def publish(self, analyzed: list[dict], predictions: dict) -> str:

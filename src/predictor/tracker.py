@@ -151,10 +151,3 @@ class PredictionTracker:
             'total_weeks': len(verified),
             'total_predictions': total,
         }
-
-    def get_last_verification(self) -> dict | None:
-        '''뉴스레터용 지난 주 결과 요약'''
-        verified = [h for h in self.history if h.get('verified')]
-        if not verified:
-            return None
-        return verified[-1]

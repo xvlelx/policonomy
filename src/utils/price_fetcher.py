@@ -10,7 +10,7 @@ from logger import get_logger
 logger = get_logger('utils.price_fetcher')
 
 # ticker → OpenBB endpoint 분류
-_INDEX_TICKERS = {'^KS11', '^IXIC', '^GSPC', '^DJI', '^GSPC'}
+_INDEX_TICKERS = {'^KS11', '^IXIC', '^GSPC', '^DJI'}
 _CURRENCY_TICKERS = {'KRW=X', 'JPY=X', 'EUR=X'}
 
 

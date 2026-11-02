@@ -23,10 +23,7 @@ class PathConfig:
 class ModelConfig:
     local_model: str = 'gemma4:e4b'
     ollama_url: str = 'http://localhost:11434/v1'
-    anthropic_key: str = field(default_factory=lambda: os.getenv('ANTHROPIC_API_KEY', ''))
     groq_key: str = field(default_factory=lambda: os.getenv('GROQ_API_KEY', ''))
-    groq_model: str = 'openai/gpt-oss-120b'  # 레거시 (현재는 llm.py에서 직접 지정)
-    use_local: bool = False  # True면 Ollama, False면 Groq
     use_groq: bool = True    # True면 Groq API 사용
 
     def __post_init__(self):

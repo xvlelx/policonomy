@@ -25,44 +25,43 @@ export default function UrgentNewsBanner() {
 
   return (
     <div className="rounded-xl border border-red-800 bg-red-950/40 overflow-hidden">
-      {/* 배너 헤더 */}
-      <div
-        role="button"
-        tabIndex={0}
-        aria-expanded={!collapsed}
-        className="w-full flex items-center justify-between px-4 py-2.5 bg-red-900/30 border-b border-red-800 hover:bg-red-900/50 transition-colors cursor-pointer"
-        onClick={() => setCollapsed(!collapsed)}
-        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setCollapsed(!collapsed); }}
-      >
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
-          </span>
-          <span className="text-xs font-semibold text-red-300 uppercase tracking-wide">
-            긴급 주목 이슈 {articles.length}건
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-red-500 text-xs">
+      {/* 배너 헤더: 토글 버튼과 닫기 버튼을 형제로 분리 */}
+      <div className="flex items-center bg-red-900/30 border-b border-red-800 hover:bg-red-900/50 transition-colors">
+        <button
+          type="button"
+          aria-expanded={!collapsed}
+          onClick={() => setCollapsed(!collapsed)}
+          className="flex-1 min-w-0 flex items-center justify-between gap-2 px-4 py-2.5 text-left cursor-pointer"
+        >
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="relative flex h-2 w-2 flex-shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+            </span>
+            <span className="text-xs font-semibold text-red-300 uppercase tracking-wide truncate">
+              긴급 주목 이슈 {articles.length}건
+            </span>
+          </div>
+          <span className="text-red-500 text-xs flex-shrink-0">
             {collapsed ? "▼" : "▲"}
           </span>
-          <button
-            onClick={(e) => { e.stopPropagation(); setDismissed(true); }}
-            className="text-red-600 hover:text-red-400 text-lg leading-none"
-            aria-label="닫기"
-          >
-            ×
-          </button>
-        </div>
+        </button>
+        <button
+          type="button"
+          onClick={() => setDismissed(true)}
+          className="min-w-[44px] min-h-[44px] flex items-center justify-center text-red-600 hover:text-red-400 text-lg leading-none flex-shrink-0"
+          aria-label="닫기"
+        >
+          ×
+        </button>
       </div>
 
       {/* 기사 목록 */}
       {!collapsed && (
         <div className="divide-y divide-red-900/50">
-          {articles.map((article, i) => (
+          {articles.map((article) => (
             <a
-              key={i}
+              key={article.link || article.title}
               href={article.link || "#"}
               target="_blank"
               rel="noopener noreferrer"

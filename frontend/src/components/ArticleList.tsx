@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Article, ArticlesResponse, api } from "@/lib/api";
-import { ChevronRight, Bell, Search, FileSearch } from "lucide-react";
+import { ChevronRight, Bell, FileSearch } from "lucide-react";
 import ArticleDetailModal from "./ArticleDetailModal";
 
 type Props = {
@@ -121,13 +121,13 @@ function NewsletterCta() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="이메일 주소 입력"
-          className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-600 min-w-0"
+          className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-base sm:text-xs text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-600 min-w-0"
           required
         />
         <button
           type="submit"
           disabled={state === "loading"}
-          className="sm:flex-shrink-0 text-xs px-3 py-1.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white rounded-lg transition-colors font-medium"
+          className="sm:flex-shrink-0 min-h-[44px] text-xs px-3 py-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white rounded-lg transition-colors font-medium"
         >
           {state === "loading" ? "..." : "구독"}
         </button>
@@ -189,7 +189,7 @@ export default function ArticleList({ articles, page, onPageChange, searchQuery 
             <button
               onClick={() => onPageChange(page - 1)}
               disabled={page <= 1}
-              className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-xs text-gray-400 hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="px-4 min-h-[44px] bg-gray-800 border border-gray-700 rounded-lg text-xs text-gray-400 hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               ← 이전
             </button>
@@ -199,7 +199,7 @@ export default function ArticleList({ articles, page, onPageChange, searchQuery 
             <button
               onClick={() => onPageChange(page + 1)}
               disabled={page >= articles.pages}
-              className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-xs text-gray-400 hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="px-4 min-h-[44px] bg-gray-800 border border-gray-700 rounded-lg text-xs text-gray-400 hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               다음 →
             </button>

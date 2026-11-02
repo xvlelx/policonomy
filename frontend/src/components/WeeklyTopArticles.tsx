@@ -59,9 +59,8 @@ function ImportanceDots({ value }: { value: number }) {
 
 export default function WeeklyTopArticles() {
   const [weeks, setWeeks] = useState<string[]>([]);
-  const [selectedWeek, setSelectedWeek] = useState<string>("");
-  const [articles, setArticles] = useState<TopArticle[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [weeksLoading, setWeeksLoading] = useState(true);
+  const [articleState, setArticleState] = useState<{ week: string; items: TopArticle[] } | null>(null);
   const [expanded, setExpanded] = useState<number | null>(null);
 
   // 필터 상태
@@ -70,17 +69,22 @@ export default function WeeklyTopArticles() {
   const [selectedWom, setSelectedWom] = useState<string>(""); // week of month
 
   useEffect(() => {
-    api.weeklyTopWeeks().then((res) => {
-      setWeeks(res.weeks);
-      if (res.weeks.length > 0) {
-        const latest = res.weeks[0];
-        setSelectedWeek(latest);
-        const d = new Date(latest + "T00:00:00");
-        setSelectedYear(String(d.getFullYear()));
-        setSelectedMonth(String(d.getMonth() + 1));
-        setSelectedWom(String(weekOfMonth(latest)));
-      }
-    });
+    api
+      .weeklyTopWeeks()
+      .then((res) => {
+        setWeeks(res.weeks);
+        if (res.weeks.length > 0) {
+          const latest = res.weeks[0];
+          const d = new Date(latest + "T00:00:00");
+          setSelectedYear(String(d.getFullYear()));
+          setSelectedMonth(String(d.getMonth() + 1));
+          setSelectedWom(String(weekOfMonth(latest)));
+        }
+      })
+      .catch(() => {
+        setWeeks([]);
+      })
+      .finally(() => setWeeksLoading(false));
   }, []);
 
   // 년도 목록
@@ -119,18 +123,19 @@ export default function WeeklyTopArticles() {
     return ws.sort((a, b) => Number(b) - Number(a));
   }, [weeks, selectedYear, selectedMonth]);
 
-  // 년/월/주차 → 실제 week 날짜 매핑
-  useEffect(() => {
-    if (!selectedYear || !selectedMonth || !selectedWom) return;
-    const matched = weeks.find((w) => {
-      const d = new Date(w + "T00:00:00");
-      return (
-        String(d.getFullYear()) === selectedYear &&
-        String(d.getMonth() + 1) === selectedMonth &&
-        String(weekOfMonth(w)) === selectedWom
-      );
-    });
-    if (matched) setSelectedWeek(matched);
+  // 년/월/주차 → 실제 week 날짜 (파생값)
+  const selectedWeek = useMemo(() => {
+    if (!selectedYear || !selectedMonth || !selectedWom) return "";
+    return (
+      weeks.find((w) => {
+        const d = new Date(w + "T00:00:00");
+        return (
+          String(d.getFullYear()) === selectedYear &&
+          String(d.getMonth() + 1) === selectedMonth &&
+          String(weekOfMonth(w)) === selectedWom
+        );
+      }) ?? ""
+    );
   }, [selectedYear, selectedMonth, selectedWom, weeks]);
 
   // 년도 변경 시 첫 번째 월/주 자동 선택
@@ -177,13 +182,17 @@ export default function WeeklyTopArticles() {
 
   useEffect(() => {
     if (!selectedWeek) return;
-    setLoading(true);
-    setExpanded(null);
+    let cancelled = false;
     api
       .weeklyTop(selectedWeek)
-      .then((res) => setArticles(res.articles))
-      .finally(() => setLoading(false));
+      .then((res) => { if (!cancelled) setArticleState({ week: selectedWeek, items: res.articles }); })
+      .catch(() => { if (!cancelled) setArticleState({ week: selectedWeek, items: [] }); });
+    return () => { cancelled = true; };
   }, [selectedWeek]);
+
+  // 현재 선택된 주차의 결과가 도착하기 전까지는 로딩 상태
+  const articles = articleState?.week === selectedWeek ? articleState.items : [];
+  const loading = weeksLoading || (!!selectedWeek && articleState?.week !== selectedWeek);
 
   if (!weeks.length && !loading) {
     return (
@@ -211,7 +220,7 @@ export default function WeeklyTopArticles() {
               <select
                 value={selectedYear}
                 onChange={(e) => handleYearChange(e.target.value)}
-                className="bg-gray-800 border border-gray-700 rounded-lg px-2 py-1.5 text-xs text-gray-300"
+                className="bg-gray-800 border border-gray-700 rounded-lg px-2 py-1.5 min-h-[44px] text-base sm:text-xs text-gray-300"
               >
                 {years.map((y) => (
                   <option key={y} value={y}>{y}년</option>
@@ -221,7 +230,7 @@ export default function WeeklyTopArticles() {
               <select
                 value={selectedMonth}
                 onChange={(e) => handleMonthChange(e.target.value)}
-                className="bg-gray-800 border border-gray-700 rounded-lg px-2 py-1.5 text-xs text-gray-300"
+                className="bg-gray-800 border border-gray-700 rounded-lg px-2 py-1.5 min-h-[44px] text-base sm:text-xs text-gray-300"
               >
                 {months.map((m) => (
                   <option key={m} value={m}>{m}월</option>
@@ -231,7 +240,7 @@ export default function WeeklyTopArticles() {
               <select
                 value={selectedWom}
                 onChange={(e) => setSelectedWom(e.target.value)}
-                className="bg-gray-800 border border-gray-700 rounded-lg px-2 py-1.5 text-xs text-gray-300"
+                className="bg-gray-800 border border-gray-700 rounded-lg px-2 py-1.5 min-h-[44px] text-base sm:text-xs text-gray-300"
               >
                 {woms.map((w) => (
                   <option key={w} value={w}>{w}째 주</option>

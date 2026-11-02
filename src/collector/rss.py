@@ -1,4 +1,6 @@
+import calendar
 import hashlib
+import re
 import urllib.parse
 import feedparser
 from datetime import datetime, timedelta
@@ -32,13 +34,20 @@ _RELEVANT_KW = [
     'GDP', 'recession', 'tariff', 'policy', 'Fed', 'earnings',
     'revenue', 'profit', 'growth', 'interest', 'bond', 'crypto',
 ]
-_RELEVANT_KW_LOWER = [k.lower() for k in _RELEVANT_KW]
+# 한글 키워드는 부분 문자열 매칭, 영문 키워드는 단어 경계 매칭
+# (예: 'ai'가 'said', 'rate'가 'corporate'에 걸리지 않도록)
+_KO_KW = [k for k in _RELEVANT_KW if not k.isascii()]
+_EN_KW_RE = re.compile(
+    r'\b(?:' + '|'.join(re.escape(k) for k in dict.fromkeys(k.lower() for k in _RELEVANT_KW if k.isascii())) + r')(?:s|es)?\b'
+)
 
 
 def _is_relevant(title: str, summary: str) -> bool:
     """제목/요약에 경제·정치·시장 관련 키워드가 하나라도 있으면 True"""
-    text = (title + ' ' + summary).lower()
-    return any(kw in text for kw in _RELEVANT_KW_LOWER)
+    text = title + ' ' + summary
+    if any(kw in text for kw in _KO_KW):
+        return True
+    return _EN_KW_RE.search(text.lower()) is not None
 
 
 def _google_news_url(keyword: str, lang: str = 'ko') -> str:
@@ -60,7 +69,8 @@ class ArticleCollector:
             for entry in feed.entries:
                 published = entry.get('published_parsed')
                 if published:
-                    pub_date = datetime(*published[:6])
+                    # feedparser의 *_parsed는 UTC → 로컬 naive 시각으로 변환해 since와 비교
+                    pub_date = datetime.fromtimestamp(calendar.timegm(published))
                     if pub_date < since:
                         continue
 

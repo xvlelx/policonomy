@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { api, Report, ReportSession } from "@/lib/api";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { api, ApiError, Report, ReportSession } from "@/lib/api";
 import Link from "next/link";
 import { ChevronDown, ChevronUp, ExternalLink, BookOpen } from "lucide-react";
 
@@ -69,7 +69,7 @@ function Section1({ headlines }: { headlines: Report["sections"]["headlines"] })
           <div className="space-y-2">
             {byRegion[region].map((h, i) => (
               <div key={i} className="bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 flex items-start gap-3">
-                <span className={`text-xs font-bold px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5 ${REGION_BADGE[h.region]}`}>
+                <span className={`text-xs font-bold px-1.5 py-0.5 rounded flex-shrink-0 max-w-[40%] truncate mt-0.5 ${REGION_BADGE[h.region]}`} title={h.outlet}>
                   {h.outlet}
                 </span>
                 <div className="flex-1 min-w-0">
@@ -156,7 +156,7 @@ function Section3({ stances }: { stances: Report["sections"]["country_stances"] 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             {s.countries.map((c, j) => (
               <div key={j} className="bg-gray-800/60 rounded-lg p-3">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-2 min-w-0">
                   <span className="text-base">{c.flag}</span>
                   <span className="text-xs font-semibold text-gray-200">{c.country}</span>
                   <span className={`ml-auto text-xs px-1.5 py-0.5 rounded ${
@@ -206,7 +206,7 @@ function Section4({ data }: { data: Report["sections"]["market_data"] }) {
                 </span>
               </div>
               {m.xgb_direction && (
-                <div className="mt-2 pt-2 border-t border-gray-800 flex items-center justify-between">
+                <div className="mt-2 pt-2 border-t border-gray-800 flex flex-wrap items-center justify-between gap-x-2">
                   <span className="text-xs text-gray-400">XGBoost</span>
                   <span className={`text-xs font-semibold ${m.xgb_direction === "상승" ? "text-green-400" : "text-red-400"}`}>
                     {m.xgb_direction} {m.xgb_confidence}%
@@ -281,7 +281,7 @@ function Section6({ data }: { data: Report["sections"]["summary_matrix"] }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {data.matrix.map((item, i) => (
           <div key={i} className="bg-gray-900 border border-gray-800 rounded-xl p-4">
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-3 min-w-0">
               <span className="text-xs font-bold text-gray-200">{item.category}</span>
               <span className="text-xs text-gray-400">/ {item.category_en}</span>
               <span className={`ml-auto text-xs font-semibold ${STATUS_COLOR[item.status] || "text-gray-400"}`}>
@@ -316,6 +316,12 @@ function Section6({ data }: { data: Report["sections"]["summary_matrix"] }) {
 }
 
 // ── 메인 컴포넌트 ──────────────────────────────────
+// 날짜에 해당하는 세션 중 기본 run_type 선택 (morning 우선)
+function pickRunType(list: ReportSession[], date: string): 'morning' | 'afternoon' {
+  const types = list.filter(s => s.date === date).map(s => s.run_type);
+  return types.includes('morning') ? 'morning' : (types[0] ?? 'morning');
+}
+
 const RUN_LABEL: Record<string, string> = {
   morning: '06시 브리핑',
   afternoon: '18시 브리핑',
@@ -333,29 +339,36 @@ export default function ReportsClient() {
   const availableRunTypes = (date: string) =>
     sessions.filter(s => s.date === date).map(s => s.run_type);
 
-  const loadInitial = () => {
+  const loadInitial = useCallback(async () => {
     setLoading(true);
     setError(null);
-    Promise.all([api.reportsList(), api.latestReport()])
-      .then(([list, r]) => {
-        setSessions(list.sessions ?? []);
-        setDates(list.dates);
-        setReport(r);
-        setSelectedDate(r.date);
-        setSelectedRunType(r.run_type ?? 'morning');
-      })
-      .catch((e: unknown) => {
-        const msg = e instanceof Error ? e.message : String(e);
-        setError(msg.includes('404') ? '아직 생성된 브리핑이 없습니다.' : `리포트를 불러오지 못했습니다.`);
-      })
-      .finally(() => setLoading(false));
-  };
+    try {
+      const list = await api.reportsList();
+      setSessions(list.sessions ?? []);
+      setDates(list.dates);
+      let r: Report;
+      try {
+        r = await api.latestReport();
+      } catch (e) {
+        // 최신 리포트가 404이고 다른 날짜가 있으면 가장 최근 날짜로 대체
+        if (!(e instanceof ApiError && e.status === 404) || list.dates.length === 0) throw e;
+        const date = [...list.dates].sort().reverse()[0];
+        r = await api.reportByDate(date, pickRunType(list.sessions ?? [], date));
+      }
+      setReport(r);
+      setSelectedDate(r.date);
+      setSelectedRunType(r.run_type ?? 'morning');
+    } catch (e) {
+      setError(e instanceof ApiError && e.status === 404 ? '아직 생성된 브리핑이 없습니다.' : '리포트를 불러오지 못했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  useEffect(() => { loadInitial(); }, []);
+  useEffect(() => { loadInitial(); }, [loadInitial]);
 
   const handleDateChange = async (date: string) => {
-    const types = sessions.filter(s => s.date === date).map(s => s.run_type);
-    const rt = types.includes('morning') ? 'morning' : (types[0] ?? 'morning');
+    const rt = pickRunType(sessions, date);
     setSelectedDate(date);
     setSelectedRunType(rt);
     await loadReport(date, rt);
@@ -366,16 +379,22 @@ export default function ReportsClient() {
     await loadReport(selectedDate, rt);
   };
 
+  // 빠르게 전환할 때 늦게 도착한 이전 응답이 화면을 덮어쓰지 않도록 요청 번호로 가드
+  const reqIdRef = useRef(0);
+
   const loadReport = async (date: string, rt: 'morning' | 'afternoon') => {
+    const reqId = ++reqIdRef.current;
     setLoading(true);
     try {
       const r = await api.reportByDate(date, rt);
+      if (reqId !== reqIdRef.current) return;
       setReport(r);
       setError(null);
     } catch {
+      if (reqId !== reqIdRef.current) return;
       setError("해당 브리핑을 불러오지 못했습니다.");
     } finally {
-      setLoading(false);
+      if (reqId === reqIdRef.current) setLoading(false);
     }
   };
 
@@ -421,7 +440,7 @@ export default function ReportsClient() {
               value={selectedDate}
               onChange={e => handleDateChange(e.target.value)}
               aria-label="브리핑 날짜 선택"
-              className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 min-h-[44px] text-xs text-gray-300"
+              className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 min-h-[44px] text-base sm:text-xs text-gray-300"
             >
               {dates.map(d => (
                 <option key={d} value={d}>{d}</option>

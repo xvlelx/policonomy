@@ -1,30 +1,16 @@
-# 1. 기본 도구
-pip install python-dotenv jupyter ipykernel
+# 로컬 개발 환경 (conda Policonomy)
+#   pip install torch          # 로컬은 MPS 지원 torch (Docker는 CPU 전용 별도 설치)
+#   pip install -r requirements.txt
+#   pip install -r third_party/Kronos/requirements.txt
 
-# 2. 수집
-pip install feedparser yt-dlp crawl4ai
+-r requirements.prod.txt
 
-# 3. AI 분석
-pip install anthropic openai
+# 정부 보도자료 수집 (collector/gov_crawler.py) — 없으면 해당 수집만 건너뜀
+crawl4ai
 
-# 4. 시장 데이터
-pip install yfinance openbb
+# 시세 fallback (utils/price_fetcher.py) — 없으면 yfinance만 사용
+openbb
 
-# 5. Whisper
-pip install openai-whisper
-
-# 6. Kronos 의존성
-cd ~/policonomy/third_party/Kronos
-pip install -r requirements.txt
-
-# 7. 영상/이미지
-pip install moviepy pillow matplotlib
-
-# 8. TTS
-pip install elevenlabs
-
-# 9. 백엔드
-pip install fastapi uvicorn sqlalchemy psycopg2-binary celery redis
-
-# 10. 기타
-pip install boto3 jinja2 stripe packagingslowapi
+# 노트북
+jupyter
+ipykernel

@@ -3,7 +3,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential git curl \
+    build-essential git curl tzdata \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.prod.txt .
@@ -34,6 +34,8 @@ done\n\
 exec "$@"\n' > /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 
 ENV PYTHONUNBUFFERED=1
+# 날짜 키(day), 오전/오후 판정, 검증 시각이 모두 KST 기준
+ENV TZ=Asia/Seoul
 # Kronos has no setup.py — add its directory to PYTHONPATH directly
 ENV PYTHONPATH=/app/src:/app/third_party/Kronos
 

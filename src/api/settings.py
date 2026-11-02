@@ -1,10 +1,12 @@
 import json
 import logging
+import os
+import secrets
 from pathlib import Path
 from typing import Optional
 from pydantic import BaseModel, Field
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Header, HTTPException
 
 logger = logging.getLogger(__name__)
 
@@ -47,12 +49,27 @@ def _save_settings(settings: UserSettings):
         json.dump(settings.model_dump(), f, ensure_ascii=False, indent=2)
 
 
+def _is_admin(key: str) -> bool:
+    admin_key = os.environ.get('POLICONOMY_ADMIN_KEY', '')
+    return bool(admin_key) and secrets.compare_digest(key or '', admin_key)
+
+
 @router.get('', response_model=UserSettings)
-def get_settings():
-    return _load_settings()
+def get_settings(x_admin_key: str = Header(default='')):
+    settings = _load_settings()
+    if not _is_admin(x_admin_key):
+        # 전역 설정이므로 이메일은 관리자에게만 노출
+        settings = settings.model_copy(update={'email': ''})
+    return settings
 
 
 @router.put('', response_model=UserSettings)
-def update_settings(settings: UserSettings):
+def update_settings(settings: UserSettings, x_admin_key: str = Header(default='')):
+    # 사용자 구분 없는 전역 설정 — Google OAuth 도입 전까지 관리자만 수정 가능
+    if not _is_admin(x_admin_key):
+        raise HTTPException(status_code=403, detail='설정 저장은 관리자만 가능합니다')
+    if not settings.email:
+        # 빈 이메일로 기존 값을 지우지 않음 (GET이 비관리자에게 email을 비워서 반환하므로)
+        settings = settings.model_copy(update={'email': _load_settings().email})
     _save_settings(settings)
     return settings

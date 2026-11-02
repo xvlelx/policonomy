@@ -80,7 +80,7 @@ export default function InsightsPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-6 space-y-6">
       {/* 헤더 */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-xl font-bold text-gray-100">주간 인사이트 아카이브</h1>
           <p className="text-xs text-gray-400 mt-1">일별 데이터 주간 집계 — 뉴스 감성 vs 실제 시장 결과</p>

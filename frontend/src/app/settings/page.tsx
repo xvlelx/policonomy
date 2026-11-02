@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { api, UserSettings } from "@/lib/api";
+import { api, ApiError, UserSettings } from "@/lib/api";
 import SettingsForm from "@/components/SettingsForm";
 
 export default function SettingsPage() {
@@ -16,7 +16,7 @@ export default function SettingsPage() {
       try {
         const data = await api.settings();
         setSettings(data);
-      } catch (e) {
+      } catch {
         setError("설정을 불러올 수 없습니다.");
       } finally {
         setLoading(false);
@@ -33,7 +33,11 @@ export default function SettingsPage() {
       setToast("저장됨 ✓");
       setTimeout(() => setToast(null), 2000);
     } catch (e) {
-      setError("저장에 실패했습니다.");
+      setError(
+        e instanceof ApiError && e.status === 403
+          ? "설정 저장은 관리자만 가능합니다"
+          : "저장에 실패했습니다."
+      );
     }
   };
 
@@ -80,7 +84,7 @@ export default function SettingsPage() {
 
       {/* 토스트 메시지 */}
       {toast && (
-        <div className="fixed bottom-4 right-4 px-4 py-2 bg-green-600 text-white rounded-lg text-sm animate-pulse">
+        <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 px-4 py-2 bg-green-600 text-white rounded-lg text-sm animate-pulse">
           {toast}
         </div>
       )}

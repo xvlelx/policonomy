@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { api, UserSettings } from "@/lib/api";
+import { api, ApiError, UserSettings } from "@/lib/api";
 import SettingsForm from "./SettingsForm";
 
 type Props = {
@@ -12,18 +12,19 @@ type Props = {
 
 export default function SettingsSlideOver({ open, onClose }: Props) {
   const [settings, setSettings] = useState<UserSettings | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState<string | null>(null);
+  const [loadFailed, setLoadFailed] = useState(false);
+  const [toast, setToast] = useState<{ message: string; ok: boolean } | null>(null);
+  // 열려 있고 아직 설정을 못 받았으며 실패하지 않은 상태면 로딩 중
+  const loading = open && !settings && !loadFailed;
 
   useEffect(() => {
-    if (open && !settings) {
-      setLoading(true);
-      api.settings()
-        .then(setSettings)
-        .catch(() => {})
-        .finally(() => setLoading(false));
-    }
-  }, [open, settings]);
+    if (!open || settings || loadFailed) return;
+    let cancelled = false;
+    api.settings()
+      .then((data) => { if (!cancelled) setSettings(data); })
+      .catch(() => { if (!cancelled) setLoadFailed(true); });
+    return () => { cancelled = true; };
+  }, [open, settings, loadFailed]);
 
   useEffect(() => {
     if (!open) return;
@@ -32,10 +33,18 @@ export default function SettingsSlideOver({ open, onClose }: Props) {
   }, [open]);
 
   const handleSave = async (data: UserSettings) => {
-    await api.updateSettings(data);
-    setSettings(data);
-    setToast("저장됨 ✓");
-    setTimeout(() => setToast(null), 2000);
+    try {
+      await api.updateSettings(data);
+      setSettings(data);
+      setToast({ message: "저장됨 ✓", ok: true });
+    } catch (e) {
+      const forbidden = e instanceof ApiError && e.status === 403;
+      setToast({
+        message: forbidden ? "설정 저장은 관리자만 가능합니다" : "저장에 실패했습니다. 다시 시도해주세요.",
+        ok: false,
+      });
+    }
+    setTimeout(() => setToast(null), 2500);
   };
 
   if (!open) return null;
@@ -54,7 +63,8 @@ export default function SettingsSlideOver({ open, onClose }: Props) {
           </div>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-300 transition-colors p-1"
+            aria-label="닫기"
+            className="-mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-500 hover:text-gray-300 transition-colors"
           >
             <X size={18} />
           </button>
@@ -70,13 +80,29 @@ export default function SettingsSlideOver({ open, onClose }: Props) {
             <SettingsForm data={settings} onSubmit={handleSave} />
           )}
           {!settings && !loading && (
-            <p className="text-xs text-gray-400 text-center py-12">설정을 불러올 수 없습니다.</p>
+            <div className="text-center py-12">
+              <p className="text-xs text-gray-400">설정을 불러올 수 없습니다.</p>
+              {loadFailed && (
+                <button
+                  type="button"
+                  onClick={() => setLoadFailed(false)}
+                  className="mt-3 min-h-[44px] px-4 text-xs text-blue-400 hover:text-blue-300"
+                >
+                  다시 시도
+                </button>
+              )}
+            </div>
           )}
         </div>
 
         {toast && (
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-green-600 text-white rounded-lg text-sm shadow-lg">
-            {toast}
+          <div
+            role="status"
+            className={`absolute bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 px-4 py-2 text-white rounded-lg text-sm shadow-lg ${
+              toast.ok ? "bg-green-600" : "bg-red-600"
+            }`}
+          >
+            {toast.message}
           </div>
         )}
       </div>

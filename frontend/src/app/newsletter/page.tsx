@@ -48,9 +48,9 @@ export default function NewsletterPage() {
           <div className="bg-white rounded-xl overflow-hidden shadow-2xl">
             <iframe
               srcDoc={html}
-              className="w-full border-0 min-h-[400px] h-[80dvh]"
+              className="w-full border-0 min-h-[400px] h-[70dvh] sm:h-[80dvh]"
               title="주간 뉴스레터"
-              sandbox="allow-same-origin"
+              sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             />
           </div>
         )}

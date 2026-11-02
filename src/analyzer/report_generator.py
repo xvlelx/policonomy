@@ -51,7 +51,6 @@ def _detect_outlet(url: str) -> tuple[str, str]:
         if domain in url:
             return info
     # 구글 뉴스 경유 기사는 원본 도메인 추출 시도
-    m = re.search(r'articles/([A-Za-z0-9_-]+)', url)
     if 'news.google.com' in url:
         return ('Google News', 'XX')
     try:
@@ -229,7 +228,7 @@ AI 분석 (약세론): {bear}
         items = []
         for key, pred in kronos.items():
             label = {'kospi': 'KOSPI', 'usd_krw': 'USD/KRW', 'nasdaq': 'NASDAQ', 'samsung': '삼성전자'}.get(key, key)
-            xgb_data = xgb.get(key, {})
+            xgb_data = xgb.get('usdkrw' if key == 'usd_krw' else key, {})  # XGB 키는 usdkrw
             fused_key = fused.get(key, {}) if key in ('kospi', 'usd_krw') else {}
             items.append({
                 'market': label,

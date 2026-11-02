@@ -5,8 +5,6 @@ API에서 POST /api/pipeline/run 을 받으면 이 모듈을 subprocess로 실�
 import os
 import sys
 import json
-import time
-import fcntl
 import signal
 import subprocess
 from pathlib import Path
@@ -33,35 +31,16 @@ def _write_status(status: str, stage: str | None = None,
     STATUS_FILE.write_text(json.dumps(payload, ensure_ascii=False), encoding='utf-8')
 
 
-def _is_running() -> bool:
-    """락파일이 존재하고 프로세스가 살아있으면 True"""
-    if not LOCK_FILE.exists():
-        return False
-    try:
-        pid = int(LOCK_FILE.read_text().strip())
-        os.kill(pid, 0)  # 프로세스 존재 확인
-        return True
-    except (ValueError, ProcessLookupError, PermissionError):
-        LOCK_FILE.unlink(missing_ok=True)
-        return False
-
-
 def _alert_failure(reason: str):
-    """파이프라인 실패 시 관리자 이메일 발송 (ADMIN_EMAIL 설정 시)"""
-    admin = os.getenv('ADMIN_EMAIL')
-    if not admin:
-        logger.warning(f'파이프라인 실패 알림 스킵 (ADMIN_EMAIL 미설정): {reason}')
-        return
+    """파이프라인 프로세스가 비정상 종료(시그널 등)됐을 때 운영자 알림.
+    일반 예외는 pipeline.py가 직접 send_alert 하므로 여기서는 중복 발송하지 않는다."""
     try:
         sys.path.insert(0, str(BASE_DIR / 'src'))
-        from publisher.email import EmailManager
-        mgr = EmailManager()
-        mgr._send_raw(
-            admin,
-            '[Policonomy] 파이프라인 실패 알림',
-            f'파이프라인이 실패했습니다.\n\n사유: {reason}\n\n시각: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n',
+        from publisher.email import EmailSender
+        EmailSender().send_alert(
+            subject=f'[Policonomy] 파이프라인 비정상 종료 — {datetime.now().strftime("%Y-%m-%d %H:%M")}',
+            body=f'사유: {reason}\n시각: {datetime.now().isoformat()}',
         )
-        logger.info(f'실패 알림 발송 → {admin}')
     except Exception as e:
         logger.error(f'실패 알림 발송 실패: {e}')
 
@@ -97,7 +76,9 @@ def run_pipeline():
             _write_status('completed', '완료')
         else:
             _write_status('error', f'종료코드 {result.returncode}')
-            _alert_failure(f'파이프라인 비정상 종료 (코드 {result.returncode})')
+            # 음수 = 시그널로 강제 종료(OOM 등) → pipeline.py가 알림을 못 보냈으므로 여기서 발송
+            if result.returncode < 0:
+                _alert_failure(f'파이프라인 강제 종료 (시그널 {-result.returncode})')
     except Exception as e:
         _write_status('error', str(e))
         _alert_failure(str(e))

@@ -31,16 +31,9 @@ const MARKET_UNITS: Record<string, string> = {
   nvidia: "$",
 };
 
-// market card key → API market param mapping
-const MARKET_PARAM: Record<string, string> = {
-  kospi: "kospi",
-  usd_krw: "usd_krw",
-  samsung: "samsung",
-  skhynix: "skhynix",
-  nasdaq: "nasdaq",
-  sp500: "sp500",
-  dow: "dow",
-  nvidia: "nvidia",
+// card key → XGBoost 예측 키 (백엔드는 usd_krw를 usdkrw로 저장)
+const XGB_KEY: Record<string, string> = {
+  usd_krw: "usdkrw",
 };
 
 const SENTIMENT_COLORS: Record<string, string> = {
@@ -59,22 +52,16 @@ function formatNum(val: number, key: string): string {
 
 function RelatedArticles({ marketKey }: { marketKey: string }) {
   const [articles, setArticles] = useState<Article[] | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const marketParam = MARKET_PARAM[marketKey];
-
-  if (!marketParam) return null;
-
   useEffect(() => {
-    setLoading(true);
     api
-      .relatedArticles(marketParam)
+      .relatedArticles(marketKey)
       .then((res) => setArticles(res.articles))
       .catch(() => setError(true))
       .finally(() => setLoading(false));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketParam]);
+  }, [marketKey]);
 
   return (
     <div className="mt-2 pt-2 border-t border-gray-800">
@@ -152,7 +139,7 @@ export default function MarketCards({ predictions, markets }: Props) {
 
           const fusedKey = (key === "kospi" || key === "usd_krw") ? key as "kospi" | "usd_krw" : null;
           const fused = fusedKey ? fused_analysis?.[fusedKey] : null;
-          const xgb = xgb_predictions?.[key];
+          const xgb = xgb_predictions?.[XGB_KEY[key] ?? key];
           const isExpanded = expandedRelated === key;
           const cvAcc = model_accuracy?.[MODEL_ACC_KEY[key] ?? ""];
 
@@ -196,7 +183,7 @@ export default function MarketCards({ predictions, markets }: Props) {
               </div>
               {xgb && (
                 <div className="mt-2 pt-2 border-t border-gray-800">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap items-center justify-between gap-x-2">
                     <div className="flex items-center gap-1.5">
                       <span className="text-xs text-gray-500">XGBoost</span>
                       {cvAcc != null && <AccuracyBadge acc={cvAcc} />}
@@ -209,7 +196,7 @@ export default function MarketCards({ predictions, markets }: Props) {
               )}
               {fused && (
                 <div className="mt-2 pt-2 border-t border-gray-800">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap items-center justify-between gap-x-2">
                     <span className="text-xs text-gray-500">AI 신뢰도</span>
                     <span className="text-xs text-blue-400">{fused.confidence}%</span>
                   </div>
@@ -218,11 +205,11 @@ export default function MarketCards({ predictions, markets }: Props) {
               )}
 
               {/* 관련 기사 토글 */}
-              {MARKET_PARAM[key] && (
+              {MARKET_LABELS[key] && (
                 <div className="mt-2 pt-2 border-t border-gray-800">
                   <button
                     onClick={() => setExpandedRelated(isExpanded ? null : key)}
-                    className="text-xs text-gray-500 hover:text-gray-300 transition-colors flex items-center gap-1 w-full"
+                    className="text-xs text-gray-500 hover:text-gray-300 transition-colors flex items-center gap-1 w-full min-h-[44px]"
                   >
                     관련 기사
                     {isExpanded ? <ChevronUp size={11} /> : <ChevronDown size={11} />}

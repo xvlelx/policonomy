@@ -66,63 +66,43 @@ class WeeklyTrainer:
                    ORDER BY week'''
             ).fetchall()])
 
-            # 실시간 수집 데이터 (검증 완료된 것만) — weekly_records + daily_records 통합
-            _rt_sql = '''
-                SELECT week AS week,
-                       (politics_pos - politics_neg + global_pos - global_neg +
-                        tech_pos - tech_neg + realestate_pos - realestate_neg) * 1.0 /
-                       NULLIF(total_articles, 0) AS sentiment_score,
-                       (politics_pos - politics_neg) * 1.0 / NULLIF(total_articles, 0) AS politics_ratio,
-                       (global_pos - global_neg) * 1.0 / NULLIF(total_articles, 0) AS global_ratio,
-                       (tech_pos - tech_neg) * 1.0 / NULLIF(total_articles, 0) AS tech_ratio,
-                       (realestate_pos - realestate_neg) * 1.0 / NULLIF(total_articles, 0) AS realestate_ratio,
-                       politics_pos * 1.0 / NULLIF(total_articles, 0) AS politics_pos_ratio,
-                       global_pos * 1.0 / NULLIF(total_articles, 0) AS global_pos_ratio,
-                       tech_pos * 1.0 / NULLIF(total_articles, 0) AS tech_pos_ratio,
-                       kospi_actual_change, usdkrw_actual_change,
-                       samsung_actual_change, nasdaq_actual_change,
-                       COALESCE(sp500_actual_change, NULL) AS sp500_actual_change,
-                       COALESCE(dow_actual_change, NULL) AS dow_actual_change,
-                       COALESCE(nvidia_actual_change, NULL) AS nvidia_actual_change,
-                       COALESCE(skhynix_actual_change, NULL) AS skhynix_actual_change,
-                       NULL AS kospi_next_dir, NULL AS usdkrw_next_dir,
-                       NULL AS samsung_next_dir, NULL AS nasdaq_next_dir,
-                       NULL AS sp500_next_dir, NULL AS dow_next_dir,
-                       NULL AS nvidia_next_dir, NULL AS skhynix_next_dir
-                FROM weekly_records
-                WHERE verified_at IS NOT NULL AND kospi_actual_change IS NOT NULL
-            '''
-            # daily_records 테이블이 존재하면 포함
-            tables = [r[0] for r in conn.execute(
+            # 실시간 주간 데이터 (검증 완료된 것만) — weekly_records
+            # daily_records는 일 단위라 주간 시계열에 섞으면 lag/이동평균이 오염되므로 제외
+            tables = {r[0] for r in conn.execute(
                 "SELECT name FROM sqlite_master WHERE type='table'"
-            ).fetchall()]
-            if 'daily_records' in tables:
-                _rt_sql += '''
-                UNION ALL
-                SELECT day AS week,
-                       (politics_pos - politics_neg + global_pos - global_neg +
-                        tech_pos - tech_neg + realestate_pos - realestate_neg) * 1.0 /
-                       NULLIF(total_articles, 0) AS sentiment_score,
-                       (politics_pos - politics_neg) * 1.0 / NULLIF(total_articles, 0) AS politics_ratio,
-                       (global_pos - global_neg) * 1.0 / NULLIF(total_articles, 0) AS global_ratio,
-                       (tech_pos - tech_neg) * 1.0 / NULLIF(total_articles, 0) AS tech_ratio,
-                       (realestate_pos - realestate_neg) * 1.0 / NULLIF(total_articles, 0) AS realestate_ratio,
-                       politics_pos * 1.0 / NULLIF(total_articles, 0) AS politics_pos_ratio,
-                       global_pos * 1.0 / NULLIF(total_articles, 0) AS global_pos_ratio,
-                       tech_pos * 1.0 / NULLIF(total_articles, 0) AS tech_pos_ratio,
-                       kospi_actual_change, usdkrw_actual_change,
-                       samsung_actual_change, nasdaq_actual_change,
-                       sp500_actual_change, dow_actual_change,
-                       nvidia_actual_change, skhynix_actual_change,
-                       NULL AS kospi_next_dir, NULL AS usdkrw_next_dir,
-                       NULL AS samsung_next_dir, NULL AS nasdaq_next_dir,
-                       NULL AS sp500_next_dir, NULL AS dow_next_dir,
-                       NULL AS nvidia_next_dir, NULL AS skhynix_next_dir
-                FROM daily_records
-                WHERE verified_at IS NOT NULL AND kospi_actual_change IS NOT NULL
+            ).fetchall()}
+            wr_cols = {r[1] for r in conn.execute('PRAGMA table_info(weekly_records)').fetchall()} \
+                if 'weekly_records' in tables else set()
+            if not {'sp500_actual_change', 'skhynix_actual_change'} <= wr_cols:
+                rt = pd.DataFrame()
+            else:
+                _rt_sql = '''
+                    SELECT week AS week,
+                           (politics_pos - politics_neg + global_pos - global_neg +
+                            tech_pos - tech_neg + realestate_pos - realestate_neg) * 1.0 /
+                           NULLIF(total_articles, 0) AS sentiment_score,
+                           (politics_pos - politics_neg) * 1.0 / NULLIF(total_articles, 0) AS politics_ratio,
+                           (global_pos - global_neg) * 1.0 / NULLIF(total_articles, 0) AS global_ratio,
+                           (tech_pos - tech_neg) * 1.0 / NULLIF(total_articles, 0) AS tech_ratio,
+                           (realestate_pos - realestate_neg) * 1.0 / NULLIF(total_articles, 0) AS realestate_ratio,
+                           politics_pos * 1.0 / NULLIF(total_articles, 0) AS politics_pos_ratio,
+                           global_pos * 1.0 / NULLIF(total_articles, 0) AS global_pos_ratio,
+                           tech_pos * 1.0 / NULLIF(total_articles, 0) AS tech_pos_ratio,
+                           kospi_actual_change, usdkrw_actual_change,
+                           samsung_actual_change, nasdaq_actual_change,
+                           COALESCE(sp500_actual_change, NULL) AS sp500_actual_change,
+                           COALESCE(dow_actual_change, NULL) AS dow_actual_change,
+                           COALESCE(nvidia_actual_change, NULL) AS nvidia_actual_change,
+                           COALESCE(skhynix_actual_change, NULL) AS skhynix_actual_change,
+                           NULL AS kospi_next_dir, NULL AS usdkrw_next_dir,
+                           NULL AS samsung_next_dir, NULL AS nasdaq_next_dir,
+                           NULL AS sp500_next_dir, NULL AS dow_next_dir,
+                           NULL AS nvidia_next_dir, NULL AS skhynix_next_dir
+                    FROM weekly_records
+                    WHERE verified_at IS NOT NULL AND kospi_actual_change IS NOT NULL
                 '''
-            _rt_sql += ' ORDER BY week'
-            rt = pd.DataFrame([dict(r) for r in conn.execute(_rt_sql).fetchall()])
+                _rt_sql += ' ORDER BY week'
+                rt = pd.DataFrame([dict(r) for r in conn.execute(_rt_sql).fetchall()])
 
         frames = [f for f in [bf, rt] if not f.empty]
         if not frames:
@@ -276,33 +256,29 @@ class WeeklyTrainer:
     # 4. 예측 (파이프라인 통합용)                                            #
     # ------------------------------------------------------------------ #
     def _fetch_this_week_changes(self) -> dict:
-        """이번 주 실제 등락률 yfinance로 조회"""
+        """이번 주 + 지난 2주 주간 등락률 (학습 데이터와 같은 '전주 금요일 종가 대비' 정의)"""
         import yfinance as yf
-        from datetime import datetime, timedelta
 
-        today = datetime.now()
-        week_start = today - timedelta(days=today.weekday())  # 이번 주 월요일
         tickers = {
-            'kospi': '^KS11', 'usd_krw': 'KRW=X',
+            'kospi': '^KS11', 'usdkrw': 'KRW=X',
             'samsung': '005930.KS', 'nasdaq': '^IXIC',
             'sp500': '^GSPC', 'dow': '^DJI',
             'nvidia': 'NVDA', 'skhynix': '000660.KS',
         }
+        nan = float('nan')
         result = {}
-        for name, ticker in tickers.items():
-            key = name if name != 'usd_krw' else 'usdkrw'
+        for key, ticker in tickers.items():
+            col = f'{key}_actual_change'
             try:
-                df = yf.Ticker(ticker).history(
-                    start=week_start.strftime('%Y-%m-%d'),
-                    end=today.strftime('%Y-%m-%d'),
-                )
-                if len(df) >= 2:
-                    chg = (float(df['Close'].iloc[-1]) - float(df['Close'].iloc[0])) / float(df['Close'].iloc[0]) * 100
-                    result[f'{key}_actual_change'] = round(chg, 2)
-                else:
-                    result[f'{key}_actual_change'] = 0.0
-            except Exception:
-                result[f'{key}_actual_change'] = 0.0
+                close = yf.Ticker(ticker).history(period='3mo')['Close']
+                close.index = pd.to_datetime(close.index).tz_localize(None)
+                weekly = (close.resample('W-FRI').last().pct_change() * 100).dropna()
+                vals = [round(float(v), 2) for v in weekly.iloc[-3:][::-1]]
+            except Exception as e:
+                logger.warning(f'{ticker} 주간 등락률 조회 실패: {e}')
+                vals = []
+            vals += [nan] * (3 - len(vals))  # 누락은 NaN — XGBoost가 결측으로 처리
+            result[col], result[f'{col}_lag1'], result[f'{col}_lag2'] = vals
         return result
 
     def predict(self, this_week_data: dict) -> dict:
@@ -328,8 +304,7 @@ class WeeklyTrainer:
                 model: XGBClassifier = saved['model']
                 feat_cols: list = saved['features']
 
-                row = {col: this_week_data.get(col, 0.0) for col in feat_cols}
-                X = np.array([[row.get(col, 0.0) for col in feat_cols]])
+                X = np.array([[this_week_data.get(col, np.nan) for col in feat_cols]], dtype=float)
                 prob = float(model.predict_proba(X)[0][1])  # 상승 확률
                 direction = '상승' if prob >= 0.5 else '하락'
                 predictions[target] = {
@@ -381,7 +356,24 @@ class WeeklyTrainer:
         }
 
         price_changes = self._fetch_this_week_changes()
-        this_week = {'sentiment_score': sentiment_score, **cat_features, **price_changes}
+        today = datetime.now()
+
+        # 4주 이동평균: 최근 3주 기록 + 이번 주 (학습 때와 같은 rolling(4) 정의)
+        hist = self._load_data()
+        ma_features = {}
+        for col, cur in [('sentiment_score', sentiment_score), *cat_features.items()]:
+            prev = hist[col].dropna().tail(3).tolist() if col in hist.columns else []
+            name = 'sentiment_ma4' if col == 'sentiment_score' else f'{col}_ma4'
+            ma_features[name] = float(np.mean(prev + [cur]))
+
+        this_week = {
+            'sentiment_score': sentiment_score,
+            **cat_features,
+            **ma_features,
+            **price_changes,
+            'month': today.month,
+            'quarter': (today.month - 1) // 3 + 1,
+        }
         result = self.predict(this_week)
 
         if result:

@@ -19,13 +19,13 @@ _FALLBACK_MODELS = [
 _CATEGORY_MARKET_MAP: dict[str, list[str]] = {
     'politics_economy': ['kospi', 'usd_krw'],
     'global_macro': ['nasdaq', 'sp500', 'kospi', 'usd_krw'],
-    'tech_industry': ['nasdaq', 'sp500', 'dow', 'nvidia', 'samsung', 'hynix'],
+    'tech_industry': ['nasdaq', 'sp500', 'dow', 'nvidia', 'samsung', 'skhynix'],
     'real_estate': ['kospi'],
 }
 
 _KOSPI_CATEGORIES = {'politics_economy', 'real_estate'}
 _US_CATEGORIES = {'global_macro', 'tech_industry'}
-_KOSPI_MARKETS = {'kospi', 'usd_krw', 'samsung', 'hynix'}
+_KOSPI_MARKETS = {'kospi', 'usd_krw', 'samsung', 'skhynix'}
 _US_MARKETS = {'nasdaq', 'sp500', 'dow', 'nvidia'}
 
 _CATEGORY_LABELS: dict[str, str] = {

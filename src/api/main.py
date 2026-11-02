@@ -3,6 +3,7 @@ import json
 import logging
 import math
 import os
+import secrets
 import sqlite3
 import sys
 import time
@@ -30,6 +31,17 @@ from slowapi.errors import RateLimitExceeded
 _ADMIN_KEY = os.environ.get('POLICONOMY_ADMIN_KEY', '')
 if not _ADMIN_KEY:
     logger.warning('POLICONOMY_ADMIN_KEY가 설정되지 않았습니다. 관리자 API가 비활성화됩니다.')
+
+
+
+def _is_admin(key: str) -> bool:
+    return bool(_ADMIN_KEY) and secrets.compare_digest(key or '', _ADMIN_KEY)
+
+
+def _require_admin(key: str) -> None:
+    if not _is_admin(key):
+        raise HTTPException(status_code=403, detail='인증 실패')
+
 
 from .settings import router as settings_router
 
@@ -112,6 +124,34 @@ def _load_json(filename: str):
     return result
 
 
+_LOCK_PATH = DATA_DIR / '.pipeline.lock'
+_STALE_RUNNING_SEC = 3 * 3600  # 락 없이 직접 실행된 경우: 3시간 넘게 갱신 없으면 중단으로 간주
+
+
+def _pid_alive(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+        return True
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+
+
+def _pipeline_process_alive() -> bool:
+    if _LOCK_PATH.exists():
+        try:
+            return _pid_alive(int(_LOCK_PATH.read_text().strip()))
+        except ValueError:
+            return False
+    # 락 파일 없음 (crontab 등으로 pipeline.py 직접 실행) → 상태 파일 갱신 시각으로 판단
+    status_path = DATA_DIR / 'pipeline_status.json'
+    try:
+        return time.time() - status_path.stat().st_mtime < _STALE_RUNNING_SEC
+    except OSError:
+        return False
+
+
 def _parse_pipeline_status() -> dict:
     status_path = DATA_DIR / 'pipeline_status.json'
     if status_path.exists():
@@ -120,9 +160,14 @@ def _parse_pipeline_status() -> dict:
             progress = data.get('progress')
             total = data.get('total')
             pct = round(progress / total * 100, 1) if progress is not None and total and total > 0 else None
+            status = data.get('status', 'unknown')
+            stage = data.get('stage')
+            if status == 'running' and not _pipeline_process_alive():
+                # 프로세스가 죽었는데 상태 파일만 running으로 남은 경우
+                status, stage = 'error', '중단됨 (프로세스 없음)'
             return {
-                'status': data.get('status', 'unknown'),
-                'stage': data.get('stage'),
+                'status': status,
+                'stage': stage,
                 'progress': progress,
                 'total': total,
                 'progress_pct': pct,
@@ -242,7 +287,10 @@ def get_newsletter():
     path = DATA_DIR / 'newsletter.html'
     if not path.exists():
         raise HTTPException(status_code=404, detail='뉴스레터 없음')
-    return HTMLResponse(content=path.read_text(encoding='utf-8'))
+    html = path.read_text(encoding='utf-8')
+    # 웹 열람본에는 개인 수신거부 링크 대신 사이트 홈 링크
+    site_url = os.environ.get('SITE_URL', 'http://localhost:3000').rstrip('/')
+    return HTMLResponse(content=html.replace('__UNSUBSCRIBE_URL__', site_url))
 
 
 @app.get('/api/stats/summary')
@@ -272,7 +320,7 @@ def get_summary():
                         SELECT COUNT(*) AS days,
                                SUM(direction_hits) AS hits,
                                SUM(direction_total) AS total
-                        FROM daily_records WHERE verified_at IS NOT NULL
+                        FROM daily_records WHERE verified_at IS NOT NULL AND direction_total > 0
                     """).fetchone()
                     if row and row[2]:
                         accuracy = {
@@ -445,7 +493,10 @@ def subscribe(request: Request, req: SubscribeRequest):
     token = sender.subscribe(email, name)
     if token is None:
         raise HTTPException(status_code=500, detail='구독 등록 실패')
-    sender.send_confirmation_email(email, name, token)
+    if token == '':
+        return {'success': True, 'email': req.email, 'already_subscribed': True}
+    if not sender.send_confirmation_email(email, name, token):
+        raise HTTPException(status_code=503, detail='확인 메일 발송 실패 — 잠시 후 다시 시도해주세요')
     return {'success': True, 'email': req.email, 'pending_confirmation': True}
 
 
@@ -459,19 +510,27 @@ def confirm_subscription(token: str = Query(...)):
     return {'success': True}
 
 
+class UnsubscribeRequest(BaseModel):
+    email: EmailStr
+    token: str
+
+
 @app.post('/api/unsubscribe')
-def unsubscribe(req: SubscribeRequest):
-    from publisher.email import EmailSender
-    sender = EmailSender()
-    sender.unsubscribe(req.email.strip().lower())
+@limiter.limit('20/hour')
+def unsubscribe(request: Request, req: UnsubscribeRequest):
+    from publisher.email import EmailSender, verify_unsubscribe_token
+    email = req.email.strip().lower()
+    if not verify_unsubscribe_token(email, req.token):
+        raise HTTPException(status_code=403, detail='유효하지 않은 수신거부 링크')
+    if not EmailSender().unsubscribe(email):
+        raise HTTPException(status_code=500, detail='수신거부 처리 실패')
     return {'success': True}
 
 
 @app.get('/api/subscribers')
 @limiter.limit('20/hour')
 def get_subscribers(request: Request, x_admin_key: str = Header(default='')):
-    if not _ADMIN_KEY or x_admin_key != _ADMIN_KEY:
-        raise HTTPException(status_code=403, detail='인증 실패')
+    _require_admin(x_admin_key)
     from publisher.email import EmailSender
     sender = EmailSender()
     return {'subscribers': sender.list_subscribers()}
@@ -786,24 +845,30 @@ def get_related_articles(market: str = Query(...)):
 @app.post('/api/pipeline/run')
 @limiter.limit('5/hour')
 def run_pipeline(request: Request, x_admin_key: str = Header(default='')):
-    if not _ADMIN_KEY or x_admin_key != _ADMIN_KEY:
-        raise HTTPException(status_code=403, detail='인증 실패')
+    _require_admin(x_admin_key)
 
     import subprocess
     import sys
 
     # 락파일로 중복 실행 방지
     lock_path = DATA_DIR / '.pipeline.lock'
-    status_path = DATA_DIR / 'pipeline_status.json'
 
     if lock_path.exists():
         try:
-            pid = int(lock_path.read_text().strip())
-            import os as _os
-            _os.kill(pid, 0)
+            alive = _pid_alive(int(lock_path.read_text().strip()))
+        except ValueError:
+            alive = False
+        if alive:
             raise HTTPException(status_code=409, detail='파이프라인이 이미 실행 중입니다')
-        except (ValueError, ProcessLookupError, PermissionError):
-            lock_path.unlink(missing_ok=True)
+        lock_path.unlink(missing_ok=True)
+
+    # O_EXCL로 원자적 생성 — 동시 요청 두 개가 모두 통과하는 경쟁 방지
+    try:
+        fd = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+    except FileExistsError:
+        raise HTTPException(status_code=409, detail='파이프라인이 이미 실행 중입니다')
+    with os.fdopen(fd, 'w') as f:
+        f.write(str(os.getpid()))
 
     runner_path = BASE_DIR / 'src' / 'pipeline_runner.py'
     env = os.environ.copy()
@@ -815,7 +880,20 @@ def run_pipeline(request: Request, x_admin_key: str = Header(default='')):
         env=env,
         start_new_session=True,
     )
+    lock_path.write_text(str(proc.pid))  # runner도 같은 PID를 기록함
     return {'started': True, 'pid': proc.pid}
+
+
+_FG_TTL = 3600
+_FG_REFRESH_COOLDOWN = 600
+_HF_FORCE_COOLDOWN = 3600
+
+
+def _cache_age(path: Path) -> float | None:
+    try:
+        return time.time() - path.stat().st_mtime
+    except OSError:
+        return None
 
 
 @app.get('/api/fear-greed')
@@ -824,20 +902,15 @@ def get_fear_greed(refresh: bool = Query(False)):
     from collector.fear_greed import FearGreedCollector
 
     collector = FearGreedCollector(DATA_DIR)
-
-    if refresh:
-        return collector.fetch()
-
-    # 캐시 우선 반환
     cache_path = DATA_DIR / 'fear_greed.json'
-    if cache_path.exists():
+    age = _cache_age(cache_path)
+
+    # refresh는 10분 쿨다운 (외부 요청 남용 방지), 캐시는 1시간 지나면 자동 갱신
+    if age is not None and age < (_FG_REFRESH_COOLDOWN if refresh else _FG_TTL):
         try:
-            data = json.loads(cache_path.read_text(encoding='utf-8'))
-            return data
+            return json.loads(cache_path.read_text(encoding='utf-8'))
         except Exception:
             pass
-
-    # 캐시 없으면 실시간 수집
     return collector.fetch()
 
 
@@ -851,12 +924,13 @@ def get_reports_list():
 
 
 @app.get('/api/reports/latest')
-def get_latest_report(generate: bool = Query(False)):
-    """최신 리포트 반환. generate=true 시 새로 생성"""
+def get_latest_report(generate: bool = Query(False), x_admin_key: str = Header(default='')):
+    """최신 리포트 반환. generate=true 시 새로 생성 (관리자 전용 — LLM 비용 발생)"""
     from analyzer.report_generator import ReportGenerator
     gen = ReportGenerator(DATA_DIR)
 
     if generate:
+        _require_admin(x_admin_key)
         return gen.generate()
 
     report = gen.load_latest()
@@ -886,6 +960,10 @@ def get_hedge_funds(force: bool = Query(False)):
     """SEC 13F 기반 헤지펀드 포지션 조회. force=true 시 캐시 무시하고 새로 수집"""
     from collector.sec_13f import HedgeFund13FCollector
     collector = HedgeFund13FCollector(DATA_DIR)
+    if force:
+        # 1시간 이내 수집했으면 force 무시 (SEC 요청 남용 방지)
+        age = _cache_age(DATA_DIR / 'hedge_funds_13f.json')
+        force = age is None or age >= _HF_FORCE_COOLDOWN
     return collector.collect(force=force)
 
 
